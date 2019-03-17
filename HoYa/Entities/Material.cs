@@ -5,30 +5,24 @@ namespace HoYa.Entities
 {
     //設備
     //物料
-    public class Material : TypeSimple
+    public class Material : Definition<MaterialChange>
     {
-        public string Code { get; set; }
-        public virtual Guid? UnitId { get; set; }
-        [ForeignKey("UnitId")]
-        public virtual Option Unit { get; set; }
-
-        public virtual Guid? CostId { get; set; }
-        [ForeignKey("CostId")]
-        public virtual Cost Cost { get; set; }//市價 
-        public virtual Guid? ProcedureId { get; set; }
-        [ForeignKey("ProcedureId")]
-        public virtual MaterialProcedure Procedure { get; set; }
+      
         
     }
 
     public class MaterialChange : Change<Material>
     {
+        public string Code { get; set; }
+        public virtual Guid? RecipeId { get; set; }
+        [ForeignKey("RecipeId")]
+        public virtual Recipe Recipe { get; set; }
     }
 
     //模擬工序(詢價產生 未投入實際生產 Process.ParentId=詢價ProcessId)
     //標準加工(工序需經主管審批 Process.ParentId is null)
     //買入實物(提領物料)
-    public class MaterialProcedure : TypeSimpleDetail<Material>
+    public class Recipe : Definition<Material>
     {
         public virtual Guid? EquipmentId { get; set; }
         [ForeignKey("EquipmentId")]
@@ -54,7 +48,7 @@ namespace HoYa.Entities
     }
 
 
-    public class MaterialProcedureInput : Detail<MaterialProcedure>
+    public class MaterialProcedureInput : Detail<Recipe>
     {
         public virtual Guid? InputId { get; set; }
         [ForeignKey("InputId")]

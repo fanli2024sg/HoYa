@@ -158,7 +158,7 @@ namespace HoYa.Controllers
 
             GroupChangeGeneral existedGroupChangeGeneral = await db.GroupChangeGenerals.FindAsync(id);
             db.Entry(existedGroupChangeGeneral).CurrentValues.SetValues(groupChangeGeneral);
-            Processing existedProcess = await db.Processings.FindAsync(existedGroupChangeGeneral.ProcessingId);
+            Process existedProcess = await db.Processings.FindAsync(existedGroupChangeGeneral.ProcessingId);
             db.Entry(existedProcess).CurrentValues.SetValues(groupChangeGeneral.Processing);
             foreach (GroupChange groupChange in db.GroupChanges.Where(x => x.ProcessingId == groupChangeGeneral.ProcessingId).ToArray())
             {

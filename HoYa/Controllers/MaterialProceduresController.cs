@@ -16,15 +16,15 @@ namespace HoYa.Controllers
         private HoYaContext db = new HoYaContext();
 
         [Route("api/MaterialProcedures/By")]
-        [ResponseType(typeof(MaterialProcedure))]
-        public IQueryable<MaterialProcedure> GetMaterialProceduresBy(string anyLike="")
+        [ResponseType(typeof(Recipe))]
+        public IQueryable<Recipe> GetMaterialProceduresBy(string anyLike="")
         {
             if (anyLike == null) anyLike = "";
             return db.MaterialProcedures.Where(x => x.Value.Contains(anyLike));
         }
 
-        [ResponseType(typeof(MaterialProcedure))]
-        public async Task<IHttpActionResult> PostMaterialProcedure(MaterialProcedure materialProcedure)
+        [ResponseType(typeof(Recipe))]
+        public async Task<IHttpActionResult> PostMaterialProcedure(Recipe materialProcedure)
         {
             db.MaterialProcedures.Add(materialProcedure);
             await db.SaveChangesAsync();

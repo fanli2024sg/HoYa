@@ -39,7 +39,7 @@ namespace HoYa.Controllers
         [ResponseType(typeof(Mission))]
         public async Task<IHttpActionResult> PutEnquiryGeneral(Guid? id, EnquiryGeneral enquiryGeneral)
         {
-            Processing existedProcess = await db.Processings.FindAsync(enquiryGeneral.ProcessingId);
+            Process existedProcess = await db.Processings.FindAsync(enquiryGeneral.ProcessingId);
             enquiryGeneral.Processing.UpdatedDate = DateTime.Now;
             db.Entry(existedProcess).CurrentValues.SetValues(enquiryGeneral.Processing);
             await db.SaveChangesAsync();

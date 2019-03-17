@@ -17,7 +17,7 @@ namespace HoYa.Controllers
     {
         private HoYaContext db = new HoYaContext();
 
-        public IQueryable<Processing> GetProcesses()
+        public IQueryable<Process> GetProcesses()
         {
             return db.Processes;
         }
@@ -31,26 +31,26 @@ namespace HoYa.Controllers
             return Ok(process);
         }
         [Route("api/Processes/By")]
-        [ResponseType(typeof(Processing))]
-        public IQueryable<Processing> GetProcessesBy(
+        [ResponseType(typeof(Process))]
+        public IQueryable<Process> GetProcessesBy(
             Guid? typeId = null,
             string anyLike = "")
         {
             return db.Processes.Where(x => (x.TypeId == typeId || typeId == null)).OrderBy(x => x.No);
         }
 
-        [ResponseType(typeof(Processing))]
+        [ResponseType(typeof(Process))]
         public async Task<IHttpActionResult> GetProcess(Guid id)
         {
-            Processing existedProcess = await db.Processes.FindAsync(id);
+            Process existedProcess = await db.Processes.FindAsync(id);
             if (existedProcess == null) return NotFound();
             return Ok(existedProcess);
         }
 
-        [ResponseType(typeof(Processing))]
-        public async Task<IHttpActionResult> PutProcess(Guid id, Processing process)
+        [ResponseType(typeof(Process))]
+        public async Task<IHttpActionResult> PutProcess(Guid id, Process process)
         {
-            Processing existedProcess = await db.Processes.FindAsync(id);
+            Process existedProcess = await db.Processes.FindAsync(id);
             process.Id = existedProcess.Id;
             process.UpdatedDate = DateTime.Now;
             db.Entry(existedProcess).CurrentValues.SetValues(process);
@@ -59,8 +59,8 @@ namespace HoYa.Controllers
             return Ok(existedProcess);
         }
 
-        [ResponseType(typeof(Processing))]
-        public async Task<IHttpActionResult> PostProcess(Processing process)
+        [ResponseType(typeof(Process))]
+        public async Task<IHttpActionResult> PostProcess(Process process)
         {
             process.Id = Guid.NewGuid();
             process.Parent = await db.Processes.FindAsync(process.ParentId);
@@ -73,7 +73,7 @@ namespace HoYa.Controllers
 
         public async Task<IHttpActionResult> DeleteProcess(Guid id)
         {
-            Processing existedProcess = await db.Processes.FindAsync(id);
+            Process existedProcess = await db.Processes.FindAsync(id);
             if (existedProcess == null) return NotFound();
             db.Processes.Remove(existedProcess);
             await db.SaveChangesAsync();

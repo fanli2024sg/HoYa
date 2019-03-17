@@ -5,20 +5,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HoYa.Entities
 {
-    public class Process : TypeSimpleDefinition<ProcessChange>
+    public class WorkFlow : NodeDefinition<WorkFlow, WorkFlowChange>
     {
        
     }
+    public class WorkFlowChange : Change<WorkFlow>
+    {
+    }
 
-    public class ProcessChange : Change<Process>
-    { 
-    } 
-    public class Mission : Detail<ProcessChange>
+    public class Step : Definition<StepChange>
+    {
+    }
+    public class StepChange : Change<Step>
+    {
+    }
+
+    public class Mission : Instance<WorkFlowChange>
     {
 
     }
 
-    public class Processing : TypeNodeInstance<Processing, Process, ProcessChange>
+    public class Process : Instance<WorkFlow>
     {
         [MaxLength(256)] public string No { get; set; }
 
@@ -29,37 +36,13 @@ namespace HoYa.Entities
         public DateTime? OverTime { get; set; }
     }
 
-    public class Step : TypeSimpleDetail<Processing>//TypeId=一般作業 特殊作業 緊急臨時特殊作業 Type.ParentId= 訪客 上課 施工
-    {
-        public virtual Guid? ProcessingId { get; set; }
-        [ForeignKey("ProcessingId")]
-        public virtual Processing Processing { get; set; }
-        public string Comment { get; set; }
-        public virtual Guid? ActionId { get; set; }
-        [ForeignKey("ActionId")]
-        public virtual Option Action { get; set; }
-        public DateTime? ActionDate { get; set; }
-
-        public DateTime? OverTime { get; set; }
-    }
-
-    public abstract class Change<E> : Entity
-    {
-        public virtual Guid? ProcessingId { get; set; }
-        [ForeignKey("ProcessingId")]
-        public virtual Processing Processing { get; set; }
-
-        public virtual Guid? EntityId { get; set; }
-        [ForeignKey("EntityId")]
-        [JsonIgnore]
-        public virtual E Entity { get; set; }
-    }
+  
 
     public abstract class General : Entity
     {
         public virtual Guid? ProcessingId { get; set; }
         [ForeignKey("ProcessingId")]
-        public virtual Processing Processing { get; set; }
+        public virtual Process Processing { get; set; }
     }
 
 

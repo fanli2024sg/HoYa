@@ -13,7 +13,7 @@ namespace HoYa
 
         }
         public DbSet<Material> Materials { get; set; }
-        public DbSet<MaterialProcedure> MaterialProcedures { get; set; }
+        public DbSet<Recipe> MaterialProcedures { get; set; }
         public DbSet<Mission> Missions { get; set; }
         public DbSet<GroupChange> GroupChanges { get; set; }
         public DbSet<Apply> Applies { get; set; }
@@ -25,8 +25,8 @@ namespace HoYa
         public DbSet<AttendanceChange> AttendanceChanges { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         */
-        public DbSet<Processing> Processings { get; set; }
-        public DbSet<Process> Processes { get; set; }
+        public DbSet<Process> Processings { get; set; }
+        public DbSet<WorkFlow> Processes { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Document> Documents { get; set; }

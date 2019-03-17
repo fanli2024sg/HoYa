@@ -191,8 +191,6 @@
     <Compile Include="Controllers\FolderFilesController.cs" />
     <Compile Include="Controllers\FoldersController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
-    <Compile Include="Controllers\LocationsController.cs" />
-    <Compile Include="Controllers\MenusController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -224,7 +222,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Files\123.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
