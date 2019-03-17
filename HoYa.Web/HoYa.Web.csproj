@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{6B67CA36-A364-4A6F-BFD1-313418248916}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>3.3</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="index.html" />
+    <Content Include="karma.conf.js" />
+    <Content Include="src\app\app.component.css" />
+    <Content Include="src\app\contents\contents.component.css" />
+    <Content Include="src\app\dashboard\dashboard\dashboard.component.css" />
+    <Content Include="src\app\dashboard\dashboard\dashboard.component.html" />
+    <Content Include="src\app\dashboard\main\main.component.css" />
+    <Content Include="src\app\dashboard\main\main.component.html" />
+    <Content Include="src\app\login\login.component.css" />
+    <Content Include="src\assets\images\angular_solidBlack.svg" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\contents\contents.component.html" />
+    <Content Include="src\app\working\working.template.html" />
+    <Content Include="src\app\login\login.component.html" />
+    <TypeScriptCompile Include="src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard.module.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard\dashboard.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\main\main.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\main\main.component.ts" />
+    <TypeScriptCompile Include="src\app\shared-material\shared-material.module.ts" />
+    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="src\%40core\guards\auth.guard.ts" />
+    <TypeScriptCompile Include="src\%40core\guards\can-deactivate.guard.ts" />
+    <TypeScriptCompile Include="src\app\working\working.component.ts" />
+    <TypeScriptCompile Include="src\app\working\working.module.ts" />
+    <TypeScriptCompile Include="src\app\working\working.routing.module.ts" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\index.html" />
+    <Content Include="src\karma.conf.js" />
+    <Content Include="src\styles.css" />
+    <Content Include="src\views\common\footer\footer.template.html" />
+    <Content Include="src\views\common\navigation\navigation.template.html" />
+    <Content Include="src\views\common\topnavbar\topnavbar.template.html" />
+    <TypeScriptCompile Include="src\views\enquiries\edit\enquiries-edit-routing.module.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\edit\enquiries-edit.module.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\enquiries-routing.module.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\enquiries.module.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\enquiries.component.spec.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\enquiries.component.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\list\enquiries-list.component.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\edit\enquiries-edit.component.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\list\enquiries-list-routing.module.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\list\enquiries-list.module.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\new\enquiries-new-routing.module.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\new\enquiries-new.component.ts" />
+    <TypeScriptCompile Include="src\views\enquiries\new\enquiries-new.module.ts" />
+    <TypeScriptCompile Include="src\views\system\system.component.ts" />
+    <TypeScriptCompile Include="src\views\system\system.module.ts" />
+    <TypeScriptCompile Include="src\views\system\system.routing.module.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\%40core\helpers\app.helpers.ts" />
+    <TypeScriptCompile Include="src\%40core\services\auth.service.ts" />
+    <TypeScriptCompile Include="src\%40core\services\dialog.service.ts" />
+    <TypeScriptCompile Include="src\%40core\services\global.service.ts" />
+    <TypeScriptCompile Include="src\%40core\services\height.service.ts" />
+    <TypeScriptCompile Include="src\%40core\services\http.service.ts" />
+    <TypeScriptCompile Include="src\%40core\services\list.service.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\contents\contents.component.ts" />
+    <TypeScriptCompile Include="src\app\contents\contents.module.ts" />
+    <TypeScriptCompile Include="src\app\contents\contents-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\login\login.module.ts" />
+    <TypeScriptCompile Include="src\app\login\login-routing.module.ts" />
+    <TypeScriptCompile Include="src\entities\control.ts" />
+    <TypeScriptCompile Include="src\entities\quotation.ts" />
+    <TypeScriptCompile Include="src\entities\identity.ts" />
+    <TypeScriptCompile Include="src\entities\person.ts" />
+    <TypeScriptCompile Include="src\entities\process.ts" />
+    <TypeScriptCompile Include="src\entities\profile.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\models\person.ts" />
+    <TypeScriptCompile Include="src\models\login.ts" />
+    <TypeScriptCompile Include="src\%40core\pipes\equal.pipe.ts" />
+    <TypeScriptCompile Include="src\%40core\pipes\highlight.pipe.ts" />
+    <TypeScriptCompile Include="src\%40core\pipes\like.pipe.ts" />
+    <TypeScriptCompile Include="src\%40core\pipes\notin.pipe.ts" />
+    <TypeScriptCompile Include="src\%40core\pipes\orderby.pipe.ts" />
+    <TypeScriptCompile Include="src\%40core\pipes\pipes.module.ts" />
+    <TypeScriptCompile Include="src\entities\entity.ts" />
+    <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\services\enquiries.service.ts" />
+    <TypeScriptCompile Include="src\services\inventories.service.ts" />
+    <TypeScriptCompile Include="src\services\materials.service.ts" />
+    <TypeScriptCompile Include="src\services\materialprocedures.service.ts" />
+    <TypeScriptCompile Include="src\services\quotations.service.ts" />
+    <TypeScriptCompile Include="src\services\settings.service.ts" />
+    <TypeScriptCompile Include="src\services\profiles.service.ts" />
+    <TypeScriptCompile Include="src\services\processes.service.ts" />
+    <TypeScriptCompile Include="src\services\groups.service.ts" />
+    <TypeScriptCompile Include="src\services\people.service.ts" />
+    <TypeScriptCompile Include="src\services\files.service.ts" />
+    <TypeScriptCompile Include="src\services\folderFiles.service.ts" />
+    <TypeScriptCompile Include="src\services\folders.service.ts" />
+    <TypeScriptCompile Include="src\services\options.service.ts" />
+    <TypeScriptCompile Include="src\services\missions.service.ts" />
+    <TypeScriptCompile Include="src\services\storages.service.ts" />
+    <TypeScriptCompile Include="src\test.ts" />
+    <TypeScriptCompile Include="src\views\common\footer\footer.component.ts" />
+    <TypeScriptCompile Include="src\views\common\footer\footer.module.ts" />
+    <TypeScriptCompile Include="src\views\common\navigation\navigation.component.ts" />
+    <TypeScriptCompile Include="src\views\common\navigation\navigation.module.ts" />
+    <TypeScriptCompile Include="src\views\common\topnavbar\topnavbar.component.ts" />
+    <TypeScriptCompile Include="src\views\common\topnavbar\topnavbar.module.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include="src\views\enquiries\enquiries.component.css" />
+    <Content Include="src\views\enquiries\enquiries.component.html" />
+    <Content Include="src\views\enquiries\list\enquiries-list.component.css" />
+    <Content Include="src\views\enquiries\list\enquiries-list.component.html" />
+    <Content Include="src\views\enquiries\edit\enquiries-edit.component.css" />
+    <Content Include="src\views\enquiries\edit\enquiries-edit.component.html" />
+    <Content Include="src\views\enquiries\new\enquiries-new.component.css" />
+    <Content Include="src\views\enquiries\new\enquiries-new.component.html" />
+    <Content Include="src\views\system\system.template.html" />
+    <Content Include="tsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <Content Include="tslint.json" />
+    <Content Include="angular.json" />
+    <Content Include="src\tsconfig.app.json" />
+    <Content Include="src\tsconfig.spec.json" />
+    <Content Include="src\tslint.json" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\directives\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\entities\enquiry.ts" />
+    <TypeScriptCompile Include="src\entities\group.ts" />
+    <TypeScriptCompile Include="src\entities\inventory.ts" />
+    <TypeScriptCompile Include="src\entities\material.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>RichEasy.Web</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>src\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>62270</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62270/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties package_1json__JSONSchema="" angular_1json__JSONSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>

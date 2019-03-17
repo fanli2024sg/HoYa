@@ -1,0 +1,8 @@
+.mat-card {
+    max-width: 350px;
+    margin: 10% auto;
+}
+
+    .mat-card .full-width {
+        width: 100%;
+    }
