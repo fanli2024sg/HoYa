@@ -19,7 +19,7 @@ namespace HoYa.Controllers
         [ResponseType(typeof(EnquiryGeneral))]
         public async Task<IHttpActionResult> GetEnquiryGeneral(Guid? processingId = null)
         {
-            EnquiryGeneral enquiryGeneral = await db.EnquiryGenerals.FirstOrDefaultAsync(x => x.ProcessingId == processingId);
+            EnquiryGeneral enquiryGeneral = await db.EnquiryGenerals.FirstOrDefaultAsync(x => x.ProcessId == processingId);
             return Ok(enquiryGeneral);
         }
 
@@ -27,9 +27,9 @@ namespace HoYa.Controllers
         [ResponseType(typeof(Mission))]
         public async Task<IHttpActionResult> PostEnquiryGeneral(EnquiryGeneral enquiryGeneral)
         {
-            Option type = await db.Options.FindAsync(enquiryGeneral.Processing.Definition.TypeId);
-            string no = type.Code + DateTime.Now.ToString("yyyyMM");
-            enquiryGeneral.Processing.No = "ENQY" + no + (db.Processings.Where(x => x.TypeId == enquiryGeneral.Processing.TypeId && x.No.Substring(0, 10) == no).Count() + 1).ToString("0000");
+            WorkFlow workFlow = await db.WorkFlows.FindAsync(enquiryGeneral.Process.DefinitionId);
+            string no = workFlow.Code + DateTime.Now.ToString("yyyyMM");
+            enquiryGeneral.Process.No = "ENQY" + no + (db.Processes.Where(x => x.DefinitionId == enquiryGeneral.Process.DefinitionId && x.No.Substring(0, 10) == no).Count() + 1).ToString("0000");
             db.EnquiryGenerals.Add(enquiryGeneral);
             await db.SaveChangesAsync();
             return Ok(enquiryGeneral);
@@ -39,31 +39,21 @@ namespace HoYa.Controllers
         [ResponseType(typeof(Mission))]
         public async Task<IHttpActionResult> PutEnquiryGeneral(Guid? id, EnquiryGeneral enquiryGeneral)
         {
-            Process existedProcess = await db.Processings.FindAsync(enquiryGeneral.ProcessingId);
-            enquiryGeneral.Processing.UpdatedDate = DateTime.Now;
-            db.Entry(existedProcess).CurrentValues.SetValues(enquiryGeneral.Processing);
-            await db.SaveChangesAsync();
-            Guid? ownerId = null;
+            EnquiryGeneral existedEnquiryGeneral = await db.EnquiryGenerals.FindAsync(id);
+            db.Entry(existedEnquiryGeneral).CurrentValues.SetValues(enquiryGeneral);
             await db.SaveChangesAsync();
             return Ok();
         }
 
         public async Task<IHttpActionResult> PostEnquiry(Enquiry enquiry)
         {
-            enquiry.MaterialProcedure = await db.MaterialProcedures.FindAsync(enquiry.MaterialProcedureId);
+            enquiry.Material = await db.Materials.FindAsync(enquiry.MaterialId);
             db.Enquiries.Add(enquiry);
             await db.SaveChangesAsync();
             return Ok(enquiry);
         }
 
-        public async Task<IHttpActionResult> PutDocument(Guid id, Document document)
-        {
-            Document existedDocument = await db.Documents.Where(i => i.Id == id).AsQueryable().FirstOrDefaultAsync();
-            db.Entry(existedDocument).CurrentValues.SetValues(document);
-            await db.SaveChangesAsync();
-            await db.Entry(existedDocument).GetDatabaseValuesAsync();
-            return Ok(existedDocument);
-        }
+     
 
         public async Task<IHttpActionResult> PutEnquiry(Guid id, Enquiry enquiry)
         {

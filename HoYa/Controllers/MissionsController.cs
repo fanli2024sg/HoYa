@@ -20,10 +20,10 @@ namespace HoYa.Controllers
         [Route("api/Missions/By")]
         [ResponseType(typeof(Mission))]
         public IQueryable<Mission> GetMissionsBy(
-            Guid? typeId = null,
+            Guid? definitionDetailId = null,
             string anyLike = "")
         {
-            return db.Missions.Where(x => (x.TypeId == typeId || typeId == null)).OrderBy(x => x.Value);
+            return db.Missions.Where(x => (x.DefinitionDetailId == definitionDetailId || definitionDetailId == null));
         }
 
         [ResponseType(typeof(Mission))]
@@ -39,7 +39,6 @@ namespace HoYa.Controllers
         {
             Mission existedMission = await db.Missions.FindAsync(id);
             mission.Id = existedMission.Id;
-            mission.UpdatedDate = DateTime.Now;
             db.Entry(existedMission).CurrentValues.SetValues(mission);
             await db.SaveChangesAsync();
             await db.Entry(existedMission).GetDatabaseValuesAsync();

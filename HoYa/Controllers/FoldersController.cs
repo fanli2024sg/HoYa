@@ -73,7 +73,7 @@ namespace HoYa.Controllers
         {
             Folder existedGallery = await db.Folders.FindAsync(id);
             if (existedGallery == null) return NotFound();
-            foreach (FolderFile existedGalleryImage in existedGallery.FolderFiles.ToArray())
+            foreach (FolderFile existedGalleryImage in db.FolderFiles.Where(x=>x.OwnerId== id).ToArray())
             {
                 db.FolderFiles.Remove(existedGalleryImage);
             }

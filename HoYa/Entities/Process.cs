@@ -5,47 +5,32 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HoYa.Entities
 {
-    public class WorkFlow : NodeDefinition<WorkFlow, WorkFlowChange>
-    {
-       
-    }
-    public class WorkFlowChange : Change<WorkFlow>
+    public class WorkFlow : Definition
     {
     }
 
-    public class Step : Definition<StepChange>
-    {
-    }
-    public class StepChange : Change<Step>
-    {
-    }
 
-    public class Mission : Instance<WorkFlowChange>
+    public class Step : Detail<WorkFlow>
     {
 
     }
 
-    public class Process : Instance<WorkFlow>
+    public class Mission : Instance<Step>
     {
-        [MaxLength(256)] public string No { get; set; }
+        public virtual Guid? ProcessId { get; set; }
+        [ForeignKey("ProcessId")]
+        public virtual Process Process { get; set; }
 
-        public virtual Guid? StepId { get; set; }
-        [ForeignKey("StepId")]
-        public virtual Step Step { get; set; }
+        public virtual Guid? GroupId { get; set; }
+        [ForeignKey("GroupId")]
+        public virtual Group Group { get; set; }
 
-        public DateTime? OverTime { get; set; }
+        public virtual Guid? ProfileId { get; set; }
+        [ForeignKey("ProfileId")]
+        public virtual Profile Profile { get; set; }
     }
 
-  
-
-    public abstract class General : Entity
+    public class Process : NodeGeneral<Process, WorkFlow>
     {
-        public virtual Guid? ProcessingId { get; set; }
-        [ForeignKey("ProcessingId")]
-        public virtual Process Processing { get; set; }
     }
-
-
-
-
 }

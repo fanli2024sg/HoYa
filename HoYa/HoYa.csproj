@@ -176,21 +176,16 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MaterialsController.cs" />
-    <Compile Include="Controllers\MaterialProceduresController.cs" />
     <Compile Include="Controllers\EnquiriesController.cs" />
-    <Compile Include="Controllers\CertificatesController.cs" />
     <Compile Include="Controllers\MissionsController.cs" />
     <Compile Include="Controllers\ProcessesController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
-    <Compile Include="Controllers\AppliesController.cs" />
     <Compile Include="Controllers\AuthenticateController.cs" />
-    <Compile Include="Controllers\ContactsController.cs" />
-    <Compile Include="Controllers\DocumentsController.cs" />
-    <Compile Include="Controllers\RelationshipsController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FolderFilesController.cs" />
     <Compile Include="Controllers\FoldersController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
+    <Compile Include="Controllers\MenusController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -222,6 +217,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\123.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

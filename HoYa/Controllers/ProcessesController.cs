@@ -21,23 +21,7 @@ namespace HoYa.Controllers
         {
             return db.Processes;
         }
-        [Route("api/Processes/No")]
-        public async Task<IHttpActionResult> GetProcessNo(Guid? typeId=null)
-        {
-            Option type = await db.Options.FindAsync(typeId);
-            JObject process = new JObject();
-            string no = type.Code + DateTime.Now.ToString("yyyyMM");
-            process["no"] = no + (db.Processes.Where(x => x.TypeId == typeId && x.No.Substring(0, 10) == no).Count()+1).ToString("0000");
-            return Ok(process);
-        }
-        [Route("api/Processes/By")]
-        [ResponseType(typeof(Process))]
-        public IQueryable<Process> GetProcessesBy(
-            Guid? typeId = null,
-            string anyLike = "")
-        {
-            return db.Processes.Where(x => (x.TypeId == typeId || typeId == null)).OrderBy(x => x.No);
-        }
+
 
         [ResponseType(typeof(Process))]
         public async Task<IHttpActionResult> GetProcess(Guid id)
@@ -52,7 +36,6 @@ namespace HoYa.Controllers
         {
             Process existedProcess = await db.Processes.FindAsync(id);
             process.Id = existedProcess.Id;
-            process.UpdatedDate = DateTime.Now;
             db.Entry(existedProcess).CurrentValues.SetValues(process);
             await db.SaveChangesAsync();
             await db.Entry(existedProcess).GetDatabaseValuesAsync();

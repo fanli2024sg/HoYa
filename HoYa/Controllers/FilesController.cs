@@ -87,7 +87,7 @@ namespace HoYa.Controllers
                 Entities.File updatedFile = await db.Files.FirstOrDefaultAsync(x => x.Value == value);
                 file.Path = path;
                 file.Value = value;
-                file.UpdatedDate = DateTime.Now;
+                file.CreatedDate = DateTime.Now;
                 db.Entry(updatedFile).CurrentValues.SetValues(file);
                 await db.SaveChangesAsync();
                 await db.Entry(updatedFile).GetDatabaseValuesAsync();

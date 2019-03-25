@@ -43,14 +43,15 @@ namespace HoYa.Controllers
         {
             db.Profiles.Add(new Profile
             {
-                Id = Guid.NewGuid(),
                 UserId = aspNetUser.Id,
                 Value = aspNetUser.UserName,
+                No = "",
                 Gallery = new Folder
                 {
                     Id = Guid.NewGuid(),
                     Value = aspNetUser.UserName
                 }
+
             });
             await db.SaveChangesAsync();
             return await db.Profiles.FirstOrDefaultAsync(x => x.UserId == aspNetUser.Id && x.Value == aspNetUser.UserName);

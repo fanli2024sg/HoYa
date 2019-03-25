@@ -15,7 +15,7 @@ namespace HoYa.Entities
     }
 
 
-    public class QuotationGeneral : General//Process.Type.Value=="O"
+    public class QuotationGeneral : Extention//Process.Type.Value=="O"
     {
         public virtual Guid? EnquiryGeneralId { get; set; }
         [ForeignKey("EnquiryGeneralId")]
