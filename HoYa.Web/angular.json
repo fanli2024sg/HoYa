@@ -20,13 +20,26 @@
                         "tsConfig": "src/tsconfig.app.json",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets",
-                            "src/manifest.json"
+                            "src/assets"
                         ],
-                        "styles": [
-                            "src/styles.css"
-                        ],
-                        "scripts": []
+                      "styles": [
+                        /* "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "node_modules/font-awesome/css/font-awesome.css",
+                            "node_modules/animate.css/animate.min.css",
+                            "node_modules/sweetalert2/dist/sweetalert2.min.css",
+                            "node_modules/toastr/build/toastr.min.css",
+                            "src/assets/styles/instyle.css",
+                            "src/assets/plugins/iCheck/custom.css",
+                            "src/assets/plugins/steps/jquery.steps.css",
+                            "src/assets/styles/slideshow.css",
+                            "src/assets/styles/bootstrap-datetimepicker.min.css",
+                            "src/assets/mystyles/mystyle.css"*/
+                        "src/styles.css"
+                      ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -44,9 +57,7 @@
                             "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "serviceWorker": true,
-                            "ngswConfigPath": "src/ngsw-config.json"
+                            "buildOptimizer": true
                         }
                     }
                 },
@@ -80,8 +91,7 @@
                         "scripts": [],
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets",
-                            "src/manifest.json"
+                            "src/assets"
                         ]
                     }
                 },

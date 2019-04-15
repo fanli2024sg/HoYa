@@ -3,13 +3,13 @@
     email: string;
     password: string;
     value: string;
-    roles: AspNetUserRole[];
+    roles: UserRole[];
     constructor() {
-        this.roles = new Array<AspNetUserRole>();
+        this.roles = new Array<UserRole>();
     }
 }
 
-export class AspNetUserRole {
+export class UserRole {
     userId: string;
     roleId: string;
     value: string;
@@ -19,7 +19,7 @@ export class AspNetUserRole {
     }
 }
 
-export class AspNetRole {
+export class Role {
     id: string;
     name: string;
     description: string;

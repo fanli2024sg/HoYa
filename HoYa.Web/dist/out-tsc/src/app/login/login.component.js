@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService } from "core/services/auth.service";
+import { AuthService } from "@core/services/auth.service";
 var LoginComponent = /** @class */ (function () {
     function LoginComponent(authService, router, formBuilder) {
         this.authService = authService;
@@ -18,7 +18,7 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         this.authService.login(aspNetUser.value, aspNetUser.password).subscribe(function () {
             if (_this.authService.isLoggedIn()) {
-                var redirect = _this.authService.redirectUrl ? _this.authService.redirectUrl : "/views";
+                var redirect = _this.authService.redirectUrl ? _this.authService.redirectUrl : "/contents";
                 _this.router.navigate([redirect]);
             }
         });
@@ -27,7 +27,7 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         this.authService.ad().subscribe(function () {
             if (_this.authService.isLoggedIn()) {
-                var redirect = _this.authService.redirectUrl ? _this.authService.redirectUrl : "/views";
+                var redirect = _this.authService.redirectUrl ? _this.authService.redirectUrl : "/contents";
                 _this.router.navigate([redirect]);
             }
         });
@@ -39,7 +39,8 @@ var LoginComponent = /** @class */ (function () {
         Component({
             selector: "login",
             templateUrl: "login.component.html",
-            styleUrls: ['login.component.css']
+            styleUrls: ['login.component.css'],
+            providers: [AuthService]
         }),
         tslib_1.__metadata("design:paramtypes", [AuthService,
             Router,

@@ -204,7 +204,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthenticateModel.cs" />
     <Compile Include="Models\GroupModel.cs" />
-    <Compile Include="Models\Query.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SettingModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -218,6 +217,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\123.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -230,7 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

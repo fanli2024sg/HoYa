@@ -1,6 +1,7 @@
 import { Folder } from "entities/entity";
 import { Injectable } from "@angular/core";
-import { HttpService } from "core/services/http.service";
+import { Response } from "@angular/http";
+import { HttpService } from "@core/services/http.service";
 @Injectable()
 export class FoldersService {
     private api: string;
@@ -8,13 +9,15 @@ export class FoldersService {
         this.api = "api/Folders/";
     }
 
-    select(x: any) {
-        if (x) return this.httpService.get(this.api +
-            ("ByGroup?Id=" + x.groupId).replace("undefine", ""));
-        else return this.httpService.get(this.api);
+    get() {
+        return this.httpService.get(this.api);
     }
 
-    find(id: string) {
+    getByGroupId(groupId: string) {
+        return this.httpService.get(this.api + "ByGroup?Id=" + groupId);
+    }
+
+    getById(id: string) {
         return this.httpService.get(this.api + id);
     }
 

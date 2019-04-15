@@ -1,6 +1,6 @@
 import { Mission } from "entities/process";
 import { Injectable } from "@angular/core";
-import { HttpService } from "core/services/http.service";
+import { HttpService } from "@core/services/http.service";
 @Injectable()
 export class MissionsService {
     private api: string;

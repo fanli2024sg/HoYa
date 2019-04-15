@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 import { NgModule } from "@angular/core";
-import { LoginComponent } from "./login.component";
-import { ReactiveFormsModule } from "@angular/forms";
-import { LoginRoutingModule } from "./login-routing.module";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { LoginComponent } from "./login.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LoginRoutingModule } from "./login-routing.module";
+import { MatIconModule, MatButtonModule, MatCardModule, MatInputModule, MatFormFieldModule } from "@angular/material";
 var LoginModule = /** @class */ (function () {
     function LoginModule() {
     }
@@ -12,10 +12,14 @@ var LoginModule = /** @class */ (function () {
         NgModule({
             imports: [
                 FormsModule,
-                CommonModule,
                 ReactiveFormsModule,
+                CommonModule,
                 LoginRoutingModule,
-                CommonModule
+                MatIconModule,
+                MatButtonModule,
+                MatCardModule,
+                MatInputModule,
+                MatFormFieldModule
             ],
             declarations: [LoginComponent]
         })

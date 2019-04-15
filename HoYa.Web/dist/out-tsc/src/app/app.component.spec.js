@@ -26,7 +26,7 @@ describe('AppComponent', function () {
         var fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         var compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('h1').textView).toContain('Welcome to app!');
+        expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
     }));
 });
 //# sourceMappingURL=app.component.spec.js.map

@@ -1,19 +1,25 @@
 import * as tslib_1 from "tslib";
-import { Extention, Detail } from "./entity";
+import { Entity, Detail } from "./entity";
+import { MaterialProcedure } from "./material";
 var Enquiry = /** @class */ (function (_super) {
-    tslib_1.__extends(Enquiry, _super);
+    tslib_1.__extends(Enquiry, _super); //Process.Type.Value=="Enquiry"
     function Enquiry() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.materialProcedure = new MaterialProcedure();
+        return _this;
     }
     return Enquiry;
 }(Detail));
 export { Enquiry };
 var EnquiryGeneral = /** @class */ (function (_super) {
-    tslib_1.__extends(EnquiryGeneral, _super);
-    function EnquiryGeneral() {
-        return _super.call(this) || this;
+    tslib_1.__extends(EnquiryGeneral, _super); //Process.Type.Value=="O"
+    function EnquiryGeneral(process) {
+        var _this = _super.call(this) || this;
+        _this.process = process;
+        return _this;
     }
     return EnquiryGeneral;
-}(Extention));
+}(Entity //Process.Type.Value=="O"
+));
 export { EnquiryGeneral };
 //# sourceMappingURL=enquiry.js.map

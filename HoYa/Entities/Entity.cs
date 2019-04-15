@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HoYa.Entities
@@ -23,11 +25,11 @@ namespace HoYa.Entities
     }
 
     public class Change : Base
-    {
+    { 
 
     }
 
-    public abstract class Extention : Base
+    public abstract class Extention: Base
     {
         public virtual Guid? UpdatedById { get; set; }
         [ForeignKey("UpdatedById")]
@@ -42,28 +44,15 @@ namespace HoYa.Entities
         }
     }
 
-    public abstract class Simple : Extention
-    {
-        public string Value { get; set; }
-    }
-
-    public abstract class TypeExtention : Extention
-    {
-        public virtual Guid? TypeId { get; set; }
-        [ForeignKey("TypeId")]
-        public virtual Option Type { get; set; }
-    }
-
-
     public abstract class Entity : Extention
     {
         public virtual Guid? ChangeId { get; set; }
         [ForeignKey("ChangeId")]
         [JsonIgnore]
-        public virtual Change Change { get; set; }
+        public virtual Change Change { get; set; }        
     }
 
-    public abstract class Definition : Entity
+    public abstract class Definition: Entity
     {
         public string Code { get; set; }
         public string Value { get; set; }
@@ -113,7 +102,7 @@ namespace HoYa.Entities
         public virtual Guid? ParentId { get; set; }
         [ForeignKey("ParentId")]
         [JsonIgnore]
-        public virtual P Parent { get; set; }
+        public virtual P Parent { get; set; } 
     }
 
 

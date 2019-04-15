@@ -165,8 +165,8 @@ namespace HoYa.Controllers
             //   var client = new HttpClient { BaseAddress = new Uri($"http://localhost:3001/") };
             var client = new HttpClient
             {
-                BaseAddress = new Uri($"http://118.163.183.248/hoya/")
-                //BaseAddress = new Uri($"http://localhost:3001/")
+                //BaseAddress = new Uri($"http://118.163.183.248/hoya/")
+                BaseAddress = new Uri($"http://localhost:3001/")
             };
 
             var buffer = System.Text.Encoding.UTF8.GetBytes("grant_type=password&username=" + userName + "&password=" + password);

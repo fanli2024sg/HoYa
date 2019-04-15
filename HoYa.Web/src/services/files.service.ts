@@ -1,6 +1,7 @@
 import { File } from "entities/entity";
 import { Injectable } from "@angular/core";
-import { HttpService } from "core/services/http.service";
+import { Response } from "@angular/http";
+import { HttpService } from "@core/services/http.service";
 @Injectable()
 export class FilesService {
     private api: string;
