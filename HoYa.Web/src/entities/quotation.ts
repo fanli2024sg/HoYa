@@ -1,12 +1,11 @@
-import { Detail } from "./entity";
+import { Detail, Extention } from "./entity";
 import { EnquiryGeneral, Enquiry } from "./enquiry";
-import { Process, General } from "entities/process";
 
-export class Quotation extends Detail<QuotationGeneral>//Process.Type.Value=="O"
+export class Quotation extends Detail<QuotationGeneral>
 {
     amount: number;
     bargain: string;
-    bargainPrice : number;
+    bargainPrice: number;
     enquiryId: string;
     enquiry: Enquiry;
     constructor() {
@@ -14,13 +13,11 @@ export class Quotation extends Detail<QuotationGeneral>//Process.Type.Value=="O"
     }
 }
 
-export class QuotationGeneral extends General//Process.Type.Value=="O"
-{
+
+export class QuotationGeneral extends Extention {
     enquiryGeneralId: string;
     enquiryGeneral: EnquiryGeneral;
-    _hasOrderPackage: boolean;
-    constructor(process?: Process) {
+    constructor() {
         super();
-        this.process = process;
     }
 }

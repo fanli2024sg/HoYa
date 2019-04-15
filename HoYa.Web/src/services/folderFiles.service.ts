@@ -1,7 +1,6 @@
 import { FolderFile } from "entities/entity";
 import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
 @Injectable()
 export class FolderFilesService {
     private api: string;

@@ -1,14 +1,14 @@
-<div style="padding: 15px">
+<div style="padding: 15px"  fxLayout="row" 
+           fxLayout.xs="column" 
+           fxFlexFill >
     <form [formGroup]="aspNetUser" (ngSubmit)="login(aspNetUser.value)">
         <mat-card>
             <mat-card-title>
                 裕浤科技
             </mat-card-title>
-
             <mat-card-content>
-
                 <mat-form-field class="full-width">
-                    <input matInput placeholder="帳號" [formControl]="aspNetUser.controls['value']" [errorStateMatcher]="matcher" />
+                    <input matInput placeholder="帳號" [formControl]="aspNetUser.controls['value']"/>
 
                     <mat-hint align="end">帳號格式正確!</mat-hint>
                     <mat-error align="end" *ngIf="aspNetUser.controls['value'].hasError('minlength') && !aspNetUser.controls['value'].hasError('required')">
@@ -21,7 +21,6 @@
                 <mat-form-field class="full-width">
                     <input matInput placeholder="密碼" [formControl]="aspNetUser.controls['password']" type="password" />
                 </mat-form-field>
-
             </mat-card-content>
             <mat-card-actions align="end">
                 <button mat-button color="accent" type="submit" [disabled]="!aspNetUser.valid">登入</button>

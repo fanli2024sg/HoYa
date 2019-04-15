@@ -15,7 +15,7 @@ namespace HoYa.Controllers
     {
         private HoYaContext db = new HoYaContext();
 
-        [Route("api/Materials/By")]
+        [Route("api/Materials")]
         [ResponseType(typeof(Material))]
         public IQueryable<Material> GetMaterialsBy(string anyLike="")
         {

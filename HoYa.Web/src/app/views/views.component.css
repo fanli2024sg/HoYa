@@ -1,0 +1,115 @@
+
+.views-toolbar {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+
+.toolbar-seprator {
+    flex: 1 1 auto;
+}
+
+.views-sidenav-container {
+    padding-top: 64px;
+    position: absolute;
+}
+
+.views-sidenav {
+    position: absolute;
+}
+
+.views-sidenav {
+    width: 300px;
+}
+
+.avatar {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 8px 0 0;
+    border-radius: 50%;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+.mat-toolbar.mat-primary .mat-list-base {
+    padding-top: 0px;
+    height: 64px !important;
+    display: inline-block;
+    -webkit-tap-highlight-color: transparent;
+}
+
+    .mat-toolbar.mat-primary .mat-list-base .mat-list-item {
+        height: 64px !important;
+        color: #ffffff;
+    }
+
+.navbar-top {
+    display: flex;
+    flex-direction: row;
+    flex: 1 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    max-height: 64px;
+    height: 64px;
+    padding: 12px 12px 12px 20px;
+    background: #b6ff00;
+}
+
+    .navbar-top .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-top .buttons {
+        display: flex;
+        align-items: center;
+    }
+
+.navbar-scroll-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-repeat: no-repeat;
+    background-size: 100% 40px,100% 10px;
+    background-attachment: local,scroll;
+}
+
+    .navbar-scroll-container .user {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        height: 136px;
+        min-height: 136px;
+        max-height: 136px;
+        padding: 24px 0 64px;
+        background: #b6ff00;
+    }
+ .navbar-scroll-container .navbar-content {
+    flex: 1 1 auto;
+    padding-top: 32px;
+}
+        .navbar-scroll-container .user .avatar-container {
+            position: absolute;
+            top: 92px;
+            border-radius: 50%;
+            padding: 8px;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            left: 50%;
+        }
+
+            .navbar-scroll-container .user .avatar-container .avatar {
+                width: 72px;
+                height: 72px;
+                margin: 0;
+            }

@@ -1,34 +1,27 @@
-import { Entity, Option, Detail } from "./entity";
-import { Group } from "./group";
-import { Person } from "./person";
+import { Extention, Detail } from "./entity";
 import { Process } from "./process";
-import { MaterialProcedure } from "./material";
-export class Enquiry extends Detail<EnquiryGeneral>//Process.Type.Value=="Enquiry"
+import { Material } from "./material";
+export class Enquiry extends Detail<EnquiryGeneral>
 {
-    processId: string;
-    process: Process;
-    materialProcedureId: string;
-    materialProcedure: MaterialProcedure;//原料耗材能源設備折舊成本
-    //新MaterialProcedure去產生MaterialChange Process => Process.Type.Value=="MaterialChange" ParentId=本Enquiry Process
-    minAmount: number;//主管壓底價
+    materialId: string;
+    material: Material;
+    minAmount: number;
     quantity: number;
-    _index: string;
-    constructor() {
+    constructor(ownerId?:string) {
         super();
-        this.materialProcedure = new MaterialProcedure();
+        this.ownerId = ownerId;
+        this.quantity = 1;
     }
 }
 
-export class EnquiryGeneral extends Entity//Process.Type.Value=="O"
-{
+export class EnquiryGeneral extends Extention {
     processId: string;
     process: Process;
-    customerName: string;
-    contactValue: string;
     contactPerson: string;
+    contactValue: string;
+    customerName: string;
     content: string;
-    constructor(process?: Process) {
+    constructor() {
         super();
-        this.process = process;
     }
 }

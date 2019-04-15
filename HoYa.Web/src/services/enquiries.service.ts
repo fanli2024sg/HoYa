@@ -1,48 +1,40 @@
 import { Enquiry, EnquiryGeneral } from "entities/enquiry";
 import { Injectable } from "@angular/core";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
+import { Observable } from 'rxjs';
 @Injectable()
 export class EnquiriesService {
     private api: string;
     constructor(private httpService: HttpService) {
-        this.api = "api/Enquiries/";
+        this.api = "api/Enquiries";
     }
 
-    get(x: any) {
-        return this.httpService.get(this.api + "By?OwnerId=" + (x.ownerId || ""));
+    select(x: any, withRefresh: boolean): Observable<Enquiry[]> {
+        // TODO: Add error handling
+        return this.httpService.search<Enquiry[]>(this.api, x, withRefresh);
     }
 
-    getOptions(x: any) {
-        return this.httpService.get(this.api +
-            "Option?typeId=e979aefd-385c-4445-9844-6e151ee141a1" +
-            "&anyLike=" + (x.anyLike ? x.anyLike : "") +
-            "&pageSize=200"
-        );
+    findGeneral(id: string) {
+        return this.httpService.get(`${this.api}/General/${id}`);
     }
 
-    getById(id: string) {
-        return this.httpService.get(this.api + id);
-    }
-
-    create(enquiry: Enquiry) {
+    create(enquiry: Enquiry): Observable<any> {
         return this.httpService.create(this.api, enquiry);
     }
     updateGeneral(id: string, enquiryGeneral: EnquiryGeneral) {
-        return this.httpService.update(this.api + "General/" + id, enquiryGeneral);
+        return this.httpService.update(`${this.api}/General/${id}`, enquiryGeneral);
     }
     createGeneral(enquiryGeneral: EnquiryGeneral) {
-console.log(enquiryGeneral);
-debugger
-        return this.httpService.create(this.api+"General/", enquiryGeneral);
+        return this.httpService.create(`${this.api}/General`, enquiryGeneral);
     }
-    getGeneral(x: any) {
-        return this.httpService.get(this.api + "General?processId=" + x.processId);
+    selectGeneral(x: any) {
+        return this.httpService.search(`${this.api}/General`, x, false);
     }
     update(id: string, enquiry: Enquiry) {
         return this.httpService.update(this.api + id, enquiry);
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 }

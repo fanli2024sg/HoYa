@@ -1,0 +1,41 @@
+<div style="padding: 0">
+    <form [formGroup]="enquiryGeneral" (ngSubmit)="createGeneral(enquiryGeneral.value)">
+        <mat-card>
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title >新增詢價</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>客戶名稱</mat-label>
+                    <input matInput placeholder="客戶名稱" [formControl]="enquiryGeneral.controls['customerName']"/>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>聯絡方式</mat-label>
+                    <input matInput placeholder="聯絡方式" [formControl]="enquiryGeneral.controls['contactValue']"/>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>聯絡窗口</mat-label>
+                    <input matInput placeholder="聯絡窗口" [formControl]="enquiryGeneral.controls['contactPerson']"/>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>詢價內容</mat-label>
+                    <textarea matInput placeholder="詢價內容" [formControl]="enquiryGeneral.controls['view']"cdkTextareaAutosize
+                              cdkAutosizeMinRows="10"
+                              cdkAutosizeMaxRows="200"></textarea>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-button color="accent" type="submit" [disabled]="!enquiryGeneral.valid">送出</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>
+<div [fileUploadInputFor]="fileUploadQueue" class="upload-drop-zone">
+    Just drag and drop files here
+</div>
+<mat-file-upload-queue #fileUploadQueue
+                       [fileAlias]="'Files'"
+                       [httpUrl]="'http://localhost:3001/api/Files/'">
+    <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
+</mat-file-upload-queue>

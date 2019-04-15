@@ -1,7 +1,7 @@
 import { Inventory } from "entities/inventory";
 import { Injectable } from "@angular/core";
 ;
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
 
 @Injectable()
 export class InventoriesService {
