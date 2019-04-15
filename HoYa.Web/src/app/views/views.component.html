@@ -1,0 +1,91 @@
+
+
+<mat-sidenav-container class="views-sidenav-container" fullscreen>
+    <mat-sidenav class="views-sidenav" #sideNav mode="over" (opened)="opened()" (closed)="closed()">
+        <div class="navbar-top">
+            <div class="logo">
+                <img class="logo-icon" src="../../../../favicon.ico">
+                <span class="logo-text secondary-text">HoYa</span>
+            </div>
+            <div class="buttons">
+                <button class="toggle-sidebar-folded mat-icon-button" fxhide.lt-lg="" mat-icon-button="" style="display: none;">
+                    <span class="mat-button-wrapper"><mat-icon class="secondary-text mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">menu</mat-icon></span>
+                    <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+                </button>
+                <button mat-icon-button (click)="sideNav.toggle()">
+                    <span class="mat-button-wrapper">
+                        <mat-icon class="secondary-text mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">arrow_back</mat-icon>
+                    </span>
+                    <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
+                </button>
+            </div>
+        </div>
+        <div class="navbar-scroll-container">
+            <div class="user fuse-navy-900" fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                <div class="h3 username">FangHsien Li</div><div class="h5 email hint-text mt-8">fanghsien@hoya.com</div>
+                <div class="avatar-container fuse-navy-700">
+                    <img class="avatar" src="../../hoya/assets/a6.jpg">
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-nav-list class="navbar-content">
+                <h3 matSubheader>選單</h3>
+                <a [routerLink]="['/', 'views', 'enquiries', 'new']" (click)="goto('新增詢價'); sideNav.close()" mat-list-item>新增詢價</a>
+                <a [routerLink]="['/', 'views', 'enquiries', 'list']" (click)="goto('詢價列表'); sideNav.close()" mat-list-item>詢價列表</a>
+
+            </mat-nav-list>
+        </div>
+
+    </mat-sidenav>
+
+    <mat-sidenav #sideNavEnd mode="side" position="end">
+        <div>待辦區塊</div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary" style="padding:0 8px" class="views-toolbar">
+            <button mat-icon-button (click)="sideNav.toggle()" *ngIf="title===''">
+                <mat-icon>{{ sideNav.opened ? 'close' : 'menu' }}</mat-icon>
+            </button>
+            <button mat-icon-button (click)="back()" *ngIf="title!==''">
+                <mat-icon [routerLink]="['/', 'views']">keyboard_arrow_left</mat-icon>
+            </button>
+            <span>{{title}}</span>
+            <span class="toolbar-seprator"></span>
+            <mat-nav-list>
+                <mat-list-item [matMenuTriggerFor]="menu1">
+                    <span class="mat-button-wrapper">
+                        <div fxlayout="row" fxlayoutalign="center center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
+                            <img class="avatar mr-0 mr-sm-16" src="../../hoya/assets/a6.jpg">
+                            <span class="username mr-12" fxhide="" fxshow.gt-sm="" style="">FangHsien Li</span>
+                            <mat-icon class="s-16 mat-icon material-icons mat-icon-no-color" fxhide.xs="" role="img" aria-hidden="true" style="">keyboard_arrow_down</mat-icon>
+                        </div>
+                    </span>
+                    <div class="mat-button-ripple mat-ripple"></div>
+                    <div class="mat-button-focus-overlay"></div>
+                </mat-list-item>
+                <mat-menu #menu1="matMenu" xPosition="before">
+                    <button mat-menu-item>
+                        <mat-icon>account_circle</mat-icon>
+                        <span>我的檔案</span>
+                    </button>
+                    <button mat-menu-item (click)="sideNavEnd.toggle()">
+                        <mat-icon>mail</mat-icon>
+                        <span>待辦</span>
+                    </button>
+                    <button mat-menu-item (click)="logout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>登出</span>
+                    </button>
+                </mat-menu>
+            </mat-nav-list>
+            <mat-divider></mat-divider>
+            <button mat-icon-button>
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+  

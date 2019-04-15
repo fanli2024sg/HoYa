@@ -1,18 +1,19 @@
 import * as tslib_1 from "tslib";
 import { Injectable } from "@angular/core";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
 var FoldersService = /** @class */ (function () {
     function FoldersService(httpService) {
         this.httpService = httpService;
         this.api = "api/Folders/";
     }
-    FoldersService.prototype.get = function () {
-        return this.httpService.get(this.api);
+    FoldersService.prototype.select = function (x) {
+        if (x)
+            return this.httpService.get(this.api +
+                ("ByGroup?Id=" + x.groupId).replace("undefine", ""));
+        else
+            return this.httpService.get(this.api);
     };
-    FoldersService.prototype.getByGroupId = function (groupId) {
-        return this.httpService.get(this.api + "ByGroup?Id=" + groupId);
-    };
-    FoldersService.prototype.getById = function (id) {
+    FoldersService.prototype.find = function (id) {
         return this.httpService.get(this.api + id);
     };
     FoldersService.prototype.create = function (folder) {

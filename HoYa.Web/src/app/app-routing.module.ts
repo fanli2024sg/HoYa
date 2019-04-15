@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CanDeactivateGuard } from "@core/guards/can-deactivate.guard";
-import { AuthGuard } from "@core/guards/auth.guard";
+import { CanDeactivateGuard } from "core/guards/can-deactivate.guard";
+import { AuthGuard } from "core/guards/auth.guard";
 const appRoutes: Routes = [
-    { path: "", redirectTo: "contents", pathMatch: "full" },
+    { path: "", redirectTo: "views", pathMatch: "full" },
     {
         path: "login",
-        loadChildren: "app/login/login.module#LoginModule"
+        loadChildren: "./login/login.module#LoginModule"
     },
     {
-        path: "contents",
-        loadChildren: "app/contents/contents.module#ContentsModule",
+        path: "views",
+        loadChildren: "./views/views.module#ViewsModule",
         canLoad: [AuthGuard]
     }
 ];
@@ -25,7 +25,8 @@ const appRoutes: Routes = [
         RouterModule
     ],
     providers: [
-        CanDeactivateGuard
+        CanDeactivateGuard,
+        AuthGuard
     ]
 })
 export class AppRoutingModule { }

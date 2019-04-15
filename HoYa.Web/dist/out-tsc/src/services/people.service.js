@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Injectable } from "@angular/core";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
 var PeopleService = /** @class */ (function () {
     function PeopleService(httpService) {
         this.httpService = httpService;
@@ -26,12 +26,6 @@ var PeopleService = /** @class */ (function () {
     };
     PeopleService.prototype.getById = function (id) {
         return this.httpService.get(this.api + id);
-    };
-    PeopleService.prototype.create = function (option) {
-        return this.httpService.create(this.api, option);
-    };
-    PeopleService.prototype.update = function (id, option) {
-        return this.httpService.update(this.api + id, option);
     };
     PeopleService.prototype.delete = function (id) {
         return this.httpService.delete(this.api + id);

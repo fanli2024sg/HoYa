@@ -1,7 +1,6 @@
-import { PersonOption, PersonModel } from "models/person";
 import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
+
 @Injectable()
 export class PeopleService {
     private api: string;
@@ -35,14 +34,6 @@ export class PeopleService {
 
     getById(id: string) {
         return this.httpService.get(this.api + id);
-    }
-
-    create(option: PersonModel) {
-        return this.httpService.create(this.api, option);
-    }
-
-    update(id: string, option: PersonModel) {
-        return this.httpService.update(this.api + id, option);
     }
 
     delete(id: string) {

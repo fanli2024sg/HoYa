@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 import { Injectable } from "@angular/core";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
 var EnquiriesService = /** @class */ (function () {
     function EnquiriesService(httpService) {
         this.httpService = httpService;
-        this.api = "api/Enquiries/";
+        this.api = "api/Enquiries";
     }
     EnquiriesService.prototype.get = function (x) {
         return this.httpService.get(this.api + "By?OwnerId=" + (x.ownerId || ""));
@@ -15,20 +15,20 @@ var EnquiriesService = /** @class */ (function () {
             "&anyLike=" + (x.anyLike ? x.anyLike : "") +
             "&pageSize=200");
     };
-    EnquiriesService.prototype.getById = function (id) {
-        return this.httpService.get(this.api + id);
+    EnquiriesService.prototype.findGeneral = function (id) {
+        return this.httpService.get(this.api + "/General/" + id);
     };
     EnquiriesService.prototype.create = function (enquiry) {
         return this.httpService.create(this.api, enquiry);
     };
     EnquiriesService.prototype.updateGeneral = function (id, enquiryGeneral) {
-        return this.httpService.update(this.api + "General/" + id, enquiryGeneral);
+        return this.httpService.update(this.api + "/General/" + id, enquiryGeneral);
     };
     EnquiriesService.prototype.createGeneral = function (enquiryGeneral) {
-        return this.httpService.create(this.api + "General/", enquiryGeneral);
+        return this.httpService.create(this.api + "/General", enquiryGeneral);
     };
-    EnquiriesService.prototype.getGeneral = function (x) {
-        return this.httpService.get(this.api + "General?processId=" + x.processId);
+    EnquiriesService.prototype.selectGeneral = function (x) {
+        return this.httpService.search(this.api + "/General", x, false);
     };
     EnquiriesService.prototype.update = function (id, enquiry) {
         return this.httpService.update(this.api + id, enquiry);

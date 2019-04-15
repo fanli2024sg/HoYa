@@ -2,7 +2,7 @@
     "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "src",
-    "importHelpers": true,
+        "importHelpers": true,
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
         "declaration": false,
@@ -19,13 +19,14 @@
             "dom"
         ],
         "paths": {
+            "core/*": [ "core/*" ],
             "entities/*": [ "entities/*" ],
             "models/*": [ "models/*" ],
             "services/*": [ "services/*" ],
             "pipes/*": [ "pipes/*" ],
-            "views/*": [ "views/*" ],
             "directives/*": [ "directives/*" ],
-            "components/*": [ "components/*" ]
+            "components/*": [ "components/*" ],
+            "interfaces/*": [ "interfaces/*" ]
         }
     }
 }

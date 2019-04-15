@@ -1,6 +1,6 @@
 import { Profile } from "entities/person";
 import { Injectable } from "@angular/core";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
 import { Observable } from "rxjs";
 @Injectable()
 export class ProfilesService {

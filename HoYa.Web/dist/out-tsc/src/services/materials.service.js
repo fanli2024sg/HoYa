@@ -1,13 +1,18 @@
 import * as tslib_1 from "tslib";
 import { Injectable } from "@angular/core";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
+export var searchUrl = 'https://npmsearch.com/query';
 var MaterialsService = /** @class */ (function () {
     function MaterialsService(httpService) {
         this.httpService = httpService;
-        this.api = "api/Materials/";
+        this.api = "api/Materials";
     }
-    MaterialsService.prototype.get = function (x) {
-        return this.httpService.get(this.api + "By?anyLike=" + x.anyLike);
+    //select(x: any): Observable<Material[]> {
+    //return this.httpService.get(`${this.api}?anyLike=${x.anyLike}`);
+    //}
+    MaterialsService.prototype.search = function (anyLike, withRefresh) {
+        // TODO: Add error handling
+        return this.httpService.search(this.api, { anyLike: anyLike }, withRefresh);
     };
     MaterialsService.prototype.create = function (material) {
         return this.httpService.create(this.api, material);

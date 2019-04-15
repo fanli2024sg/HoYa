@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Injectable } from "@angular/core";
-import { HttpService } from "@core/services/http.service";
+import { HttpService } from "core/services/http.service";
 var OptionsService = /** @class */ (function () {
     function OptionsService(httpService) {
         this.httpService = httpService;

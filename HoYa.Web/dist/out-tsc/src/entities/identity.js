@@ -5,18 +5,18 @@ var AspNetUser = /** @class */ (function () {
     return AspNetUser;
 }());
 export { AspNetUser };
-var UserRole = /** @class */ (function () {
-    function UserRole(userId, roleId) {
+var AspNetUserRole = /** @class */ (function () {
+    function AspNetUserRole(userId, roleId) {
         this.userId = userId;
         this.roleId = roleId;
     }
-    return UserRole;
+    return AspNetUserRole;
 }());
-export { UserRole };
-var Role = /** @class */ (function () {
-    function Role() {
+export { AspNetUserRole };
+var AspNetRole = /** @class */ (function () {
+    function AspNetRole() {
     }
-    return Role;
+    return AspNetRole;
 }());
-export { Role };
+export { AspNetRole };
 //# sourceMappingURL=identity.js.map

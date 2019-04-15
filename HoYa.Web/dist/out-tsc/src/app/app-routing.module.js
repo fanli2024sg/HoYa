@@ -1,17 +1,17 @@
 import * as tslib_1 from "tslib";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { CanDeactivateGuard } from "@core/guards/can-deactivate.guard";
-import { AuthGuard } from "@core/guards/auth.guard";
+import { CanDeactivateGuard } from "core/guards/can-deactivate.guard";
+import { AuthGuard } from "core/guards/auth.guard";
 var appRoutes = [
-    { path: "", redirectTo: "contents", pathMatch: "full" },
+    { path: "", redirectTo: "views", pathMatch: "full" },
     {
         path: "login",
-        loadChildren: "app/login/login.module#LoginModule"
+        loadChildren: "./login/login.module#LoginModule"
     },
     {
-        path: "contents",
-        loadChildren: "app/contents/contents.module#ContentsModule",
+        path: "views",
+        loadChildren: "./views/views.module#ViewsModule",
         canLoad: [AuthGuard]
     }
 ];
@@ -27,7 +27,8 @@ var AppRoutingModule = /** @class */ (function () {
                 RouterModule
             ],
             providers: [
-                CanDeactivateGuard
+                CanDeactivateGuard,
+                AuthGuard
             ]
         })
     ], AppRoutingModule);

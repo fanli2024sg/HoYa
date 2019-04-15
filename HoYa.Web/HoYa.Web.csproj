@@ -7,10 +7,10 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <OutputPath>bin</OutputPath>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>3.3</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -23,6 +23,7 @@
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
     <Use64BitIISExpress />
+    <TypeScriptBuildMode>true</TypeScriptBuildMode>
   </PropertyGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -31,93 +32,83 @@
     <Content Include="favicon.ico" />
     <Content Include="index.html" />
     <Content Include="karma.conf.js" />
+    <Content Include="node_modules\%40angular\material\prebuilt-themes\indigo-pink.css" />
     <Content Include="src\app\app.component.css" />
-    <Content Include="src\app\contents\contents.component.css" />
-    <Content Include="src\app\dashboard\dashboard\dashboard.component.css" />
-    <Content Include="src\app\dashboard\dashboard\dashboard.component.html" />
-    <Content Include="src\app\dashboard\main\main.component.css" />
-    <Content Include="src\app\dashboard\main\main.component.html" />
     <Content Include="src\app\login\login.component.css" />
+    <Content Include="src\app\views\enquiries\edit\add\enquiry.component.css" />
+    <Content Include="src\app\views\enquiries\edit\add\enquiry.component.html" />
+    <Content Include="src\app\views\enquiries\edit\enquiries-edit.component.css" />
+    <Content Include="src\app\views\enquiries\new\enquiries-new.component.css" />
+    <Content Include="src\app\views\views.component.css" />
+    <Content Include="src\app\views\views.component.html" />
+    <Content Include="src\assets\a6.jpg" />
     <Content Include="src\assets\images\angular_solidBlack.svg" />
     <Content Include="src\app\app.component.html" />
-    <Content Include="src\app\contents\contents.component.html" />
-    <Content Include="src\app\working\working.template.html" />
     <Content Include="src\app\login\login.component.html" />
+    <TypeScriptCompile Include="src\core\interceptors\auth.interceptor.ts" />
+    <TypeScriptCompile Include="src\core\interceptors\index.ts" />
+    <TypeScriptCompile Include="src\core\interceptors\noop.interceptor.ts" />
     <TypeScriptCompile Include="src\app\app-routing.module.ts" />
-    <TypeScriptCompile Include="src\app\dashboard\dashboard-routing.module.ts" />
-    <TypeScriptCompile Include="src\app\dashboard\dashboard.module.ts" />
-    <TypeScriptCompile Include="src\app\dashboard\dashboard\dashboard.component.spec.ts" />
-    <TypeScriptCompile Include="src\app\dashboard\dashboard\dashboard.component.ts" />
-    <TypeScriptCompile Include="src\app\dashboard\main\main.component.spec.ts" />
-    <TypeScriptCompile Include="src\app\dashboard\main\main.component.ts" />
-    <TypeScriptCompile Include="src\app\shared-material\shared-material.module.ts" />
-    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
-    <TypeScriptCompile Include="src\%40core\guards\auth.guard.ts" />
-    <TypeScriptCompile Include="src\%40core\guards\can-deactivate.guard.ts" />
-    <TypeScriptCompile Include="src\app\working\working.component.ts" />
-    <TypeScriptCompile Include="src\app\working\working.module.ts" />
-    <TypeScriptCompile Include="src\app\working\working.routing.module.ts" />
+    <TypeScriptCompile Include="src\core\guards\auth.guard.ts" />
+    <TypeScriptCompile Include="src\core\guards\can-deactivate.guard.ts" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\index.html" />
     <Content Include="src\karma.conf.js" />
     <Content Include="src\styles.css" />
-    <Content Include="src\views\common\footer\footer.template.html" />
-    <Content Include="src\views\common\navigation\navigation.template.html" />
-    <Content Include="src\views\common\topnavbar\topnavbar.template.html" />
-    <TypeScriptCompile Include="src\views\enquiries\edit\enquiries-edit-routing.module.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\edit\enquiries-edit.module.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\enquiries-routing.module.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\enquiries.module.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\enquiries.component.spec.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\enquiries.component.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\list\enquiries-list.component.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\edit\enquiries-edit.component.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\list\enquiries-list-routing.module.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\list\enquiries-list.module.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\new\enquiries-new-routing.module.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\new\enquiries-new.component.ts" />
-    <TypeScriptCompile Include="src\views\enquiries\new\enquiries-new.module.ts" />
-    <TypeScriptCompile Include="src\views\system\system.component.ts" />
-    <TypeScriptCompile Include="src\views\system\system.module.ts" />
-    <TypeScriptCompile Include="src\views\system\system.routing.module.ts" />
+    <TypeScriptCompile Include="src\core\core.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\edit\add\enquiry.component.ts" />
+    <TypeScriptCompile Include="src\app\views\views-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\views\views.component.ts" />
+    <TypeScriptCompile Include="src\app\views\views.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\edit\enquiries-edit-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\edit\enquiries-edit.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\enquiries-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\enquiries.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\enquiries.component.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\list\enquiries-list.component.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\edit\enquiries-edit.component.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\list\enquiries-list-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\list\enquiries-list.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\new\enquiries-new-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\new\enquiries-new.component.ts" />
+    <TypeScriptCompile Include="src\app\views\enquiries\new\enquiries-new.module.ts" />
+    <TypeScriptCompile Include="src\app\views\system\system.component.ts" />
+    <TypeScriptCompile Include="src\app\views\system\system.module.ts" />
+    <TypeScriptCompile Include="src\app\views\system\system.routing.module.ts" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\%40core\helpers\app.helpers.ts" />
-    <TypeScriptCompile Include="src\%40core\services\auth.service.ts" />
-    <TypeScriptCompile Include="src\%40core\services\dialog.service.ts" />
-    <TypeScriptCompile Include="src\%40core\services\global.service.ts" />
-    <TypeScriptCompile Include="src\%40core\services\height.service.ts" />
-    <TypeScriptCompile Include="src\%40core\services\http.service.ts" />
-    <TypeScriptCompile Include="src\%40core\services\list.service.ts" />
+    <TypeScriptCompile Include="src\core\helpers\app.helpers.ts" />
+    <TypeScriptCompile Include="src\core\services\app.service.ts" />
+    <TypeScriptCompile Include="src\core\services\auth.service.ts" />
+    <TypeScriptCompile Include="src\core\services\dialog.service.ts" />
+    <TypeScriptCompile Include="src\core\services\global.service.ts" />
+    <TypeScriptCompile Include="src\core\services\http.service.ts" />
+    <TypeScriptCompile Include="src\core\services\list.service.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
-    <TypeScriptCompile Include="src\app\contents\contents.component.ts" />
-    <TypeScriptCompile Include="src\app\contents\contents.module.ts" />
-    <TypeScriptCompile Include="src\app\contents\contents-routing.module.ts" />
     <TypeScriptCompile Include="src\app\login\login.component.ts" />
     <TypeScriptCompile Include="src\app\login\login.module.ts" />
     <TypeScriptCompile Include="src\app\login\login-routing.module.ts" />
-    <TypeScriptCompile Include="src\entities\control.ts" />
     <TypeScriptCompile Include="src\entities\quotation.ts" />
     <TypeScriptCompile Include="src\entities\identity.ts" />
     <TypeScriptCompile Include="src\entities\person.ts" />
     <TypeScriptCompile Include="src\entities\process.ts" />
-    <TypeScriptCompile Include="src\entities\profile.ts" />
+    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="src\environments\environment.ts" />
     <TypeScriptCompile Include="src\main.ts" />
-    <TypeScriptCompile Include="src\models\person.ts" />
+    <TypeScriptCompile Include="src\models\query.ts" />
     <TypeScriptCompile Include="src\models\login.ts" />
-    <TypeScriptCompile Include="src\%40core\pipes\equal.pipe.ts" />
-    <TypeScriptCompile Include="src\%40core\pipes\highlight.pipe.ts" />
-    <TypeScriptCompile Include="src\%40core\pipes\like.pipe.ts" />
-    <TypeScriptCompile Include="src\%40core\pipes\notin.pipe.ts" />
-    <TypeScriptCompile Include="src\%40core\pipes\orderby.pipe.ts" />
-    <TypeScriptCompile Include="src\%40core\pipes\pipes.module.ts" />
+    <TypeScriptCompile Include="src\core\pipes\equal.pipe.ts" />
+    <TypeScriptCompile Include="src\core\pipes\highlight.pipe.ts" />
+    <TypeScriptCompile Include="src\core\pipes\like.pipe.ts" />
+    <TypeScriptCompile Include="src\core\pipes\notin.pipe.ts" />
+    <TypeScriptCompile Include="src\core\pipes\orderby.pipe.ts" />
+    <TypeScriptCompile Include="src\core\pipes\pipes.module.ts" />
     <TypeScriptCompile Include="src\entities\entity.ts" />
     <TypeScriptCompile Include="src\polyfills.ts" />
     <TypeScriptCompile Include="src\services\enquiries.service.ts" />
     <TypeScriptCompile Include="src\services\inventories.service.ts" />
     <TypeScriptCompile Include="src\services\materials.service.ts" />
-    <TypeScriptCompile Include="src\services\materialprocedures.service.ts" />
     <TypeScriptCompile Include="src\services\quotations.service.ts" />
     <TypeScriptCompile Include="src\services\settings.service.ts" />
     <TypeScriptCompile Include="src\services\profiles.service.ts" />
@@ -129,26 +120,15 @@
     <TypeScriptCompile Include="src\services\folders.service.ts" />
     <TypeScriptCompile Include="src\services\options.service.ts" />
     <TypeScriptCompile Include="src\services\missions.service.ts" />
-    <TypeScriptCompile Include="src\services\storages.service.ts" />
     <TypeScriptCompile Include="src\test.ts" />
-    <TypeScriptCompile Include="src\views\common\footer\footer.component.ts" />
-    <TypeScriptCompile Include="src\views\common\footer\footer.module.ts" />
-    <TypeScriptCompile Include="src\views\common\navigation\navigation.component.ts" />
-    <TypeScriptCompile Include="src\views\common\navigation\navigation.module.ts" />
-    <TypeScriptCompile Include="src\views\common\topnavbar\topnavbar.component.ts" />
-    <TypeScriptCompile Include="src\views\common\topnavbar\topnavbar.module.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
-    <Content Include="src\views\enquiries\enquiries.component.css" />
-    <Content Include="src\views\enquiries\enquiries.component.html" />
-    <Content Include="src\views\enquiries\list\enquiries-list.component.css" />
-    <Content Include="src\views\enquiries\list\enquiries-list.component.html" />
-    <Content Include="src\views\enquiries\edit\enquiries-edit.component.css" />
-    <Content Include="src\views\enquiries\edit\enquiries-edit.component.html" />
-    <Content Include="src\views\enquiries\new\enquiries-new.component.css" />
-    <Content Include="src\views\enquiries\new\enquiries-new.component.html" />
-    <Content Include="src\views\system\system.template.html" />
+    <Content Include="src\app\views\enquiries\enquiries.component.html" />
+    <Content Include="src\app\views\enquiries\list\enquiries-list.component.html" />
+    <Content Include="src\app\views\enquiries\edit\enquiries-edit.component.html" />
+    <Content Include="src\app\views\enquiries\new\enquiries-new.component.html" />
+    <Content Include="src\app\views\system\system.template.html" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
@@ -201,7 +181,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties angular_1json__JSONSchema="" package_1json__JSONSchema="" />
+      <UserProperties package_1json__JSONSchema="" angular_1json__JSONSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

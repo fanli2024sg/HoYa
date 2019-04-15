@@ -1,8 +1,7 @@
 import * as tslib_1 from "tslib";
-import { Detail } from "./entity";
-import { General } from "entities/process";
+import { Detail, Extention } from "./entity";
 var Quotation = /** @class */ (function (_super) {
-    tslib_1.__extends(Quotation, _super); //Process.Type.Value=="O"
+    tslib_1.__extends(Quotation, _super);
     function Quotation() {
         return _super.call(this) || this;
     }
@@ -10,14 +9,11 @@ var Quotation = /** @class */ (function (_super) {
 }(Detail));
 export { Quotation };
 var QuotationGeneral = /** @class */ (function (_super) {
-    tslib_1.__extends(QuotationGeneral, _super); //Process.Type.Value=="O"
-    function QuotationGeneral(process) {
-        var _this = _super.call(this) || this;
-        _this.process = process;
-        return _this;
+    tslib_1.__extends(QuotationGeneral, _super);
+    function QuotationGeneral() {
+        return _super.call(this) || this;
     }
     return QuotationGeneral;
-}(General //Process.Type.Value=="O"
-));
+}(Extention));
 export { QuotationGeneral };
 //# sourceMappingURL=quotation.js.map
