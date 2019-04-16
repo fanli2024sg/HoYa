@@ -1,6 +1,6 @@
 import { Material } from "entities/material";
 import { Injectable } from "@angular/core";
-import { HttpService } from "core/services/http.service";
+import { HttpService } from "services/http.service";
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 

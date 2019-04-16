@@ -108,6 +108,23 @@ export abstract class General<D> extends Base {
     }
 }
 
+export abstract class SimpleGeneral<D> extends General<D>
+{
+    value: string;
+    constructor() {
+        super();
+    }
+}
+
+export abstract class RealSimpleGeneral<D> extends SimpleGeneral<D>
+{
+    galleryId: string;
+    gallery: Folder;
+    constructor() {
+        super();
+    }
+}
+
 export abstract class NodeGeneral<P, D> extends General<D>
 {
     no: string;

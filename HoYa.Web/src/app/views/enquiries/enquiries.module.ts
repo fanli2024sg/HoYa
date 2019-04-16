@@ -1,10 +1,11 @@
 import { NgModule } from "@angular/core";
 import { EnquiriesComponent } from "./enquiries.component";
-import { EnquiriesRoutingModule } from "./enquiries-routing.module";
-import { CoreModule } from "core/core.module";
+import { EnquiriesRouting } from "./enquiries.routing";
+import { AppCommon } from "app/app.common";
 @NgModule({
     imports: [
-        EnquiriesRoutingModule,CoreModule
+        EnquiriesRouting,
+        AppCommon
     ],
     declarations: [EnquiriesComponent]
 })

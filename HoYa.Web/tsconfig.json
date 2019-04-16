@@ -19,14 +19,16 @@
             "dom"
         ],
         "paths": {
-            "core/*": [ "core/*" ],
-            "entities/*": [ "entities/*" ],
-            "models/*": [ "models/*" ],
-            "services/*": [ "services/*" ],
-            "pipes/*": [ "pipes/*" ],
+            "app/*": [ "app/*" ],
+            "assets/*": [ "assets/*" ],
             "directives/*": [ "directives/*" ],
-            "components/*": [ "components/*" ],
-            "interfaces/*": [ "interfaces/*" ]
+            "entities/*": [ "entities/*" ],
+            "environments": [ "environments/*" ],
+            "guards/*": [ "guards/*" ],
+            "interceptors/*": [ "interceptors/*" ],
+            "models/*": [ "models/*" ],
+            "pipes/*": [ "pipes/*" ],
+            "services/*": [ "services/*" ]
         }
     }
 }

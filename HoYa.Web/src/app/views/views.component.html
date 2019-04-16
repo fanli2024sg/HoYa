@@ -30,8 +30,8 @@
             <mat-divider></mat-divider>
             <mat-nav-list class="navbar-content">
                 <h3 matSubheader>選單</h3>
-                <a [routerLink]="['/', 'views', 'enquiries', 'new']" (click)="goto('新增詢價'); sideNav.close()" mat-list-item>新增詢價</a>
-                <a [routerLink]="['/', 'views', 'enquiries', 'list']" (click)="goto('詢價列表'); sideNav.close()" mat-list-item>詢價列表</a>
+                <a [routerLink]="['/', 'views', 'enquiries', 'generals', 'create']" (click)="goto('新增詢價'); sideNav.close()" mat-list-item>新增詢價</a>
+                <a [routerLink]="['/', 'views', 'enquiries', 'generals']" (click)="goto('詢價列表'); sideNav.close()" mat-list-item>詢價列表</a>
 
             </mat-nav-list>
         </div>

@@ -14,6 +14,9 @@ namespace HoYa.Entities
 
     public class EnquiryGeneral : Extention
     {
+        public virtual Guid? ProfileId { get; set; }
+        [ForeignKey("ProfileId")]
+        public virtual Profile Profile { get; set; }
         public virtual Guid? ProcessId { get; set; }
         [ForeignKey("ProcessId")]
         public virtual Process Process { get; set; }
@@ -21,6 +24,5 @@ namespace HoYa.Entities
         public string ContactValue { get; set; }
         public string CustomerName { get; set; }
         public string Content { get; set; }
-
     }
 }

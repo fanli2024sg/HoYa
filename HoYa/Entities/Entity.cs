@@ -13,7 +13,7 @@ namespace HoYa.Entities
         [JsonIgnore]
         public virtual Profile CreatedBy { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public Base()
         {
@@ -96,15 +96,28 @@ namespace HoYa.Entities
 
     public abstract class General<D> : Base
     {
+        public string No { get; set; }
+
         public virtual Guid? DefinitionId { get; set; }
         [ForeignKey("DefinitionId")]
-        [JsonIgnore]
         public virtual D Definition { get; set; }
 
         public virtual Guid? DefinitionChangeId { get; set; }
         [ForeignKey("DefinitionChangeId")]
         [JsonIgnore]
         public virtual Change DefinitionChange { get; set; }
+    }
+
+    public abstract class SimpleGeneral<D> : General<D>
+    {
+        public string Value { get; set; }
+    }
+
+    public abstract class RealSimpleGeneral<D> : SimpleGeneral<D>
+    {
+        public virtual Guid? GalleryId { get; set; }
+        [ForeignKey("GalleryId")]
+        public virtual Folder Gallery { get; set; }
     }
 
     public abstract class NodeGeneral<P, D> : General<D>
@@ -115,7 +128,6 @@ namespace HoYa.Entities
         [JsonIgnore]
         public virtual P Parent { get; set; }
     }
-
 
     public abstract class Instance<DD> : Base
     {

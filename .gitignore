@@ -341,3 +341,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /HoYa/Files
+/HoYa.Web/dist

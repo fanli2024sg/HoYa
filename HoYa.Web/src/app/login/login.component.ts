@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { AspNetUser } from "entities/identity";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService } from "core/services/auth.service";
+import { AuthService } from "services/auth.service";
 import { Observable } from 'rxjs';
 
 @Component({

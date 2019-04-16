@@ -1,15 +1,13 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
 import { ViewsComponent } from "./views.component";
-import { ViewsRoutingModule } from "./views-routing.module";
+import { ViewsRouting } from "./views.routing";
 
-import { CoreModule } from "core/core.module";
-import { AuthGuard } from "core/guards/auth.guard";
+import { AppCommon } from "app/app.common";
+import { AuthGuard } from "guards/auth.guard";
 @NgModule({
     imports: [
-        CoreModule,
-        ViewsRoutingModule
+        AppCommon,
+        ViewsRouting
     ],
     declarations: [ViewsComponent], providers: [AuthGuard]
 })

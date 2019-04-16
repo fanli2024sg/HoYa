@@ -1,31 +1,29 @@
-import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpService } from "core/services/http.service";
-import { AppRoutingModule } from "./app-routing.module";
-//import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from "@angular/material/core";
+import { HttpService } from "services/http.service";
+import { AppRouting } from "./app.routing";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { ServiceWorkerModule } from "@angular/service-worker";
-import { environment } from "../environments/environment";
-import { httpInterceptorProviders } from "core/interceptors/index";
-import { AuthService } from "core/services/auth.service";
+import { environment } from "environments/environment";
+import { AuthInterceptor } from "interceptors/auth.interceptor";
+import { AuthService } from "services/auth.service";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserAnimationsModule,
-        FlexLayoutModule,
         BrowserModule,
-        AppRoutingModule,
+        AppRouting,
         HttpClientModule,
         ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production })
     ],
-    providers: [ 
+    providers: [
         HttpService,
-        //{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
-        httpInterceptorProviders,
-        AuthService 
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        
+        AuthService
     ],
     bootstrap: [AppComponent]
 })

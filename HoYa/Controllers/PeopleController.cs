@@ -41,20 +41,6 @@ namespace HoYa.Controllers
         }
 
 
-        [Route("api/People/Option")]
-        public async Task<IHttpActionResult> GetPersonOption(
-            Guid? profileId = null, Guid? id = null)
-        {
-
-
-            PersonOption personOption = await db.People.Where(x =>
-                     (x.ProfileId == profileId || profileId == null) && (x.Id == id || id == null)).Select(x => new PersonOption
-                     {
-                         Id = x.Id,
-                         Value = ""
-                     }).FirstOrDefaultAsync();
-            return Ok(personOption);
-        }
 
         [ResponseType(typeof(Person))]
         public async Task<IHttpActionResult> GetPerson(Guid id)

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatSidenav, MatDrawerToggleResult } from "@angular/material";
 import { Router } from "@angular/router";
-import { AuthService } from "core/services/auth.service";
+import { AuthService } from "services/auth.service";
 @Component({
     selector: "views",
     templateUrl: "views.component.html",

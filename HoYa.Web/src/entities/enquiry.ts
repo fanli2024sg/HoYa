@@ -1,6 +1,7 @@
 import { Extention, Detail } from "./entity";
 import { Process } from "./process";
 import { Material } from "./material";
+import { Profile } from "./person";
 export class Enquiry extends Detail<EnquiryGeneral>
 {
     materialId: string;
@@ -15,6 +16,8 @@ export class Enquiry extends Detail<EnquiryGeneral>
 }
 
 export class EnquiryGeneral extends Extention {
+    profileId: string;
+    profile: Profile;
     processId: string;
     process: Process;
     contactPerson: string;

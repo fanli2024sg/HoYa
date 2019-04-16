@@ -47,7 +47,6 @@ namespace HoYa.Controllers
 
         public async Task<IHttpActionResult> PostProfile(Profile profile)
         {
-            profile.Id = Guid.NewGuid();
             db.Profiles.Add(profile);
             await db.SaveChangesAsync();
             await db.Entry(profile).GetDatabaseValuesAsync();
