@@ -1,0 +1,40 @@
+<mat-toolbar>詢價列表</mat-toolbar>
+<mat-form-field style="margin: 20px; width:calc(100% - 160px)">
+    <input matInput #optionsFilter type="text" placeholder="搜尋">
+    <button mat-button *ngIf="anyLike" matSuffix mat-icon-button aria-label="Clear" (click)="anyLike=''">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+<button mat-raised-button color="primary" style="margin-right: 20px; width:100px" [routerLink]="['/', 'views', 'options', 'create']">新增</button>
+<mat-table [dataSource]="options" matSort #sortTable="matSort" (matSortChange)="changeSort($event)">
+    <ng-container matColumnDef="processNo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>單號</mat-header-cell>
+        <mat-cell *matCellDef="let option">{{ option.process.no }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="customerCode">
+        <mat-header-cell *matHeaderCellDef>客戶統編</mat-header-cell>
+        <mat-cell *matCellDef="let option">{{ option.profile?.definition?.code }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="customerValue">
+        <mat-header-cell *matHeaderCellDef>客戶名稱</mat-header-cell>
+        <mat-cell *matCellDef="let option">{{ option.profile?.definition?.value ? option.profile?.definition?.value : option.customerName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="contactPerson">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>聯絡人</mat-header-cell>
+        <mat-cell *matCellDef="let option">{{ option.contactPerson }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="createdDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>建立日期</mat-header-cell>
+        <mat-cell *matCellDef="let option">{{ option.createdDate }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="management">
+        <mat-header-cell *matHeaderCellDef>更多</mat-header-cell>
+        <mat-cell *matCellDef="let option">
+            <button mat-icon-button [routerLink]="['/', 'views', 'options', 'generals', option.id]"><mat-icon>chevron_right</mat-icon></button>
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="['processNo', 'customerCode','customerValue','contactPerson', 'createdDate', 'management']"></mat-header-row>
+    <mat-row matRipple *matRowDef="let selectedOption; columns: ['processNo', 'customerCode','customerValue', 'contactPerson', 'createdDate', 'management']"></mat-row>
+</mat-table>
+<mat-paginator #optionsPaginator [length]="optionsPaginatorLength" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+</mat-paginator>

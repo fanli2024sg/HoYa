@@ -37,6 +37,7 @@ namespace HoYa
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Folder>().HasOptional(p => p.CreatedBy).WithMany();
+            modelBuilder.Entity<Option>().HasOptional(p => p.Parent).WithMany();
             modelBuilder.Entity<Profile>().HasOptional(p => p.CreatedBy).WithMany();
             modelBuilder.Entity<Change>().HasOptional(p => p.CreatedBy).WithMany();
             modelBuilder.Entity<Person>().HasOptional(p => p.Change).WithMany();

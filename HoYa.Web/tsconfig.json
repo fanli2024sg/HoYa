@@ -26,6 +26,7 @@
             "environments": [ "environments/*" ],
             "guards/*": [ "guards/*" ],
             "interceptors/*": [ "interceptors/*" ],
+            "interfaces/*": [ "interfaces/*" ],
             "models/*": [ "models/*" ],
             "pipes/*": [ "pipes/*" ],
             "services/*": [ "services/*" ]

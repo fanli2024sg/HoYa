@@ -1,20 +1,21 @@
-import { Profile } from "entities/person";
+import { Profile, ProfileGroup } from "entities/person";
 import { Injectable } from "@angular/core";
 import { HttpService } from "services/http.service";
 import { Observable } from "rxjs";
+import { Query } from "models/query";
 @Injectable()
 export class ProfilesService {
     private api: string;
     constructor(private httpService: HttpService) {
-        this.api = "api/Profiles/";
+        this.api = "api/Profiles";
     }
 
     get(x: any) {
-        return this.httpService.get(this.api);
+        return this.httpService.select(this.api);
     }
 
     find(id: string) {
-        return this.httpService.get(this.api + id);
+        return this.httpService.select(`${this.api}/${id}`);
     }
 
     create(profile: Profile) {
@@ -22,10 +23,27 @@ export class ProfilesService {
     }
 
     update(id: string, profile: Profile) {
-        return this.httpService.update(this.api + id, profile);
+        return this.httpService.update(`${this.api}/${id}`, profile);
+    }
+
+
+    archiveGroup(id: string, profileGroup: ProfileGroup) {
+        return this.httpService.update(`${this.api}/Groups/${id}`, profileGroup);
+    }
+
+    createGroup(profileGroup: ProfileGroup) {
+        return this.httpService.create(`${this.api}/Groups`, profileGroup);
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
+    }
+
+    filter(params: any, withRefresh: boolean): Observable<Query<Profile>> {
+        return this.httpService.select<Query<Profile>>(`${this.api}`, params, withRefresh);
+    }
+
+    select(params: any, withRefresh: boolean): Observable<Profile[]> {
+        return this.httpService.select<Profile[]>(`${this.api}`, params, withRefresh);
     }
 }

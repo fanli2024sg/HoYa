@@ -54,7 +54,6 @@ namespace HoYa.Entities
         public virtual Option Type { get; set; }
     }
 
-
     public abstract class Entity : Extention
     {
         public virtual Guid? ChangeId { get; set; }
@@ -70,6 +69,13 @@ namespace HoYa.Entities
         public virtual Guid? StatusId { get; set; }
         [ForeignKey("StatusId")]
         public virtual Option Status { get; set; }
+    }
+
+    public abstract class NodeDefinition<P> : Definition
+    {
+        public virtual Guid? ParentId { get; set; }
+        [ForeignKey("ParentId")]
+        public virtual P Parent { get; set; }
     }
 
     public abstract class TypeDefinition : Definition
@@ -145,11 +151,26 @@ namespace HoYa.Entities
 
     public abstract class Detail<O> : Base
     {
+
+
+
         public virtual Guid? OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         [JsonIgnore]
         public virtual O Owner { get; set; }
+
+        public virtual Guid? OwnerChangeId { get; set; }
+        [ForeignKey("OwnerChangeId")]
+        [JsonIgnore]
+        public virtual Change OwnerChange { get; set; }
     }
+
+
+    public abstract class SimpleDetail<O> : Detail<O>
+    {
+        public string Value { get; set; }
+    }
+
 
     public abstract class Relation<O, T> : Detail<O>
     {
@@ -196,10 +217,8 @@ namespace HoYa.Entities
         public virtual P Parent { get; set; }
     }
 
-    public class Option : Node<Option>
+    public class Option : NodeDefinition<Option>
     {
-        public string Value { get; set; }
-        public string Code { get; set; }
     }
 
 

@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { CurrentUserModel } from "models/login";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Observable, of } from 'rxjs';
-import { HttpParamsOptions } from '@angular/common/http/src/params';
 
 @Injectable()
 export class HttpService {
@@ -13,30 +12,37 @@ export class HttpService {
     constructor(private http: HttpClient) {
         //let urlSplit = window.location.href.split("/");      
         //this.host = "http://" + urlSplit[0] + "/" + urlSplit[1] + "/";
-        this.host = "http://118.163.183.248/hoya/";
-        //this.host = "http://localhost:3001/";
+          //this.host = "http://118.163.183.248/hoya/";
+      this.host = "http://localhost:3001/";
     }
 
 
-    /** GET heroes from the server */
-    search<I>(api: string, fromObject: HttpParamsOptions["fromObject"], refresh = false): Observable<I> {
-        let params = new HttpParams({ fromObject: fromObject });
+
+    create<I>(api: string, model: any): Observable<I> {
+        return this.http.post<I>(`${this.host}${api}`, model).pipe(map(x => x));
+
+    }
+
+    select<I>(api: string, model?: any, refresh?: boolean): Observable<I> {
+        let params = new HttpParams({ fromObject: model });
         let headerMap = refresh ? { "x-refresh": "true" } : {};
         let headers = new HttpHeaders(headerMap);
-        return this.http.get<I>(this.host + api, { headers, params }).pipe(map(x => x));
+        return this.http.get<I>(`${this.host}${api}`, { headers, params }).pipe(map(x => x));
+    }
+
+    update<I>(api: string, model: any): Observable<I> {
+        return this.http.put<I>(`${this.host}${api}`, model).pipe(map(x => x));
+    }
+
+    delete<I>(api: string): Observable<I> {
+        return this.http.delete<I>(`${this.host}${api}`).pipe(map(x => x));
     }
 
 
 
-    get(url: string) {
-        url.replace("u", "");
-        return this.http.get(this.host + url, this.getHttpOptions()).pipe(map(x => x));
-    }
 
-    create(url: string, model: any) {
-        return this.http.post(this.host + url, model).pipe(map(x => x));
 
-    }
+
 
 
     upload(url: string, files: Array<File>) {
@@ -60,13 +66,8 @@ export class HttpService {
         });
     }
 
-    update(url: string, model: any) {
-        return this.http.put(this.host + url, model).pipe(map(x => x));
-    }
 
-    delete(url: string) {
-        return this.http.delete(this.host + url, this.getHttpOptions()).pipe(map(x => x));
-    }
+
     private getHttpOptions() {
         this.currentUser = JSON.parse(localStorage.getItem("user"));
         if (this.currentUser) {

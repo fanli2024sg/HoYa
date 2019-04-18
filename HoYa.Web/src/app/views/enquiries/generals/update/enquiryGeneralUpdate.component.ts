@@ -13,10 +13,11 @@ import { Material } from "entities/material";
 import { Observable, Subject } from "rxjs";
 import { switchMap, debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { EnquiryAppendComponent } from "../../append/enquiryAppend.component";
-import { ProfileCreateComponent } from "../../../profiles/create/profileCreate.component";
+import { ProfileAppendComponent } from "../../../profiles/append/profileAppend.component";
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { MatSnackBar } from "@angular/material";
 import { Profile } from "entities/person";
+import { AppInterface } from "interfaces/app.interface";
 @Component({
     selector: "enquiryGeneralUpdate",
     templateUrl: "enquiryGeneralUpdate.component.html",
@@ -47,9 +48,12 @@ export class EnquiryGeneralUpdateComponent implements OnInit {
         public router: Router,
         public formBuilder: FormBuilder,
         private enquiriesService: EnquiriesService,
-        private profilesService: ProfilesService,
-        public dialog: MatDialog
+        public profilesService: ProfilesService,
+        public dialog: MatDialog,
+        public appService: AppInterface
     ) {
+        this.appService.title$.next("詢價細節(業務)");
+        this.appService.leftIcon$.next("arrow_back");
         this.currentPage = {
             pageIndex: 0,
             pageSize: 10,
@@ -67,12 +71,12 @@ export class EnquiryGeneralUpdateComponent implements OnInit {
         this.currentSort = sortInfo;
     }
 
-    profileCreateDialog() {
+    profileAppendDialog() {
         let profile = new Profile();
-        
+
         profile.definition.givenName = this.enquiryGeneral.customerName;
 
-        this.dialog.open(ProfileCreateComponent, {
+        this.dialog.open(ProfileAppendComponent, {
             width: "250px",
             data: this.enquiryGeneral.profile
         }).afterClosed().subscribe((profile: Profile) => {
@@ -171,8 +175,8 @@ export class EnquiryGeneralUpdateComponent implements OnInit {
 
     save() {
         console.log(this.enquiryGeneral.profile.definition);
-    
-       
+
+
 
 
         let ps: Promise<Enquiry>[] = new Array<Promise<Enquiry>>();

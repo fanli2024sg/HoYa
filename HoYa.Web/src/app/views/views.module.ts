@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ViewsComponent } from "./views.component";
 import { ViewsRouting } from "./views.routing";
-
 import { AppCommon } from "app/app.common";
 import { AuthGuard } from "guards/auth.guard";
 @NgModule({
@@ -9,7 +8,10 @@ import { AuthGuard } from "guards/auth.guard";
         AppCommon,
         ViewsRouting
     ],
-    declarations: [ViewsComponent], providers: [AuthGuard]
+    declarations: [ViewsComponent],
+    providers: [
+        AuthGuard
+    ]
 })
 
 export class ViewsModule { }

@@ -18,8 +18,8 @@ export class AuthService {
     constructor(private http: HttpClient) {
         this.headers.append("View-Type", "application/x-www-form-urlencoded");
         this.loginModel = new LoginModel();
-        this.host = "http://118.163.183.248/hoya/";
-        //this.host = "http://localhost:3001/";
+         //this.host = "http://118.163.183.248/hoya/";
+       this.host = "http://localhost:3001/";
         this.userName = "";
         this.userId = "";
         this.profileValue = "";

@@ -1,3 +1,28 @@
+.searchBar {
+    width: 100%;
+    position: absolute;
+    z-index: 9998;
+    top: 0;
+    height: 64px;
+    left: 0;
+}
+
+    .searchBar input {
+        width: calc(100% - 32px);
+        font-family: Roboto,"Noto Sans TC",sans-serif;
+        height: 100%;
+        outline: none;
+        border: none;
+        font-size: 20px;
+        padding: 0px 16px;
+    }
+
+    .searchBar .mat-icon-button {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 9998;
+    }
 
 .views-toolbar {
     position: fixed;
@@ -113,3 +138,20 @@
                 height: 72px;
                 margin: 0;
             }
+
+
+@media (max-width: 600px) {
+    .searchBar {
+        height: 56px;
+    }
+
+        .searchBar input {
+            width: calc(100% - 24px);
+            padding: 0px 12px;
+        }
+
+        .searchBar .mat-icon-button {
+            top: 8px;
+            right: 8px;
+        }
+}

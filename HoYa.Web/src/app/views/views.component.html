@@ -1,10 +1,8 @@
-
-
-<mat-sidenav-container class="views-sidenav-container" fullscreen>
-    <mat-sidenav class="views-sidenav" #sideNav mode="over" (opened)="opened()" (closed)="closed()">
+﻿<mat-sidenav-container class="views-sidenav-container" fullscreen>
+    <mat-sidenav class="views-sidenav" [(opened)]="sidenavOpen" mode="over" (opened)="opened()" (closed)="closed()">
         <div class="navbar-top">
             <div class="logo">
-                <img class="logo-icon" src="../../../../favicon.ico">
+                <img class="logo-icon" src="assets/favicon.ico">
                 <span class="logo-text secondary-text">HoYa</span>
             </div>
             <div class="buttons">
@@ -12,7 +10,7 @@
                     <span class="mat-button-wrapper"><mat-icon class="secondary-text mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">menu</mat-icon></span>
                     <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
                 </button>
-                <button mat-icon-button (click)="sideNav.toggle()">
+                <button mat-icon-button (click)="iconClick('arrow_back')">
                     <span class="mat-button-wrapper">
                         <mat-icon class="secondary-text mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">arrow_back</mat-icon>
                     </span>
@@ -24,15 +22,16 @@
             <div class="user fuse-navy-900" fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
                 <div class="h3 username">FangHsien Li</div><div class="h5 email hint-text mt-8">fanghsien@hoya.com</div>
                 <div class="avatar-container fuse-navy-700">
-                    <img class="avatar" src="../../hoya/assets/a6.jpg">
+                    <img class="avatar" src="assets/a6.jpg">
                 </div>
             </div>
             <mat-divider></mat-divider>
             <mat-nav-list class="navbar-content">
                 <h3 matSubheader>選單</h3>
-                <a [routerLink]="['/', 'views', 'enquiries', 'generals', 'create']" (click)="goto('新增詢價'); sideNav.close()" mat-list-item>新增詢價</a>
-                <a [routerLink]="['/', 'views', 'enquiries', 'generals']" (click)="goto('詢價列表'); sideNav.close()" mat-list-item>詢價列表</a>
-
+                <a [routerLink]="['/', 'views', 'enquiries', 'generals', 'create']" mat-list-item>新增詢價</a>
+                <a [routerLink]="['/', 'views', 'enquiries', 'generals']" mat-list-item>詢價列表</a>
+                <a [routerLink]="['/', 'views', 'profiles' ]" mat-list-item>檔案列表</a>
+                <a [routerLink]="['/', 'views', 'steps' ]" mat-list-item>任務列表</a>
             </mat-nav-list>
         </div>
 
@@ -44,19 +43,19 @@
 
     <mat-sidenav-content>
         <mat-toolbar color="primary" style="padding:0 8px" class="views-toolbar">
-            <button mat-icon-button (click)="sideNav.toggle()" *ngIf="title===''">
-                <mat-icon>{{ sideNav.opened ? 'close' : 'menu' }}</mat-icon>
-            </button>
-            <button mat-icon-button (click)="back()" *ngIf="title!==''">
-                <mat-icon [routerLink]="['/', 'views']">keyboard_arrow_left</mat-icon>
-            </button>
-            <span>{{title}}</span>
+            <ng-container *ngTemplateOutlet="leftBar; context:{leftIcon: leftIcon$ | async}"></ng-container>
+            <ng-template #leftBar let-leftIcon="leftIcon">
+                <button mat-icon-button (click)="iconClick(leftIcon)">
+                    <mat-icon>{{leftIcon}}</mat-icon>
+                </button>
+            </ng-template>
+            <span> {{title$ | async}}</span>
             <span class="toolbar-seprator"></span>
             <mat-nav-list>
                 <mat-list-item [matMenuTriggerFor]="menu1">
                     <span class="mat-button-wrapper">
                         <div fxlayout="row" fxlayoutalign="center center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
-                            <img class="avatar mr-0 mr-sm-16" src="../../hoya/assets/a6.jpg">
+                            <img class="avatar mr-0 mr-sm-16" src="assets/a6.jpg">
                             <span class="username mr-12" fxhide="" fxshow.gt-sm="" style="">FangHsien Li</span>
                             <mat-icon class="s-16 mat-icon material-icons mat-icon-no-color" fxhide.xs="" role="img" aria-hidden="true" style="">keyboard_arrow_down</mat-icon>
                         </div>
@@ -80,12 +79,17 @@
                 </mat-menu>
             </mat-nav-list>
             <mat-divider></mat-divider>
-            <button mat-icon-button>
-                <mat-icon>search</mat-icon>
+            <button mat-icon-button *ngFor="let rightIcon of rightIcons$ | async" (click)="iconClick(rightIcon)">
+                <mat-icon>{{rightIcon}}</mat-icon>
             </button>
         </mat-toolbar>
-
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
-  
+
+<div class="searchBar mat-elevation-z8" *ngIf="searchBar">
+    <button mat-icon-button aria-label="Clear" (click)="searchBar=false">
+        <mat-icon>close</mat-icon>
+    </button>
+    <input placeholder="搜尋" (keyup)="search($event.target.value)" />
+</div>

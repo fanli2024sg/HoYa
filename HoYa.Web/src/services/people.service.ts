@@ -9,23 +9,23 @@ export class PeopleService {
     }
 
     get() {
-        return this.httpService.get(this.api);
+        return this.httpService.select(this.api);
     }
 
     getBy(x: any) {
-        return this.httpService.get(this.api + "By?ParentId=" + x.parentId);
+        return this.httpService.select(this.api + "By?ParentId=" + x.parentId);
     }
 
     findByDocumentNo(documentNo: string) {
-        return this.httpService.get(this.api + "By?documentNo=" + documentNo);
+        return this.httpService.select(this.api + "By?documentNo=" + documentNo);
     }
 
     findByEmployeeNo(employeeNo: string) {
-        return this.httpService.get(this.api + "By?employeeNo=" + employeeNo);
+        return this.httpService.select(this.api + "By?employeeNo=" + employeeNo);
     }
 
     getOptions(x: any) {
-        return this.httpService.get(this.api +
+        return this.httpService.select(this.api +
             "Option?typeId=e979aefd-385c-4445-9844-6e151ee141a1" +
             "&anyLike=" + (x.anyLike ? x.anyLike : "") +
             "&pageSize=200"
@@ -33,10 +33,10 @@ export class PeopleService {
     }
 
     getById(id: string) {
-        return this.httpService.get(this.api + id);
+        return this.httpService.select(`${this.api}/${id}`);
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 }

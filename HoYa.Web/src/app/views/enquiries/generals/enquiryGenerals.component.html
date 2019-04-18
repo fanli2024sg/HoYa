@@ -5,7 +5,7 @@
         <mat-icon>close</mat-icon>
     </button>
 </mat-form-field>
-<button mat-raised-button color="primary" style="margin-right: 20px; width:100px" [routerLink]="['/', 'views', 'enquiries', 'create']">新增</button>
+<button mat-raised-button color="primary" style="margin-right: 20px; width:100px" [routerLink]="['/', 'views', 'enquiries', 'generals', 'create']">新增</button>
 <mat-table [dataSource]="enquiryGenerals" matSort #sortTable="matSort" (matSortChange)="changeSort($event)">
     <ng-container matColumnDef="processNo">
         <mat-header-cell *matHeaderCellDef mat-sort-header>單號</mat-header-cell>
@@ -30,7 +30,7 @@
     <ng-container matColumnDef="management">
         <mat-header-cell *matHeaderCellDef>更多</mat-header-cell>
         <mat-cell *matCellDef="let enquiryGeneral">
-            <button mat-icon-button [routerLink]="['/', 'views', 'enquiries', 'generals',enquiryGeneral.id]"><mat-icon>more_vert</mat-icon></button>
+            <button mat-icon-button [routerLink]="['/', 'views', 'enquiries', 'generals', enquiryGeneral.id]"><mat-icon>chevron_right</mat-icon></button>
         </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="['processNo', 'customerCode','customerValue','contactPerson', 'createdDate', 'management']"></mat-header-row>

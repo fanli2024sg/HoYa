@@ -9,13 +9,13 @@ export class FoldersService {
     }
 
     select(x: any) {
-        if (x) return this.httpService.get(this.api +
+        if (x) return this.httpService.select(this.api +
             ("ByGroup?Id=" + x.groupId).replace("undefine", ""));
-        else return this.httpService.get(this.api);
+        else return this.httpService.select(this.api);
     }
 
     find(id: string) {
-        return this.httpService.get(this.api + id);
+        return this.httpService.select(`${this.api}/${id}`);
     }
 
     create(folder: Folder) {
@@ -27,6 +27,6 @@ export class FoldersService {
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 }

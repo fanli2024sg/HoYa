@@ -3,7 +3,7 @@ import { EnquiryGeneralsComponent } from "./enquiryGenerals.component";
 import { EnquiryGeneralUpdateComponent } from "./update/enquiryGeneralUpdate.component";
 import { EnquiryGeneralCreateComponent } from "./create/enquiryGeneralCreate.component";
 import { EnquiryAppendComponent } from "../append/enquiryAppend.component";
-import { ProfileCreateComponent } from "../../profiles/create/profileCreate.component";
+import { ProfileAppendComponent } from "../../profiles/append/profileAppend.component";
 import { EnquiryGeneralsRouting } from "./enquiryGenerals.routing";
 import { AppCommon } from "app/app.common";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -15,14 +15,14 @@ import { ReactiveFormsModule } from "@angular/forms";
     ],
     declarations: [
         EnquiryAppendComponent, 
-        ProfileCreateComponent,
+        ProfileAppendComponent,
         EnquiryGeneralsComponent,
         EnquiryGeneralUpdateComponent,
         EnquiryGeneralCreateComponent
     ],
     entryComponents: [
         EnquiryAppendComponent,
-        ProfileCreateComponent
+        ProfileAppendComponent
     ]
 })
 

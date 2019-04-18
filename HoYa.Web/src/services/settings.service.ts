@@ -10,6 +10,6 @@ export class SettingsService {
     }
 
     find() {
-        return this.httpService.get(this.api + "Settings");
+        return this.httpService.select(this.api + "Settings");
     }
 }

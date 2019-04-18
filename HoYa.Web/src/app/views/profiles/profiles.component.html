@@ -1,1 +1,47 @@
-<router-outlet></router-outlet>
+﻿<div fxLayout="row"
+     fxLayout.xs="column"
+     fxFlexFill>
+    <mat-card [class.mat-elevation-z8]="true" fxFlex>
+        <mat-card-content> 
+             <button mat-raised-button color="primary" style="position: absolute; top: 16px; right: 16px; height: 32px; width: 100px" (click)="profileCreateDialog()" align="end">新增</button>
+
+            <mat-table [dataSource]="profiles" matSort #sortTable="matSort" (matSortChange)="changeSort($event)">
+                <ng-container matColumnDef="personTypeValue">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>類型</mat-header-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.definition?.type?.value }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="personCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>統編</mat-header-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.definition?.code }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="personValue">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>名稱</mat-header-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.definition?.value }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="profileValue">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>帳號</mat-header-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.value }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="profileNo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>客戶編碼/員工工號</mat-header-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.no }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>建立日期</mat-header-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.createdDate }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="management">
+                    <mat-header-cell *matHeaderCellDef>更多</mat-header-cell>
+                    <mat-cell *matCellDef="let profile">
+                        <button mat-icon-button [routerLink]="['/', 'views', 'profiles', profile.id]"><mat-icon>chevron_right</mat-icon></button>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="['personTypeValue','personCode', 'personValue','profileValue','profileNo', 'createdDate', 'management']"></mat-header-row>
+                <mat-row matRipple *matRowDef="let selectedProfile; columns: ['personTypeValue','personCode', 'personValue','profileValue','profileNo', 'createdDate', 'management']"></mat-row>
+            </mat-table>
+            <mat-paginator #profilesPaginator [length]="profilesPaginatorLength" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+            </mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>
+    

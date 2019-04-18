@@ -178,6 +178,8 @@
     <Compile Include="Controllers\MaterialsController.cs" />
     <Compile Include="Controllers\EnquiriesController.cs" />
     <Compile Include="Controllers\MissionsController.cs" />
+    <Compile Include="Controllers\WorkFlowsController.cs" />
+    <Compile Include="Controllers\StepsController.cs" />
     <Compile Include="Controllers\ProcessesController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\AuthenticateController.cs" />

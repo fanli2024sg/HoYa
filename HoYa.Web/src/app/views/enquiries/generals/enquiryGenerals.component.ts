@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+ï»¿import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { EnquiriesService } from "services/enquiries.service";
 import { MatTableDataSource, MatPaginator, PageEvent, MatSort, Sort } from "@angular/material";
 import { EnquiryGeneral } from "entities/enquiry";
 import { Query } from "models/query";
+
+import { AppInterface } from "interfaces/app.interface";
 @Component({
     selector: "enquiryGenerals",
     templateUrl: "enquiryGenerals.component.html",
@@ -18,8 +20,13 @@ export class EnquiryGeneralsComponent implements OnInit {
     currentSort: Sort;
     enquiryGenerals = new MatTableDataSource<EnquiryGeneral>();
     enquiryGeneralsPaginatorLength: number;
-    constructor(private enquiriesService: EnquiriesService) { }
+    constructor(
+        private enquiriesService: EnquiriesService,
+        public appService: AppInterface) {
+    }
     ngOnInit() {
+        this.appService.title$.next("è©¢åƒ¹åˆ—è¡¨");
+        this.appService.leftIcon$.next("menu");
         this.anyLike = "";
         this.currentPage = {
             pageIndex: 0,
@@ -63,7 +70,7 @@ export class EnquiryGeneralsComponent implements OnInit {
                 pageSize: this.currentPage.pageSize,
                 sortBy: this.currentSort.active,
                 orderBy: this.currentSort.direction
-            })
+            }, false)
             .subscribe((query: Query<EnquiryGeneral>) => {
                 this.enquiryGeneralsPaginatorLength = query.paginatorLength;
                 this.enquiryGenerals.data = query.data;
@@ -72,10 +79,10 @@ export class EnquiryGeneralsComponent implements OnInit {
     }
 
     reply(emailRow) {
-        console.log('¦^ÂÐ«H¥ó', emailRow);
+        console.log('å›žè¦†ä¿¡ä»¶', emailRow);
     }
 
     delete(emailRow) {
-        console.log('§R°£«H¥ó', emailRow);
+        console.log('åˆªé™¤ä¿¡ä»¶', emailRow);
     }
 }

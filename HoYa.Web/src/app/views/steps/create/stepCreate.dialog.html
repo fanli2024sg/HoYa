@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>
+    新增任務
+</h2>
+<mat-dialog-content class="post-form">
+    <mat-form-field>
+        <input type="text" placeholder="流程" matInput (keyup)="search($event.target.value)" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectWorkFlow($event.option.value)" [displayWith]="displayWorkFlow">
+            <mat-option *ngFor="let workFlow of filteredWorkFlows$ | async" [value]="workFlow">
+                <span>{{ workFlow.value }}</span>
+                <small> | code: {{workFlow.code}}</small>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="名稱" [(ngModel)]="step.value" />
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button color="primary" [mat-dialog-close]="step" (click)="create()" cdkFocusInitial>新增</button>
+    <button mat-button mat-dialog-close color="warn">取消</button>
+</mat-dialog-actions>

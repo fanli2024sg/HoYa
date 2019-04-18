@@ -78,6 +78,14 @@ export abstract class Definition extends Entity {
     }
 }
 
+export abstract class NodeDefinition<P> extends Definition {
+    parentId: string;
+    parent: P;
+    constructor() {
+        super();
+    }
+}
+
 export abstract class TypeDefinition extends Definition {
     typeId: string;
     type: Option;
@@ -150,6 +158,15 @@ export abstract class Instance<DD> extends Base {
 export abstract class Detail<O> extends Base {
     ownerId: string;
     owner: O;
+    ownerChangeId: string;
+    ownerChange: Change;
+    constructor() {
+        super();
+    }
+}
+
+export abstract class SimpleDetail<O> extends Detail<O> {
+    value: string; 
     constructor() {
         super();
     }
@@ -172,9 +189,6 @@ export abstract class Relation<O, T> extends Detail<O>
 
 export abstract class Event<O, OC, T, TC> extends Relation<O, T>
 {
-    ownerChangeId: string;
-    ownerChange: OC;
-
     targetChangeId: string;
     targetChange: TC;
     constructor() {
@@ -191,11 +205,8 @@ export abstract class Node<P> extends Entity {
     }
 }
 
-export class Option extends Node<Option>
+export class Option extends NodeDefinition<Option>
 {
-    Value: string;
-    Code: string;
-
     constructor() {
         super();
     }

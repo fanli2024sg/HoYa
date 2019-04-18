@@ -10,19 +10,19 @@ export class QuotationsService {
     }
 
     get(x: any) {
-        return this.httpService.get(this.api + "By?ownerId=" + x.ownerId + "&enquiryId=" + x.enquiryId)
+        return this.httpService.select(this.api + "By?ownerId=" + x.ownerId + "&enquiryId=" + x.enquiryId)
     }
 
     getByTypeId(typeId: number) {
-        return this.httpService.get(this.api + "ByType?Id=" + typeId)
+        return this.httpService.select(this.api + "ByType?Id=" + typeId)
     }
 
     getByCodeOrValue(typeId: string, codeOrValue: string) {
-       return this.httpService.get(this.api + "ByCodeOrValue?typeId=" + typeId + "&&like=" + codeOrValue)
+       return this.httpService.select(this.api + "ByCodeOrValue?typeId=" + typeId + "&&like=" + codeOrValue)
     }
 
     getById(id: string) {
-        return this.httpService.get(this.api + id)
+        return this.httpService.select(`${this.api}/${id}`)
     }
 
     create(quotation: Quotation) {
@@ -42,6 +42,6 @@ export class QuotationsService {
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 }

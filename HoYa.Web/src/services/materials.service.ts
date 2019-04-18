@@ -4,6 +4,7 @@ import { HttpService } from "services/http.service";
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
+import { Query } from "models/query";
 export const searchUrl = 'https://npmsearch.com/query';
 
 
@@ -23,7 +24,7 @@ export class MaterialsService {
 
     search(anyLike: string, withRefresh: boolean): Observable<Material[]> {
         // TODO: Add error handling
-        return this.httpService.search<Material[]>(this.api, { anyLike: anyLike }, withRefresh);
+        return this.httpService.select<Material[]>(this.api, { anyLike: anyLike }, withRefresh);
     }
 
     create(material: Material) {
@@ -31,11 +32,11 @@ export class MaterialsService {
     }
 
     update(id: string, material: Material) {
-        return this.httpService.update(this.api + id, material);
+        return this.httpService.update(`${this.api}/${id}`, material);
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 
     

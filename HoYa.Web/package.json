@@ -11,7 +11,7 @@
     "@angular/material-moment-adapter": "^7.3.7",
     "@angular/platform-browser": "^7.2.13",
     "@angular/platform-browser-dynamic": "^7.2.13",
-    "@angular/pwa": "^0.12.4",
+    "@angular/pwa": "^0.13.8",
     "@angular/router": "^7.2.13",
     "@angular/service-worker": "^7.2.13",
     "@zxing/library": "^0.12.3",

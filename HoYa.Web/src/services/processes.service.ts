@@ -1,4 +1,4 @@
-import { Process } from "entities/process";
+import { Process } from "entities/workflow";
 import { Injectable } from "@angular/core";
 import { HttpService } from "services/http.service";
 @Injectable()
@@ -9,15 +9,15 @@ export class ProcessesService {
     }
 
     get(x) {
-        return this.httpService.get(this.api);
+        return this.httpService.select(this.api);
     }
 
     getNo(x) {
-        return this.httpService.get(this.api + "No?typeId=" + x.typeId);
+        return this.httpService.select(this.api + "No?typeId=" + x.typeId);
     }
 
     find(id: string) {
-        return this.httpService.get(this.api + id);
+        return this.httpService.select(`${this.api}/${id}`);
     }
 
     create(process: Process) {
@@ -25,10 +25,10 @@ export class ProcessesService {
     }
 
     update(id: string, process: Process) {
-        return this.httpService.update(this.api + id, process);
+        return this.httpService.update(`${this.api}/${id}`, process);
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 }

@@ -1,0 +1,30 @@
+﻿<div fxLayout="row"
+     fxLayout.xs="column"
+     fxFlexFill>
+    <mat-card [class.mat-elevation-z8]="true" fxFlex>
+        <mat-card-content>
+            <button mat-raised-button color="primary" style="position: absolute; top: 16px; right: 16px; height: 32px; width: 100px" (click)="stepCreateDialog()" align="end">新增</button>
+            <mat-table [dataSource]="steps" matSort #sortTable="matSort" (matSortChange)="changeSort($event)">
+                <ng-container matColumnDef="ownerValue">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>流程</mat-header-cell>
+                    <mat-cell *matCellDef="let step">{{ step.owner?.value }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="value">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>名稱</mat-header-cell>
+                    <mat-cell *matCellDef="let step">{{ step.value }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="more">
+                    <mat-header-cell *matHeaderCellDef>更多</mat-header-cell>
+                    <mat-cell *matCellDef="let step">
+                        <button mat-icon-button [routerLink]="['/', 'views', 'steps', step.id]"><mat-icon>chevron_right</mat-icon></button>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="['ownerValue','value','more']"></mat-header-row>
+                <mat-row matRipple *matRowDef="let selectedStep; columns: ['ownerValue','value','more']"></mat-row>
+            </mat-table>
+            <mat-paginator #stepsPaginator [length]="stepsPaginatorLengh" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+            </mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>
+

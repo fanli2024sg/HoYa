@@ -1,4 +1,4 @@
-import { NodeGeneral, Definition, Detail, Instance } from "./entity";
+import { NodeGeneral, Definition, SimpleDetail, Instance } from "./entity";
 import { Group } from "./group";
 import { Profile } from "./person";
 export class WorkFlow extends Definition {
@@ -8,7 +8,7 @@ export class WorkFlow extends Definition {
 }
 
 
-export class Step extends Detail<WorkFlow>
+export class Step extends SimpleDetail<WorkFlow>
 {
     constructor() {
         super();

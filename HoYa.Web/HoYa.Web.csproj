@@ -29,7 +29,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon.ico" />
+    <Content Include="src\assets\favicon.ico" />
     <Content Include="index.html" />
     <Content Include="karma.conf.js" />
     <Content Include="node_modules\%40angular\material\prebuilt-themes\indigo-pink.css" />
@@ -37,8 +37,22 @@
     <Content Include="src\app\login\login.component.css" />
     <Content Include="src\app\views\enquiries\append\enquiryAppend.component.css" />
     <Content Include="src\app\views\enquiries\append\enquiryAppend.component.html" />
+    <Content Include="src\app\views\options\create\optionCreate.component.css" />
+    <Content Include="src\app\views\options\create\optionCreate.component.html" />
+    <Content Include="src\app\views\options\options.component.html" />
+    <Content Include="src\app\views\options\update\optionUpdate.component.css" />
+    <Content Include="src\app\views\options\update\optionUpdate.component.html" />
+    <Content Include="src\app\views\steps\create\stepCreate.dialog.css" />
+    <Content Include="src\app\views\steps\create\stepCreate.dialog.html" />
+    <Content Include="src\app\views\steps\steps.component.css" />
+    <Content Include="src\app\views\steps\steps.component.html" />
+    <Content Include="src\app\views\profiles\profiles.component.css" />
+    <Content Include="src\app\views\profiles\update\profileUpdate.view.css" />
+    <Content Include="src\app\views\profiles\update\profileUpdate.view.html" />
     <Content Include="src\app\views\profiles\create\profileCreate.component.css" />
     <Content Include="src\app\views\profiles\create\profileCreate.component.html" />
+    <Content Include="src\app\views\profiles\append\profileAppend.component.css" />
+    <Content Include="src\app\views\profiles\append\profileAppend.component.html" />
     <Content Include="src\app\views\enquiries\generals\update\enquiryGeneralUpdate.component.css" />
     <Content Include="src\app\views\enquiries\generals\create\enquiryGeneralCreate.component.css" />
     <Content Include="src\app\views\profiles\profiles.component.html" />
@@ -52,7 +66,18 @@
     <TypeScriptCompile Include="src\app\views\enquiries\append\enquiryAppend.component.ts" />
     <TypeScriptCompile Include="src\app\views\enquiries\generals\enquiryGenerals.module.ts" />
     <TypeScriptCompile Include="src\app\views\enquiries\generals\enquiryGenerals.routing.ts" />
+    <TypeScriptCompile Include="src\app\views\options\create\optionCreate.component.ts" />
+    <TypeScriptCompile Include="src\app\views\options\options.component.ts" />
+    <TypeScriptCompile Include="src\app\views\options\options.module.ts" />
+    <TypeScriptCompile Include="src\app\views\options\options.routing.ts" />
+    <TypeScriptCompile Include="src\app\views\options\update\optionUpdate.component.ts" />
+    <TypeScriptCompile Include="src\app\views\steps\create\stepCreate.dialog.ts" />
+    <TypeScriptCompile Include="src\app\views\steps\steps.component.ts" />
+    <TypeScriptCompile Include="src\app\views\steps\steps.module.ts" />
+    <TypeScriptCompile Include="src\app\views\steps\steps.routing.ts" />
+    <TypeScriptCompile Include="src\app\views\profiles\update\profileUpdate.view.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\create\profileCreate.component.ts" />
+    <TypeScriptCompile Include="src\app\views\profiles\append\profileAppend.component.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\profiles.component.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\profiles.module.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\profiles.routing.ts" />
@@ -74,6 +99,7 @@
     <TypeScriptCompile Include="src\app\views\enquiries\generals\create\enquiryGeneralCreate.component.ts" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\interfaces\app.interface.ts" />
     <TypeScriptCompile Include="src\services\app.service.ts" />
     <TypeScriptCompile Include="src\services\auth.service.ts" />
     <TypeScriptCompile Include="src\services\http.service.ts" />
@@ -85,7 +111,7 @@
     <TypeScriptCompile Include="src\entities\quotation.ts" />
     <TypeScriptCompile Include="src\entities\identity.ts" />
     <TypeScriptCompile Include="src\entities\person.ts" />
-    <TypeScriptCompile Include="src\entities\process.ts" />
+    <TypeScriptCompile Include="src\entities\workflow.ts" />
     <TypeScriptCompile Include="src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="src\environments\environment.ts" />
     <TypeScriptCompile Include="src\main.ts" />
@@ -96,6 +122,8 @@
     <TypeScriptCompile Include="src\services\enquiries.service.ts" />
     <TypeScriptCompile Include="src\services\inventories.service.ts" />
     <TypeScriptCompile Include="src\services\materials.service.ts" />
+    <TypeScriptCompile Include="src\services\workflows.service.ts" />
+    <TypeScriptCompile Include="src\services\steps.service.ts" />
     <TypeScriptCompile Include="src\services\quotations.service.ts" />
     <TypeScriptCompile Include="src\services\settings.service.ts" />
     <TypeScriptCompile Include="src\services\profiles.service.ts" />
@@ -124,8 +152,6 @@
     <Content Include="src\tsconfig.app.json" />
     <Content Include="src\tsconfig.spec.json" />
     <Content Include="src\tslint.json" />
-    <Content Include="src\manifest.json" />
-    <Content Include="src\ngsw-config.json" />
     <Content Include="package-lock.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

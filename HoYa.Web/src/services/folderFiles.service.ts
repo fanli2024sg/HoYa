@@ -9,15 +9,15 @@ export class FolderFilesService {
     }
 
     get() {
-        return this.httpService.get(this.api);
+        return this.httpService.select(this.api);
     }
 
     getByGroupId(groupId: number) {
-        return this.httpService.get(this.api + "ByGroup?Id=" + groupId);
+        return this.httpService.select(this.api + "ByGroup?Id=" + groupId);
     }
 
     getById(id: number) {
-        return this.httpService.get(this.api + id);
+        return this.httpService.select(`${this.api}/${id}`);
     }
 
     create(folderFile: FolderFile) {
@@ -29,6 +29,6 @@ export class FolderFilesService {
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 }

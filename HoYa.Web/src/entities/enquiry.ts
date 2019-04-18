@@ -1,5 +1,5 @@
 import { Extention, Detail } from "./entity";
-import { Process } from "./process";
+import { Process } from "./workflow";
 import { Material } from "./material";
 import { Profile } from "./person";
 export class Enquiry extends Detail<EnquiryGeneral>
@@ -8,6 +8,9 @@ export class Enquiry extends Detail<EnquiryGeneral>
     material: Material;
     minAmount: number;
     quantity: number;
+    price: number;
+    priceMin: number;
+    priceMax: number;
     constructor(ownerId?:string) {
         super();
         this.ownerId = ownerId;

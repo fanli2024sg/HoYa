@@ -11,7 +11,7 @@
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>客戶名稱</mat-label>
                 <input matInput placeholder="客戶名稱" [(ngModel)]="enquiryGeneral.customerName" disabled />       
-                <button matSuffix mat-icon-button (click)="profileCreateDialog()">
+                <button matSuffix mat-icon-button (click)="profileAppendDialog()">
                     <mat-icon>chevron_right</mat-icon>
                 </button>
             </mat-form-field>
@@ -66,7 +66,7 @@
         <mat-card-actions style="position: absolute; bottom: 20px; right: 20px" align="end">
             <button mat-button color="primary" type="submit" (click)="save()"><mat-icon>check</mat-icon> 送出</button>
             <button mat-button color="accent" type="submit" (click)="save()"><mat-icon>save_alt</mat-icon> 儲存</button>
-            <button mat-button color="warn" type="submit" [routerLink]="['/', 'views', 'enquiries', 'list']"><mat-icon>redo</mat-icon> 取消</button>
+            <button mat-button color="warn" type="submit" [routerLink]="['/', 'views', 'enquiries', 'generals']"><mat-icon>redo</mat-icon> 取消</button>
         </mat-card-actions>
     </mat-card>
 </div>

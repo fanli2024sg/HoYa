@@ -9,10 +9,22 @@ export const viewsRoutes: Routes = [
         component: ViewsComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: "", redirectTo: "enquiries", pathMatch: "full" },
+            {
+                path: "",
+                redirectTo: "enquiries",
+                pathMatch: "full"
+            },
             {
                 path: "enquiries",
                 loadChildren: "./enquiries/enquiries.module#EnquiriesModule"
+            },
+            {
+                path: "profiles",
+                loadChildren: "./profiles/profiles.module#ProfilesModule"
+            },
+            {
+                path: "steps",
+                loadChildren: "./steps/steps.module#StepsModule"
             }
         ]
     }

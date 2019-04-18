@@ -10,7 +10,7 @@ namespace HoYa.Entities
     }
 
 
-    public class Step : Detail<WorkFlow>
+    public class Step : SimpleDetail<WorkFlow>
     {
 
     }

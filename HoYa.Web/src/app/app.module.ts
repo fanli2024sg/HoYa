@@ -9,7 +9,9 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "environments/environment";
 import { AuthInterceptor } from "interceptors/auth.interceptor";
 import { AuthService } from "services/auth.service";
+import { AppService } from "services/app.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AppInterface } from '../interfaces/app.interface';
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -17,12 +19,12 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
         BrowserModule,
         AppRouting,
         HttpClientModule,
-        ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production })
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [
         HttpService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-        
+        { provide: AppInterface, useExisting: AppService }, AppService,
         AuthService
     ],
     bootstrap: [AppComponent]

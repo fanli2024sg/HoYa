@@ -11,15 +11,15 @@ export class InventoriesService {
     }
 
     get(x: any) {
-        return this.httpService.get(this.api)
+        return this.httpService.select(this.api)
     }
 
     getByProfileId(profileId: number) {
-        return this.httpService.get(this.api + "ByProfile?Id=" + profileId)
+        return this.httpService.select(this.api + "ByProfile?Id=" + profileId)
     }
 
     getById(id: string) {
-        return this.httpService.get(this.api + id)
+        return this.httpService.select(`${this.api}/${id}`)
     }
 
     create(inventory: Inventory) {
@@ -31,6 +31,6 @@ export class InventoriesService {
     }
 
     delete(id: string) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 }

@@ -8,15 +8,15 @@ export class FilesService {
         this.api = "api/Files/";
     }
     get() {
-        return this.httpService.get(this.api);
+        return this.httpService.select(this.api);
     }
 
     getByGroupId(groupId: number) {
-        return this.httpService.get(this.api + "ByGroup?Id=" + groupId);
+        return this.httpService.select(this.api + "ByGroup?Id=" + groupId);
     }
 
     getById(id: number) {
-        return this.httpService.get(this.api + id);
+        return this.httpService.select(`${this.api}/${id}`);
     }
 
     create(files: any) {
@@ -28,6 +28,6 @@ export class FilesService {
     }
 
     delete(id: number) {
-        return this.httpService.delete(this.api + id);
+        return this.httpService.delete(`${this.api}/${id}`);
     }
 }
