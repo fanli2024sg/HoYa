@@ -21,8 +21,8 @@ export class OptionsService {
         return this.httpService.select(`${this.api}/${id}`);
     }
 
-    select(params: any, withRefresh: boolean): Observable<Query<Option>> {
-        return this.httpService.select<Query<Option>>(this.api, params, withRefresh);
+    select(params: any, withRefresh: boolean): Observable<Option[]> {
+        return this.httpService.select<Option[]>(`${this.api}`, params, withRefresh);
     }
 
     create(option: Option) {

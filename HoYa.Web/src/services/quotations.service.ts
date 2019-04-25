@@ -10,7 +10,7 @@ export class QuotationsService {
     }
 
     get(x: any) {
-        return this.httpService.select(this.api + "By?ownerId=" + x.ownerId + "&enquiryId=" + x.enquiryId)
+        return this.httpService.select(this.api + "By?ownerId=" + x.ownerId + "&inquiryId=" + x.inquiryId)
     }
 
     getByTypeId(typeId: number) {

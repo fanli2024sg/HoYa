@@ -7,12 +7,12 @@
             </div>
             <div class="buttons">
                 <button class="toggle-sidebar-folded mat-icon-button" fxhide.lt-lg="" mat-icon-button="" style="display: none;">
-                    <span class="mat-button-wrapper"><mat-icon class="secondary-text mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">menu</mat-icon></span>
+                    <span class="mat-button-wrapper"><mat-icon class="secondary-text mat-icon recipe-icons mat-icon-no-color" role="img" aria-hidden="true">menu</mat-icon></span>
                     <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
                 </button>
                 <button mat-icon-button (click)="iconClick('arrow_back')">
                     <span class="mat-button-wrapper">
-                        <mat-icon class="secondary-text mat-icon material-icons mat-icon-no-color" role="img" aria-hidden="true">arrow_back</mat-icon>
+                        <mat-icon class="secondary-text mat-icon recipe-icons mat-icon-no-color" role="img" aria-hidden="true">arrow_back</mat-icon>
                     </span>
                     <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div>
                 </button>
@@ -28,8 +28,8 @@
             <mat-divider></mat-divider>
             <mat-nav-list class="navbar-content">
                 <h3 matSubheader>選單</h3>
-                <a [routerLink]="['/', 'views', 'enquiries', 'generals', 'create']" mat-list-item>新增詢價</a>
-                <a [routerLink]="['/', 'views', 'enquiries', 'generals']" mat-list-item>詢價列表</a>
+                <a [routerLink]="['/', 'views', 'inquiries', 'generals', 'create']" mat-list-item>新增詢價</a>
+                <a [routerLink]="['/', 'views', 'inquiries', 'generals']" mat-list-item>詢價列表</a>
                 <a [routerLink]="['/', 'views', 'profiles' ]" mat-list-item>檔案列表</a>
                 <a [routerLink]="['/', 'views', 'steps' ]" mat-list-item>任務列表</a>
             </mat-nav-list>
@@ -43,12 +43,16 @@
 
     <mat-sidenav-content>
         <mat-toolbar color="primary" style="padding:0 8px" class="views-toolbar">
-            <ng-container *ngTemplateOutlet="leftBar; context:{leftIcon: leftIcon$ | async}"></ng-container>
-            <ng-template #leftBar let-leftIcon="leftIcon">
-                <button mat-icon-button (click)="iconClick(leftIcon)">
-                    <mat-icon>{{leftIcon}}</mat-icon>
-                </button>
-            </ng-template>
+            <!--<ng-container *ngTemplateOutlet="leftBar; context:{leftIcon: leftIcon$ | async}"></ng-container>
+    <ng-template #leftBar let-leftIcon="leftIcon">
+        <button mat-icon-button (click)="iconClick(leftIcon)">
+            <mat-icon>{{leftIcon}}</mat-icon>
+        </button>
+    </ng-template>-->
+
+            <button mat-icon-button (click)="iconClick('leftIcon$')">
+                <mat-icon>{{leftIcon$ | async}}</mat-icon>
+            </button>
             <span> {{title$ | async}}</span>
             <span class="toolbar-seprator"></span>
             <mat-nav-list>
@@ -57,7 +61,7 @@
                         <div fxlayout="row" fxlayoutalign="center center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
                             <img class="avatar mr-0 mr-sm-16" src="assets/a6.jpg">
                             <span class="username mr-12" fxhide="" fxshow.gt-sm="" style="">FangHsien Li</span>
-                            <mat-icon class="s-16 mat-icon material-icons mat-icon-no-color" fxhide.xs="" role="img" aria-hidden="true" style="">keyboard_arrow_down</mat-icon>
+                            <mat-icon class="s-16 mat-icon recipe-icons mat-icon-no-color" fxhide.xs="" role="img" aria-hidden="true" style="">keyboard_arrow_down</mat-icon>
                         </div>
                     </span>
                     <div class="mat-button-ripple mat-ripple"></div>

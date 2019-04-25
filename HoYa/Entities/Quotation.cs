@@ -9,16 +9,16 @@ namespace HoYa.Entities
         public float? Amount { get; set; }
         public string Bargain { get; set; }
         public float? BargainPrice { get; set; }
-        public virtual Guid? EnquiryId { get; set; }
-        [ForeignKey("EnquiryId")]
-        public virtual Enquiry Enquiry { get; set; }
+        public virtual Guid? InquiryId { get; set; }
+        [ForeignKey("InquiryId")]
+        public virtual Inquiry Inquiry { get; set; }
     }
 
 
-    public class QuotationGeneral : Extention//Process.Type.Value=="O"
+    public class QuotationGeneral : Base//Process.Type.Value=="O"
     {
-        public virtual Guid? EnquiryGeneralId { get; set; }
-        [ForeignKey("EnquiryGeneralId")]
-        public virtual EnquiryGeneral EnquiryGeneral { get; set; }
+        public virtual Guid? InquiryGeneralId { get; set; }
+        [ForeignKey("InquiryGeneralId")]
+        public virtual InquiryGeneral InquiryGeneral { get; set; }
     }
 }

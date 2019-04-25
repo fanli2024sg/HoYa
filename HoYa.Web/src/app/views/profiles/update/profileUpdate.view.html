@@ -7,11 +7,31 @@
                 <mat-label>帳號</mat-label>
                 <input matInput placeholder="帳號" [(ngModel)]="profile.value" disabled />
             </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>類型</mat-label>
+                <mat-select [(value)]="profile.typeId">
+                    <mat-option *ngFor="let type of types$ | async" [value]="type.id">
+                        {{type.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline" *ngIf="profile.definitionBranch">
+                <mat-label>證件</mat-label>
+                <input matInput placeholder="證件" [(ngModel)]="profile.definitionBranch.code" />
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline" *ngIf="profile.definitionBranch">
+                <mat-label>名稱</mat-label>
+                <input matInput placeholder="名稱" [(ngModel)]="profile.definitionBranch.value" />
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>客戶編碼/員工工號</mat-label>
+                <input matInput placeholder="客戶編碼/員工工號" [(ngModel)]="profile.no" />
+            </mat-form-field>
+            <h2 class="example-h2">群組</h2>
             <section class="example-section">
-                <mat-checkbox class="example-margin" *ngFor="groups" [(ngModel)]="checked">Checked</mat-checkbox>
-                <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">Indeterminate</mat-checkbox>
+                <mat-checkbox class="example-margin" *ngFor="let group of groups" [(ngModel)]="group._checked">{{group.value}}</mat-checkbox>
             </section>
-   
+
         </mat-card-content>
         <mat-card-actions style="position: absolute; bottom: 20px; right: 20px" align="end">
             <button mat-button color="primary" type="submit" (click)="save()"><mat-icon>check</mat-icon> 送出</button>

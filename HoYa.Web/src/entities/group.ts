@@ -1,6 +1,6 @@
-import { TypeDefinition, Relation, Base, Detail, Node } from "./entity";
+import { TypeNodeDefinition, Relation, Base, Detail, NodeDefinition } from "./entity";
 
-export class Group extends TypeDefinition {
+export class Group extends TypeNodeDefinition<Group> {
     constructor() {
         super();
     }
@@ -29,7 +29,7 @@ export class Rule extends Detail<Group>
 }
 
 //選單
-export class Menu extends Node<Menu>
+export class Menu extends NodeDefinition<Menu>
 {
     value: string;
     code: string;

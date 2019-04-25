@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>
+    新增產品服務
+</h2>
+<mat-dialog-content class="post-form">
+    <mat-form-field>
+        <mat-chip *ngFor="let category of categories"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(fruit)">
+            {{fruit}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input type="text" placeholder="品項" matInput (keyup)="search($event.target.value)" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectRecipe($event.option.value)" [displayWith]="displayCategory">
+            <mat-option *ngFor="let category of filteredCategories$ | async" [value]="category">
+                <span>{{ category.value }}</span>
+                <small> | code: {{recipe.code}}</small>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="數量" type="number" [(ngModel)]="recipe.value" />
+    </mat-form-field>   
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button color="primary" [mat-dialog-close]="recipe" cdkFocusInitial>儲存</button>
+    <button mat-button mat-dialog-close color="warn">取消</button>
+</mat-dialog-actions>

@@ -19,14 +19,17 @@ export class AppService implements AppInterface {
     title$: BehaviorSubject<string> = new BehaviorSubject<string>("­º­¶");
     rightIcons$: BehaviorSubject<Array<string>> = new BehaviorSubject<Array<string>>([]); 
     profileMenus$: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]); 
-
+    app: string = "hoya";
+    webPort: string = "4200";
+    apiPort: string = "3001";
+    host$: BehaviorSubject<string> = new BehaviorSubject<string>("http://localhost:3001");
 
 
     headers = new Headers();
     constructor(private http: HttpClient) {
-       
+        let urls = window.location.href.split("/");
+        let app = urls[3] === this.app ? ("/"+this.app) : "";
+        let host = (urls[0] + "//" + urls[2] + app).replace(this.webPort, this.apiPort);
+        this.host$.next(host);
     }
-   
-   
-    
 }

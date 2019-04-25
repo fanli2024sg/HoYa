@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>
+    客戶細節
+</h2>
+<mat-dialog-content class="post-form">
+    <mat-form-field>
+        <input matInput placeholder="名稱" [(ngModel)]="profile.definitionBranch.value" />
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="統編" [(ngModel)]="profile.definitionBranch.code" />
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button color="primary" [mat-dialog-close]="profile" cdkFocusInitial>儲存</button>
+    <button mat-button mat-dialog-close color="warn">取消</button>
+</mat-dialog-actions>

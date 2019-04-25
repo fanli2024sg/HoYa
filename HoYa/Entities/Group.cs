@@ -11,7 +11,7 @@ namespace HoYa.Entities
     //公共授權 type=ehs
     //門禁授權 type=gate
     //部門建立 type=hr
-    public class Group : TypeDefinition
+    public class Group : TypeNodeDefinition<Group>
     { 
     }
     
@@ -35,7 +35,7 @@ namespace HoYa.Entities
     }
 
     //選單
-    public class Menu : Node<Menu>
+    public class Menu : NodeDefinition<Menu>
     {
         public string Value { get; set; }
         public string Code { get; set; }

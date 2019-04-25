@@ -1,12 +1,26 @@
-import { NodeGeneral, Definition, SimpleDetail, Instance } from "./entity";
+import { Branch, Change, Definition, SimpleDetail, NodeInstance, Relation } from "./entity";
 import { Group } from "./group";
 import { Profile } from "./person";
-export class WorkFlow extends Definition {
+
+
+export class WorkFlowDefinition extends Definition {
     constructor() {
         super();
     }
 }
 
+
+export class WorkFlow extends Branch<WorkFlowDefinition>{
+    constructor() {
+        super();
+    }
+}
+export class WorkFlowChange extends Change<WorkFlow>
+{
+    constructor() {
+        super();
+    }
+}
 
 export class Step extends SimpleDetail<WorkFlow>
 {
@@ -14,27 +28,29 @@ export class Step extends SimpleDetail<WorkFlow>
         super();
     }
 }
-
-export class Mission extends Instance<Step>
+export class StepGroup extends Relation<Step, Group>
 {
-    processId: string;
-    process: Process;
-
-    groupId: string;
-    group: Group;
-
-    ProfileId: string;
-    profile: Profile;
     constructor() {
         super();
     }
 }
 
-export class Process extends NodeGeneral<Process, WorkFlow>
+
+
+export class Activity extends Relation<Process, Step>
 {
-    constructor(definitionId?: string, definitionChangeId?: string) {
+    participantId: string;
+    participant: Profile;
+    constructor() {
         super();
-        this.definitionId = definitionId;
+    }
+}
+
+export class Process extends NodeInstance<WorkFlow, WorkFlowChange, Process>
+{
+    constructor(definitionBranchId?: string, definitionChangeId?: string) {
+        super();
+        this.definitionBranchId = definitionBranchId;
         this.definitionChangeId = definitionChangeId;
     }
 }

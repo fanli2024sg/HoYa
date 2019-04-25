@@ -29,19 +29,17 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\app\views\inquiries\generals\create\inquiryGeneralCreate.dialog.css" />
+    <Content Include="src\app\views\inquiries\generals\create\inquiryGeneralCreate.dialog.html" />
+    <Content Include="src\app\views\recipes\append\recipeAppend.dialog.css" />
+    <Content Include="src\app\views\recipes\append\recipeAppend.dialog.html" />
+    <Content Include="src\app\views\steps\update\stepUpdate.view.css" />
+    <Content Include="src\app\views\steps\update\stepUpdate.view.html" />
     <Content Include="src\assets\favicon.ico" />
-    <Content Include="index.html" />
-    <Content Include="karma.conf.js" />
-    <Content Include="node_modules\%40angular\material\prebuilt-themes\indigo-pink.css" />
     <Content Include="src\app\app.component.css" />
     <Content Include="src\app\login\login.component.css" />
-    <Content Include="src\app\views\enquiries\append\enquiryAppend.component.css" />
-    <Content Include="src\app\views\enquiries\append\enquiryAppend.component.html" />
-    <Content Include="src\app\views\options\create\optionCreate.component.css" />
-    <Content Include="src\app\views\options\create\optionCreate.component.html" />
-    <Content Include="src\app\views\options\options.component.html" />
-    <Content Include="src\app\views\options\update\optionUpdate.component.css" />
-    <Content Include="src\app\views\options\update\optionUpdate.component.html" />
+    <Content Include="src\app\views\inquiries\append\inquiryAppend.component.css" />
+    <Content Include="src\app\views\inquiries\append\inquiryAppend.component.html" />
     <Content Include="src\app\views\steps\create\stepCreate.dialog.css" />
     <Content Include="src\app\views\steps\create\stepCreate.dialog.html" />
     <Content Include="src\app\views\steps\steps.component.css" />
@@ -51,36 +49,41 @@
     <Content Include="src\app\views\profiles\update\profileUpdate.view.html" />
     <Content Include="src\app\views\profiles\create\profileCreate.component.css" />
     <Content Include="src\app\views\profiles\create\profileCreate.component.html" />
-    <Content Include="src\app\views\profiles\append\profileAppend.component.css" />
-    <Content Include="src\app\views\profiles\append\profileAppend.component.html" />
-    <Content Include="src\app\views\enquiries\generals\update\enquiryGeneralUpdate.component.css" />
-    <Content Include="src\app\views\enquiries\generals\create\enquiryGeneralCreate.component.css" />
+    <Content Include="src\app\views\profiles\append\profileAppend.dialog.css" />
+    <Content Include="src\app\views\profiles\append\profileAppend.dialog.html" />
+    <Content Include="src\app\views\inquiries\generals\update\inquiryGeneralUpdate.view.css" />
     <Content Include="src\app\views\profiles\profiles.component.html" />
     <Content Include="src\app\views\views.component.css" />
     <Content Include="src\app\views\views.component.html" />
     <Content Include="src\assets\a6.jpg" />
+    <Content Include="src\assets\icons\icon-128x128.png" />
+    <Content Include="src\assets\icons\icon-144x144.png" />
+    <Content Include="src\assets\icons\icon-152x152.png" />
+    <Content Include="src\assets\icons\icon-192x192.png" />
+    <Content Include="src\assets\icons\icon-384x384.png" />
+    <Content Include="src\assets\icons\icon-512x512.png" />
+    <Content Include="src\assets\icons\icon-72x72.png" />
+    <Content Include="src\assets\icons\icon-96x96.png" />
     <Content Include="src\assets\images\angular_solidBlack.svg" />
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\login\login.component.html" />
     <TypeScriptCompile Include="src\app\app.routing.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\append\enquiryAppend.component.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\generals\enquiryGenerals.module.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\generals\enquiryGenerals.routing.ts" />
-    <TypeScriptCompile Include="src\app\views\options\create\optionCreate.component.ts" />
-    <TypeScriptCompile Include="src\app\views\options\options.component.ts" />
-    <TypeScriptCompile Include="src\app\views\options\options.module.ts" />
-    <TypeScriptCompile Include="src\app\views\options\options.routing.ts" />
-    <TypeScriptCompile Include="src\app\views\options\update\optionUpdate.component.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\generals\create\inquiryGeneralCreate.dialog.ts" />
+    <TypeScriptCompile Include="src\app\views\recipes\append\recipeAppend.dialog.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\append\inquiryAppend.component.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\generals\inquiryGenerals.module.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\generals\inquiryGenerals.routing.ts" />
     <TypeScriptCompile Include="src\app\views\steps\create\stepCreate.dialog.ts" />
     <TypeScriptCompile Include="src\app\views\steps\steps.component.ts" />
     <TypeScriptCompile Include="src\app\views\steps\steps.module.ts" />
     <TypeScriptCompile Include="src\app\views\steps\steps.routing.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\update\profileUpdate.view.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\create\profileCreate.component.ts" />
-    <TypeScriptCompile Include="src\app\views\profiles\append\profileAppend.component.ts" />
+    <TypeScriptCompile Include="src\app\views\profiles\append\profileAppend.dialog.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\profiles.component.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\profiles.module.ts" />
     <TypeScriptCompile Include="src\app\views\profiles\profiles.routing.ts" />
+    <TypeScriptCompile Include="src\app\views\steps\update\stepUpdate.view.ts" />
     <TypeScriptCompile Include="src\app\views\views.routing.ts" />
     <TypeScriptCompile Include="src\interceptors\auth.interceptor.ts" />
     <TypeScriptCompile Include="src\guards\auth.guard.ts" />
@@ -91,12 +94,11 @@
     <TypeScriptCompile Include="src\app\app.common.ts" />
     <TypeScriptCompile Include="src\app\views\views.component.ts" />
     <TypeScriptCompile Include="src\app\views\views.module.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\enquiries.routing.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\enquiries.module.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\enquiries.component.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\generals\enquiryGenerals.component.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\generals\update\enquiryGeneralUpdate.component.ts" />
-    <TypeScriptCompile Include="src\app\views\enquiries\generals\create\enquiryGeneralCreate.component.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\inquiries.routing.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\inquiries.module.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\inquiries.component.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\generals\inquiryGenerals.component.ts" />
+    <TypeScriptCompile Include="src\app\views\inquiries\generals\update\inquiryGeneralUpdate.view.ts" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\interfaces\app.interface.ts" />
@@ -119,9 +121,12 @@
     <TypeScriptCompile Include="src\models\login.ts" />
     <TypeScriptCompile Include="src\entities\entity.ts" />
     <TypeScriptCompile Include="src\polyfills.ts" />
-    <TypeScriptCompile Include="src\services\enquiries.service.ts" />
+    <TypeScriptCompile Include="src\services\inquiryGenerals.service.ts" />
+    <TypeScriptCompile Include="src\services\inquiries.service.ts" />
     <TypeScriptCompile Include="src\services\inventories.service.ts" />
-    <TypeScriptCompile Include="src\services\materials.service.ts" />
+    <TypeScriptCompile Include="src\services\contacts.service.ts" />
+    <TypeScriptCompile Include="src\services\categories.service.ts" />
+    <TypeScriptCompile Include="src\services\recipes.service.ts" />
     <TypeScriptCompile Include="src\services\workflows.service.ts" />
     <TypeScriptCompile Include="src\services\steps.service.ts" />
     <TypeScriptCompile Include="src\services\quotations.service.ts" />
@@ -134,15 +139,14 @@
     <TypeScriptCompile Include="src\services\folderFiles.service.ts" />
     <TypeScriptCompile Include="src\services\folders.service.ts" />
     <TypeScriptCompile Include="src\services\options.service.ts" />
-    <TypeScriptCompile Include="src\services\missions.service.ts" />
+    <TypeScriptCompile Include="src\services\activities.service.ts" />
     <TypeScriptCompile Include="src\test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
-    <Content Include="src\app\views\enquiries\enquiries.component.html" />
-    <Content Include="src\app\views\enquiries\generals\enquiryGenerals.component.html" />
-    <Content Include="src\app\views\enquiries\generals\update\enquiryGeneralUpdate.component.html" />
-    <Content Include="src\app\views\enquiries\generals\create\enquiryGeneralCreate.component.html" />
+    <Content Include="src\app\views\inquiries\inquiries.component.html" />
+    <Content Include="src\app\views\inquiries\generals\inquiryGenerals.component.html" />
+    <Content Include="src\app\views\inquiries\generals\update\inquiryGeneralUpdate.view.html" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
@@ -153,22 +157,18 @@
     <Content Include="src\tsconfig.spec.json" />
     <Content Include="src\tslint.json" />
     <Content Include="package-lock.json" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <Content Include="src\manifest.json" />
+    <Content Include="src\ngsw-config.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\directives\" />
     <Folder Include="src\pipes\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\entities\enquiry.ts" />
+    <TypeScriptCompile Include="src\entities\inquiry.ts" />
     <TypeScriptCompile Include="src\entities\group.ts" />
     <TypeScriptCompile Include="src\entities\inventory.ts" />
-    <TypeScriptCompile Include="src\entities\material.ts" />
+    <TypeScriptCompile Include="src\entities\item.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
@@ -197,7 +197,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties angular_1json__JSONSchema="" package_1json__JSONSchema="" />
+      <UserProperties package_1json__JSONSchema="" angular_1json__JSONSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

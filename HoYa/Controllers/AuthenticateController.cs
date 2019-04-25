@@ -160,13 +160,14 @@ namespace HoYa.Controllers
 
         private async Task<IHttpActionResult> LoginAsync(string userName, string password)
         {
-            // var client = new HttpClient { BaseAddress = new Uri($"{Request.RequestUri.Scheme}://{Request.RequestUri.Authority}:{Request.RequestUri.Port}/oa/") };
-            //  var client = new HttpClient { BaseAddress = new Uri($"{Request.RequestUri.Scheme}://{Request.RequestUri.Authority}/oa/") };
-            //   var client = new HttpClient { BaseAddress = new Uri($"http://localhost:3001/") };
+            string app = Request.RequestUri.AbsolutePath.Split('/')[1] + "/";
+            if (app != "hoya/") app = "";
             var client = new HttpClient
             {
                 //BaseAddress = new Uri($"http://118.163.183.248/hoya/")
-                BaseAddress = new Uri($"http://localhost:3001/")
+                //BaseAddress = new Uri($"http://localhost:3001/")
+                //BaseAddress = new Uri($"https://hoya.azurewebsites.net/")
+                BaseAddress = new Uri($"{Request.RequestUri.Scheme}://{Request.RequestUri.Authority}/{app}")
             };
 
             var buffer = System.Text.Encoding.UTF8.GetBytes("grant_type=password&username=" + userName + "&password=" + password);
@@ -200,7 +201,7 @@ namespace HoYa.Controllers
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest, new JObject(new JProperty("message", "")));
+                return Content(HttpStatusCode.BadRequest, new JObject(new JProperty("message", result.Content)));
             }
         }
 

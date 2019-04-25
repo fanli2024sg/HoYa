@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoYa", "HoYa\HoYa.csproj", "{9644F569-2720-4567-93C9-21074915D88C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoYa.Web", "HoYa.Web\HoYa.Web.csproj", "{6B67CA36-A364-4A6F-BFD1-313418248916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoYa", "HoYa\HoYa.csproj", "{9644F569-2720-4567-93C9-21074915D88C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +13,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9644F569-2720-4567-93C9-21074915D88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9644F569-2720-4567-93C9-21074915D88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9644F569-2720-4567-93C9-21074915D88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9644F569-2720-4567-93C9-21074915D88C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B67CA36-A364-4A6F-BFD1-313418248916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B67CA36-A364-4A6F-BFD1-313418248916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B67CA36-A364-4A6F-BFD1-313418248916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B67CA36-A364-4A6F-BFD1-313418248916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9644F569-2720-4567-93C9-21074915D88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9644F569-2720-4567-93C9-21074915D88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9644F569-2720-4567-93C9-21074915D88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9644F569-2720-4567-93C9-21074915D88C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC717BA7-1091-4224-BEC5-D2B60D4AE14F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/fanghsienli
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = HoYa.Web\\HoYa.Web.csproj
+		SccProjectName1 = HoYa.Web
+		SccLocalPath1 = HoYa.Web
+		SccProjectUniqueName2 = HoYa\\HoYa.csproj
+		SccProjectName2 = HoYa
+		SccLocalPath2 = HoYa
 	EndGlobalSection
 EndGlobal

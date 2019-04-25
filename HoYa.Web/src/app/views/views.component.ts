@@ -3,13 +3,16 @@ import { MatSidenav, MatDrawerToggleResult } from "@angular/material";
 import { Router } from "@angular/router";
 import { AuthService } from "services/auth.service";
 import { AppInterface } from "interfaces/app.interface";
+import { AppService } from "services/app.service";
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 @Component({
     selector: "views",
     templateUrl: "views.component.html",
     styleUrls: ["views.component.css"],
-    providers: []
+    providers: [
+        AppService
+    ]
 })
 export class ViewsComponent implements OnInit {
     leftIcon$: Observable<string> = this.appService.leftIcon$;
@@ -48,6 +51,8 @@ export class ViewsComponent implements OnInit {
     }
 
     iconClick(icon: string) {
+        if (icon === "leftIcon$") icon = this.appService.leftIcon$.getValue();
+
         switch (icon) {
             case "search":
                 this.searchBar = true;

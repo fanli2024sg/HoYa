@@ -16,68 +16,35 @@ export abstract class Base {
 
     createdDate: Date;
 
+    _checked: boolean;
     constructor() {
         this.id = Guid.newGuid();
         this.createdDate = null;
     }
 }
-
-export class Change extends Base {
-    constructor() {
-        super();
-    }
-}
-
-export abstract class Extention extends Base {
-    updatedById: string;
-    updatedBy: Profile;
-
-    updatedDate: Date;
-
-    constructor() {
-        super();
-        this.updatedDate = new Date();
-    }
-}
-
-export abstract class Simple extends Extention {
-    value: string;
-
-    constructor() {
-        super();
-    }
-}
-
-export abstract class TypeExtention extends Extention {
-    typeId: string;
-    type: Option;
-
-    constructor() {
-        super();
-    }
-}
-
-
-export abstract class Entity extends Extention {
-    changeId: string;
-    change: Change;
-
-    constructor() {
-        super();
-    }
-}
-
-export abstract class Definition extends Entity {
+export abstract class Definition extends Base {
     code: string;
     value: string;
     statusId: string;
     status: Option;
-
     constructor() {
         super();
     }
 }
-
+export abstract class TypeDefinition extends Definition {
+    typeId: string;
+    type: Option;
+    constructor() {
+        super();
+    }
+}
+export abstract class RealTypeDefinition extends TypeDefinition {
+    galleryId: string;
+    gallery: Folder;
+    constructor() {
+        super();
+    }
+}
 export abstract class NodeDefinition<P> extends Definition {
     parentId: string;
     parent: P;
@@ -85,46 +52,7 @@ export abstract class NodeDefinition<P> extends Definition {
         super();
     }
 }
-
-export abstract class TypeDefinition extends Definition {
-    typeId: string;
-    type: Option;
-
-    constructor() {
-        super();
-    }
-}
-
-
-export abstract class DefinitionDetail<D, DC> extends Definition {
-    definitionId: string;
-    definition: D;
-    definitionChangeId: string;
-    definitionChange: DC;
-    constructor() {
-        super();
-    }
-}
-
-export abstract class General<D> extends Base {
-    definitionId: string;
-    definition: D;
-    definitionChangeId: string;
-    definitionChange: Change;
-    constructor() {
-        super();
-    }
-}
-
-export abstract class SimpleGeneral<D> extends General<D>
-{
-    value: string;
-    constructor() {
-        super();
-    }
-}
-
-export abstract class RealSimpleGeneral<D> extends SimpleGeneral<D>
+export abstract class RealNodeDefinition<P> extends NodeDefinition<P>
 {
     galleryId: string;
     gallery: Folder;
@@ -132,46 +60,39 @@ export abstract class RealSimpleGeneral<D> extends SimpleGeneral<D>
         super();
     }
 }
-
-export abstract class NodeGeneral<P, D> extends General<D>
+export abstract class TypeNodeDefinition<P> extends NodeDefinition<P>
 {
-    no: string;
-    parentId: string;
-    parent: P;
+    typeId: string;
+    type: Option;
     constructor() {
         super();
     }
 }
-
-
-export abstract class Instance<DD> extends Base {
-    no: string;
-    definitionDetailId: string;
-    definitionDetail: DD;
-    entityChangeId: string;
-    entityChange: Change;
+export class Branch<D> extends Base {
+    code: string;
+    value: string;
+    statusId: string;
+    status: Option;
+    definitionId: string;
+    definition: D;
     constructor() {
         super();
     }
 }
-
-export abstract class Detail<O> extends Base {
+export class Change<DB> extends Base {
+    definitionBranchId: string;
+    definitionBranch: DB;
+    constructor() {
+        super();
+    }
+}
+export class Detail<O> extends Base {
     ownerId: string;
     owner: O;
-    ownerChangeId: string;
-    ownerChange: Change;
     constructor() {
         super();
     }
 }
-
-export abstract class SimpleDetail<O> extends Detail<O> {
-    value: string; 
-    constructor() {
-        super();
-    }
-}
-
 export abstract class Relation<O, T> extends Detail<O>
 {
     targetId: string;
@@ -183,40 +104,84 @@ export abstract class Relation<O, T> extends Detail<O>
     archivedBy: Profile;
     constructor() {
         super();
-        this.archivedDate = new Date();
     }
 }
-
-export abstract class Event<O, OC, T, TC> extends Relation<O, T>
+export abstract class SimpleDetail<O> extends Detail<O>
 {
-    targetChangeId: string;
-    targetChange: TC;
+    value: string;
     constructor() {
         super();
     }
 }
-
-export abstract class Node<P> extends Entity {
+export class TypeSimpleDetail<O> extends SimpleDetail<O> {
+    typeId: string;
+    type: Option;
+    constructor() {
+        super();
+    }
+}
+export class Instance<DB, DC> extends Base {
+    no: string;
+    definitionBranchId: string;
+    definitionBranch: DB;
+    definitionChangeId: string;
+    definitionChange: DC;
+    constructor() {
+        super();
+    }
+}
+export abstract class SimpleInstance<DB, DC> extends Instance<DB, DC>
+{
+    value: string;
+    constructor() {
+        super();
+    }
+}
+export abstract class TypeSimpleInstance<DB, DC> extends SimpleInstance<DB, DC>
+{
+    typeId: string;
+    type: Option;
+    constructor() {
+        super();
+    }
+}
+export abstract class RealSimpleInstance<DB, DC> extends SimpleInstance<DB, DC>
+{
+    galleryId: string;
+    gallery: Folder;
+    constructor() {
+        super();
+    }
+}
+export abstract class RealTypeSimpleInstance<DB, DC> extends TypeSimpleInstance<DB, DC>
+{
+    galleryId: string;
+    gallery: Folder;
+    constructor() {
+        super();
+    }
+}
+export abstract class NodeInstance<B, C, P> extends Instance<B, C>
+{
     parentId: string;
     parent: P;
-
     constructor() {
         super();
     }
 }
-
 export class Option extends NodeDefinition<Option>
 {
     constructor() {
         super();
     }
 }
-
-
-
-export class Folder extends Base {
-    value: string;
-
+export class Category extends RealNodeDefinition<Category>
+{
+    constructor() {
+        super();
+    }
+}
+export class Folder extends Definition {
     constructor() {
         super();
     }
@@ -227,10 +192,9 @@ export class FolderFile extends Relation<Folder, File>
         super();
     }
 }
-export class File extends Base {
+export class File extends Definition {
     path: string;
     url: string;
-    value: string;
     constructor() {
         super();
     }

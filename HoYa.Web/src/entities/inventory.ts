@@ -1,7 +1,7 @@
 import { Instance } from "./entity";
-import { Material } from "./material";
-//實例化Material
-export class Inventory extends Instance<Material>
+import { Item, RecipeChange } from "./item";
+//實例化Recipe
+export class Inventory extends Instance<Item, RecipeChange>
 {
     constructor() {
         super();

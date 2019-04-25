@@ -3,11 +3,13 @@ import { MatTableDataSource } from "@angular/material";
 import { Router, ActivatedRoute } from "@angular/router";
 import { GroupsService } from "services/groups.service";
 import { ProfilesService } from "services/profiles.service";
+import { OptionsService } from "services/options.service";
+import { PeopleService } from "services/people.service";
 import { ProfileGroup, Profile, Person } from "entities/person";
 import { Group } from "entities/group";
-import { Material } from "entities/material";
+import { Recipe } from "entities/item";
 import { Observable, Subject } from "rxjs";
-import { MatDialog, MatDialogRef } from "@angular/material";
+import { Option } from "entities/entity";
 import { MatSnackBar } from "@angular/material";
 import { AppInterface } from "interfaces/app.interface";
 @Component({
@@ -16,17 +18,21 @@ import { AppInterface } from "interfaces/app.interface";
     styleUrls: ["profileUpdate.view.css"],
     providers: [
         ProfilesService,
-        GroupsService
+        GroupsService,
+        OptionsService,
+        PeopleService
     ]
 })
 export class ProfileUpdateView implements OnInit {
     groups: Group[];
+    types$: Observable<Option[]> = this.optionsService.select({ parentId: "24741b4f-e765-40d0-a1e8-15ab515972cd" }, false);
+
     profileGroups: ProfileGroup[];
-    enquiriesDataSource = new MatTableDataSource<ProfileGroup>();
+    inquiriesDataSource = new MatTableDataSource<ProfileGroup>();
     profile: Profile;
-    materials: Material[];
+    recipes: Recipe[];
     withRefresh = false;
-    filteredMaterials$: Observable<Material[]>;
+    filteredRecipes$: Observable<Recipe[]>;
     private anyLike$ = new Subject<string>();
     deleteProfileGroupIds = new Array<string>();
     constructor(
@@ -35,29 +41,44 @@ export class ProfileUpdateView implements OnInit {
         public router: Router,
         public groupsService: GroupsService,
         public profilesService: ProfilesService,
+        public optionsService: OptionsService,
+        public peopleService: PeopleService,
         public appInterface: AppInterface
     ) {      
-        this.appInterface.leftIcon$.next("arrow_back");
+       
     }
 
     ngOnInit() {
+        this.appInterface.leftIcon$.next("arrow_back");
         this.profilesService.find(this.activatedRoute.snapshot.paramMap.get("id")).subscribe((profile: Profile) => {
             this.profile = profile;
-            this.appInterface.title$.next(this.profile.value);
-            if (!this.profile.definitionId) {
-                this.profile.definition = new Person();
+            if (!this.profile.definitionBranchId) {
+                this.profile.definitionBranch = new Person();
             }
+            console.log(this.profile);
+            this.appInterface.title$.next(`${this.profile.definitionBranch.value}(${this.profile.value})`.replace("()",""));
+
+           // this.groups$ = this.groupsService.select({ ownerId: this.profile.id }, false);
             this.groupsService.select({ ownerId: this.profile.id }, false).subscribe((groups: Group[]) => {
                 this.groups = groups;
+                this.profilesService.selectGroups({ ownerId: this.profile.id }, false).subscribe((profileGroups: ProfileGroup[]) => {
+
+                    this.profileGroups = profileGroups;
+                    this.profileGroups.forEach((profileGroup: ProfileGroup) => {
+                        this.groups.find(x => x.id === profileGroup.targetId)._checked = true;
+                    });
+                });
             });
+
+           
         });
     }
 
     removeProfileGroup(id: string) {
         this.deleteProfileGroupIds.push(id);
-        let enquiries = this.enquiriesDataSource.data;
-        enquiries = enquiries.filter(x => x.id !== id);
-        this.enquiriesDataSource.data = enquiries;
+        let inquiries = this.inquiriesDataSource.data;
+        inquiries = inquiries.filter(x => x.id !== id);
+        this.inquiriesDataSource.data = inquiries;
     }
 
     archiveProfileGroup(id: string, profileGroup: ProfileGroup): Promise<ProfileGroup> {
@@ -85,20 +106,53 @@ export class ProfileUpdateView implements OnInit {
     }
 
     save() {
+        console.log(this.groups);
+        
         let promises: Promise<ProfileGroup>[] = new Array<Promise<ProfileGroup>>();
-        promises.push();
+
+        this.groups.forEach((group: Group) => {
+            if (group._checked) {
+                if (this.profileGroups.filter(x => x.targetId === group.id).length === 0) {
+                    let profileGroup = new ProfileGroup(this.profile.id, group.id); 
+                    promises.push(this.createProfileGroup(profileGroup));
+                }
+            } else {
+                if (this.profileGroups.filter(x => x.targetId === group.id && x.createdDate!==null).length === 1) {
+                    let profileGroup = this.profileGroups.find(x => x.targetId === group.id);
+                    profileGroup.endDate = new Date();
+                    profileGroup.archivedDate = new Date();
+                    promises.push(this.archiveProfileGroup(profileGroup.id, profileGroup));
+                }
+            }
+        })
+        /*
         this.profileGroups.filter(x => x.createdDate === null).forEach((profileGroup: ProfileGroup) => {
             if (profileGroup.createdDate) promises.push(this.archiveProfileGroup(profileGroup.id, profileGroup));
             else promises.push(this.createProfileGroup(profileGroup));
-        });
+        });*/
 
         Promise.all(promises).then(() => {
-            this.updateProfile(this.profile).then(() => {
-                this.matSnackBar.open("儲存成功", "萬德佛!ಥ◡ಥ", {
-                    duration: 5000,
+            if (this.profile.definitionBranchId === null) {
+
+                this.peopleService.create(this.profile.definitionBranch).subscribe((createdPerson: Person) => {
+                    this.profile.definitionBranchId = createdPerson.id;
+                    this.updateProfile(this.profile).then(() => {
+                        this.matSnackBar.open("儲存成功", "萬德佛!ಥ◡ಥ", {
+                            duration: 5000,
+                        });
+                        this.router.navigate(["./views/profiles"]);
+                    });
                 });
-                this.router.navigate(["./views/enquiries/profiles"]);
-            });
+            } else {
+                this.peopleService.update(this.profile.definitionBranchId, this.profile.definitionBranch).subscribe((updatedPerson: Person) => {
+                    this.updateProfile(this.profile).then(() => {
+                        this.matSnackBar.open("儲存成功", "萬德佛!ಥ◡ಥ", {
+                            duration: 5000,
+                        });
+                        this.router.navigate(["./views/profiles"]);
+                    });
+                });
+            }
         });
     }
 }

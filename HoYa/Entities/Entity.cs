@@ -7,62 +7,18 @@ namespace HoYa.Entities
     public abstract class Base
     {
         public virtual Guid Id { get; set; }
-
         public virtual Guid? CreatedById { get; set; }
         [ForeignKey("CreatedById")]
         [JsonIgnore]
         public virtual Profile CreatedBy { get; set; }
-
         public DateTime CreatedDate { get; set; }
-
         public Base()
         {
             Id = Guid.NewGuid();
             CreatedDate = DateTime.Now;
         }
     }
-
-    public class Change : Base
-    {
-
-    }
-
-    public abstract class Extention : Base
-    {
-        public virtual Guid? UpdatedById { get; set; }
-        [ForeignKey("UpdatedById")]
-        [JsonIgnore]
-        public virtual Profile UpdatedBy { get; set; }
-
-        public DateTime? UpdatedDate { get; set; }
-
-        public Extention()
-        {
-            UpdatedDate = DateTime.Now;
-        }
-    }
-
-    public abstract class Simple : Extention
-    {
-        public string Value { get; set; }
-    }
-
-    public abstract class TypeExtention : Extention
-    {
-        public virtual Guid? TypeId { get; set; }
-        [ForeignKey("TypeId")]
-        public virtual Option Type { get; set; }
-    }
-
-    public abstract class Entity : Extention
-    {
-        public virtual Guid? ChangeId { get; set; }
-        [ForeignKey("ChangeId")]
-        [JsonIgnore]
-        public virtual Change Change { get; set; }
-    }
-
-    public abstract class Definition : Entity
+    public class Definition : Base
     {
         public string Code { get; set; }
         public string Value { get; set; }
@@ -70,108 +26,60 @@ namespace HoYa.Entities
         [ForeignKey("StatusId")]
         public virtual Option Status { get; set; }
     }
-
+    public abstract class TypeDefinition : Definition
+    {
+        public virtual Guid? TypeId { get; set; }
+        [ForeignKey("TypeId")]
+        public virtual Option Type { get; set; }
+    }
+    public abstract class RealTypeDefinition : TypeDefinition
+    {
+        public virtual Guid? GalleryId { get; set; }
+        [ForeignKey("GalleryId")]
+        public virtual Folder Gallery { get; set; }
+    }
     public abstract class NodeDefinition<P> : Definition
     {
         public virtual Guid? ParentId { get; set; }
         [ForeignKey("ParentId")]
         public virtual P Parent { get; set; }
     }
-
-    public abstract class TypeDefinition : Definition
-    {
-        public virtual Guid? TypeId { get; set; }
-        [ForeignKey("TypeId")]
-        [JsonIgnore]
-        public virtual Option Type { get; set; }
-    }
-
-
-    public abstract class DefinitionDetail<D, DC> : Definition
-    {
-        public virtual Guid? DefinitionId { get; set; }
-        [ForeignKey("DefinitionId")]
-        [JsonIgnore]
-        public virtual D Definition { get; set; }
-
-        public virtual Guid? DefinitionChangeId { get; set; }
-        [ForeignKey("DefinitionChangeId")]
-        [JsonIgnore]
-        public virtual DC DefinitionChange { get; set; }
-    }
-
-    public abstract class General<D> : Base
-    {
-        public string No { get; set; }
-
-        public virtual Guid? DefinitionId { get; set; }
-        [ForeignKey("DefinitionId")]
-        public virtual D Definition { get; set; }
-
-        public virtual Guid? DefinitionChangeId { get; set; }
-        [ForeignKey("DefinitionChangeId")]
-        [JsonIgnore]
-        public virtual Change DefinitionChange { get; set; }
-    }
-
-    public abstract class SimpleGeneral<D> : General<D>
-    {
-        public string Value { get; set; }
-    }
-
-    public abstract class RealSimpleGeneral<D> : SimpleGeneral<D>
+    public abstract class RealNodeDefinition<P> : NodeDefinition<P>
     {
         public virtual Guid? GalleryId { get; set; }
         [ForeignKey("GalleryId")]
         public virtual Folder Gallery { get; set; }
     }
-
-    public abstract class NodeGeneral<P, D> : General<D>
+    public abstract class TypeNodeDefinition<P> : NodeDefinition<P>
     {
-        public string No { get; set; }
-        public virtual Guid? ParentId { get; set; }
-        [ForeignKey("ParentId")]
-        [JsonIgnore]
-        public virtual P Parent { get; set; }
+        public virtual Guid? TypeId { get; set; }
+        [ForeignKey("TypeId")]
+        public virtual Option Type { get; set; }
     }
-
-    public abstract class Instance<DD> : Base
+    public class Branch<D> : Base
     {
-        public string No { get; set; }
-        public virtual Guid? DefinitionDetailId { get; set; }
-        [ForeignKey("DefinitionDetailId")]
+        public string Code { get; set; }
+        public string Value { get; set; }
+        public virtual Guid? StatusId { get; set; }
+        [ForeignKey("StatusId")]
+        public virtual Option Status { get; set; }
+        public virtual Guid? DefinitionId { get; set; }
+        [ForeignKey("DefinitionId")]
         [JsonIgnore]
-        public virtual DD DefinitionDetail { get; set; }
-
-        public virtual Guid? EntityChangeId { get; set; }
-        [ForeignKey("EntityChangeId")]
-        [JsonIgnore]
-        public virtual Change EntityChange { get; set; }
+        public virtual D Definition { get; set; }
     }
-
-    public abstract class Detail<O> : Base
+    public class Change<DB> : Base
     {
-
-
-
+        public virtual Guid? DefinitionBranchId { get; set; }
+        [ForeignKey("DefinitionBranchId")]
+        public virtual DB DefinitionBranch { get; set; }
+    }
+    public class Detail<O> : Base
+    {
         public virtual Guid? OwnerId { get; set; }
         [ForeignKey("OwnerId")]
-        [JsonIgnore]
         public virtual O Owner { get; set; }
-
-        public virtual Guid? OwnerChangeId { get; set; }
-        [ForeignKey("OwnerChangeId")]
-        [JsonIgnore]
-        public virtual Change OwnerChange { get; set; }
     }
-
-
-    public abstract class SimpleDetail<O> : Detail<O>
-    {
-        public string Value { get; set; }
-    }
-
-
     public abstract class Relation<O, T> : Detail<O>
     {
         public virtual Guid? TargetId { get; set; }
@@ -192,49 +100,75 @@ namespace HoYa.Entities
 
         public Relation()
         {
-            ArchivedDate = DateTime.Now;
         }
     }
-
-    public abstract class Event<O, OC, T, TC> : Relation<O, T>
+    public abstract class SimpleDetail<O> : Detail<O>
     {
-        public virtual Guid? OwnerChangeId { get; set; }
-        [ForeignKey("OwnerChangeId")]
-        [JsonIgnore]
-        public virtual OC OwnerChange { get; set; }
-
-        public virtual Guid? TargetChangeId { get; set; }
-        [ForeignKey("TargetChangeId")]
-        [JsonIgnore]
-        public virtual TC TargetChange { get; set; }
+        public string Value { get; set; }
     }
 
-    public abstract class Node<P> : Entity
+    public abstract class TypeSimpleDetail<O> : SimpleDetail<O>
+    {
+        public virtual Guid? TypeId { get; set; }
+        [ForeignKey("TypeId")]
+        public virtual Option Type { get; set; }
+    }
+    public class Instance<DB, DC> : Base
+    {
+        public string No { get; set; }
+
+        public virtual Guid? DefinitionBranchId { get; set; }
+        [ForeignKey("DefinitionBranchId")]
+        public virtual DB DefinitionBranch { get; set; }
+
+        public virtual Guid? DefinitionChangeId { get; set; }
+        [ForeignKey("DefinitionChangeId")]
+        public virtual DC DefinitionChange { get; set; }
+    }
+    public abstract class SimpleInstance<DB, DC> : Instance<DB, DC>
+    {
+        public string Value { get; set; }
+    }
+    public abstract class TypeSimpleInstance<DB, DC> : SimpleInstance<DB, DC>
+    {
+        public virtual Guid? TypeId { get; set; }
+        [ForeignKey("TypeId")]
+        public virtual Option Type { get; set; }
+    }
+    public abstract class RealSimpleInstance<DB, DC> : SimpleInstance<DB, DC>
+    {
+        public virtual Guid? GalleryId { get; set; }
+        [ForeignKey("GalleryId")]
+        public virtual Folder Gallery { get; set; }
+    }
+    public abstract class RealTypeSimpleInstance<DB, DC> : TypeSimpleInstance<DB, DC>
+    {
+        public virtual Guid? GalleryId { get; set; }
+        [ForeignKey("GalleryId")]
+        public virtual Folder Gallery { get; set; }
+    }
+    public abstract class NodeInstance<B, C, P> : Instance<B, C>
     {
         public virtual Guid? ParentId { get; set; }
         [ForeignKey("ParentId")]
         [JsonIgnore]
         public virtual P Parent { get; set; }
-    }
-
+    } 
     public class Option : NodeDefinition<Option>
     {
     }
-
-
-
-    public class Folder : Base
+    public class Category : RealNodeDefinition<Category>
     {
-        public string Value { get; set; }
+    }
+    public class Folder : Definition
+    {
     }
     public class FolderFile : Relation<Folder, File>
     {
     }
-    public class File : Base
+    public class File : Definition
     {
         public string Path { get; set; }
         public string Url { get; set; }
-        public string Value { get; set; }
-
     }
 }

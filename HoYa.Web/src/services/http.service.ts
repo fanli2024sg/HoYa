@@ -3,23 +3,20 @@ import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { CurrentUserModel } from "models/login";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-
+import { AppInterface } from "interfaces/app.interface";
 @Injectable()
 export class HttpService {
 
     host: string;
     currentUser: CurrentUserModel;
-    constructor(private http: HttpClient) {
-        //let urlSplit = window.location.href.split("/");      
-        //this.host = "http://" + urlSplit[0] + "/" + urlSplit[1] + "/";
-          //this.host = "http://118.163.183.248/hoya/";
-      this.host = "http://localhost:3001/";
+    constructor(private http: HttpClient,
+        private appInterface: AppInterface) {
     }
 
 
 
     create<I>(api: string, model: any): Observable<I> {
-        return this.http.post<I>(`${this.host}${api}`, model).pipe(map(x => x));
+        return this.http.post<I>(`${this.appInterface.host$.getValue()}/${api}`, model).pipe(map(x => x));
 
     }
 
@@ -27,15 +24,15 @@ export class HttpService {
         let params = new HttpParams({ fromObject: model });
         let headerMap = refresh ? { "x-refresh": "true" } : {};
         let headers = new HttpHeaders(headerMap);
-        return this.http.get<I>(`${this.host}${api}`, { headers, params }).pipe(map(x => x));
+        return this.http.get<I>(`${this.appInterface.host$.getValue()}/${api}`, { headers, params }).pipe(map(x => x));
     }
 
     update<I>(api: string, model: any): Observable<I> {
-        return this.http.put<I>(`${this.host}${api}`, model).pipe(map(x => x));
+        return this.http.put<I>(`${this.appInterface.host$.getValue()}/${api}`, model).pipe(map(x => x));
     }
 
     delete<I>(api: string): Observable<I> {
-        return this.http.delete<I>(`${this.host}${api}`).pipe(map(x => x));
+        return this.http.delete<I>(`${this.appInterface.host$.getValue()}/${api}`).pipe(map(x => x));
     }
 
 
@@ -45,7 +42,7 @@ export class HttpService {
 
 
 
-    upload(url: string, files: Array<File>) {
+    upload(api: string, files: Array<File>) {
         return new Promise((resolve, reject) => {
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();
@@ -61,7 +58,7 @@ export class HttpService {
                     }
                 }
             }
-            xhr.open("POST", this.host + url, true);
+            xhr.open("POST", `${this.appInterface.host$.getValue()}/${api}`, true);
             xhr.send(formData);
         });
     }

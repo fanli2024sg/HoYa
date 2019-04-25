@@ -9,4 +9,5 @@ export abstract class AppInterface {
     abstract profileMenus$: BehaviorSubject<Array<any>>;
     abstract page$: BehaviorSubject<PageEvent>;
     abstract sort$: BehaviorSubject<Sort>;
+    abstract host$: BehaviorSubject<string>;
 }

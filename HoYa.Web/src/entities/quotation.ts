@@ -1,22 +1,22 @@
-import { Detail, Extention } from "./entity";
-import { EnquiryGeneral, Enquiry } from "./enquiry";
+import { Detail, Base } from "./entity";
+import { InquiryGeneral, Inquiry } from "./inquiry";
 
 export class Quotation extends Detail<QuotationGeneral>
 {
     amount: number;
     bargain: string;
     bargainPrice: number;
-    enquiryId: string;
-    enquiry: Enquiry;
+    inquiryId: string;
+    inquiry: Inquiry;
     constructor() {
         super();
     }
 }
 
 
-export class QuotationGeneral extends Extention {
-    enquiryGeneralId: string;
-    enquiryGeneral: EnquiryGeneral;
+export class QuotationGeneral extends Base {
+    inquiryGeneralId: string;
+    inquiryGeneral: InquiryGeneral;
     constructor() {
         super();
     }

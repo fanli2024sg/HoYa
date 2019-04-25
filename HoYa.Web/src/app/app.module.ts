@@ -24,7 +24,8 @@ import { AppInterface } from '../interfaces/app.interface';
     providers: [
         HttpService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-        { provide: AppInterface, useExisting: AppService }, AppService,
+        { provide: AppInterface, useExisting: AppService },
+        AppService,
         AuthService
     ],
     bootstrap: [AppComponent]

@@ -28,6 +28,8 @@ export class ProfilesService {
 
 
     archiveGroup(id: string, profileGroup: ProfileGroup) {
+        console.log(JSON.stringify(profileGroup));
+        debugger
         return this.httpService.update(`${this.api}/Groups/${id}`, profileGroup);
     }
 
@@ -45,5 +47,9 @@ export class ProfilesService {
 
     select(params: any, withRefresh: boolean): Observable<Profile[]> {
         return this.httpService.select<Profile[]>(`${this.api}`, params, withRefresh);
+    }
+
+    selectGroups(params: any, withRefresh: boolean): Observable<ProfileGroup[]> {
+        return this.httpService.select<ProfileGroup[]>(`${this.api}/Groups`, params, withRefresh);
     }
 }

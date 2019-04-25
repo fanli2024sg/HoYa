@@ -22,7 +22,7 @@
                 <mat-header-row *matHeaderRowDef="['ownerValue','value','more']"></mat-header-row>
                 <mat-row matRipple *matRowDef="let selectedStep; columns: ['ownerValue','value','more']"></mat-row>
             </mat-table>
-            <mat-paginator #stepsPaginator [length]="stepsPaginatorLengh" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+            <mat-paginator #stepsPaginator [length]="stepsPaginatorLength" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
             </mat-paginator>
         </mat-card-content>
     </mat-card>

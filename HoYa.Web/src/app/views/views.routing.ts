@@ -11,12 +11,12 @@ export const viewsRoutes: Routes = [
         children: [
             {
                 path: "",
-                redirectTo: "enquiries",
+                redirectTo: "inquiries",
                 pathMatch: "full"
             },
             {
-                path: "enquiries",
-                loadChildren: "./enquiries/enquiries.module#EnquiriesModule"
+                path: "inquiries",
+                loadChildren: "./inquiries/inquiries.module#InquiriesModule"
             },
             {
                 path: "profiles",

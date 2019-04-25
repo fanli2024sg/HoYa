@@ -75,11 +75,11 @@ export class ProfilesComponent implements OnInit {
         this.getProfiles();
 
     }
-
+    profileCreateDialog() {}
     getProfiles() {
         this.profilesService
             .filter({
-                anyLike: this.anyLike,
+                anyLike: this.appService.anyLike$.value,
                 pageIndex: this.currentPage.pageIndex + 1,
                 pageSize: this.currentPage.pageSize,
                 sortBy: this.currentSort.active,

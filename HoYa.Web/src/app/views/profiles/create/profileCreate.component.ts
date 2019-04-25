@@ -29,7 +29,7 @@ export class ProfileCreateComponent {
         this.profilesService.create(this.profile).subscribe((createdProfile: Profile) => {
 
 
-            this.matSnackBar.open(`${createdProfile.definition.surName}${createdProfile.definition.givenName}新增成功`, "萬德佛!ಥ◡ಥ", {
+            this.matSnackBar.open(`${createdProfile.definitionBranch.surName}${createdProfile.definitionBranch.givenName}新增成功`, "萬德佛!ಥ◡ಥ", {
                 duration: 5000,
             });
         }

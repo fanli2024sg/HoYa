@@ -18,6 +18,8 @@ export class GroupsService {
         return this.httpService.select<Group[]>(`${this.api}`, params, withRefresh);
     }
 
+   
+
     find(id: string) {
         return this.httpService.select(`${this.api}/${id}`);
     }

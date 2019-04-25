@@ -1,0 +1,17 @@
+<div fxLayout="row"
+     fxLayout.xs="column"
+     fxFlexFill>
+    <mat-card *ngIf="step" [class.mat-elevation-z8]="true" fxFlex> 
+        <mat-card-content>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>名稱</mat-label>
+                <input matInput placeholder="名稱" [(ngModel)]="step.value" disabled />
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions style="position: absolute; bottom: 20px; right: 20px" align="end">
+            <button mat-button color="primary" type="submit" (click)="save()"><mat-icon>check</mat-icon> 送出</button>
+            <button mat-button color="accent" type="submit" (click)="save()"><mat-icon>save_alt</mat-icon> 儲存</button>
+            <button mat-button color="warn" type="submit" [routerLink]="['/', 'views', 'steps']"><mat-icon>redo</mat-icon> 取消</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

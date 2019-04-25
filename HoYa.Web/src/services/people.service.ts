@@ -1,5 +1,8 @@
+import { Person } from "entities/person";
 import { Injectable } from "@angular/core";
 import { HttpService } from "services/http.service";
+import { Observable } from "rxjs";
+import { Query } from "models/query";
 
 @Injectable()
 export class PeopleService {
@@ -8,35 +11,19 @@ export class PeopleService {
         this.api = "api/People/";
     }
 
-    get() {
-        return this.httpService.select(this.api);
+    update(id: string, person: Person) {
+        return this.httpService.update(`${this.api}/${id}`, person);
     }
 
-    getBy(x: any) {
-        return this.httpService.select(this.api + "By?ParentId=" + x.parentId);
-    }
-
-    findByDocumentNo(documentNo: string) {
-        return this.httpService.select(this.api + "By?documentNo=" + documentNo);
-    }
-
-    findByEmployeeNo(employeeNo: string) {
-        return this.httpService.select(this.api + "By?employeeNo=" + employeeNo);
-    }
-
-    getOptions(x: any) {
-        return this.httpService.select(this.api +
-            "Option?typeId=e979aefd-385c-4445-9844-6e151ee141a1" +
-            "&anyLike=" + (x.anyLike ? x.anyLike : "") +
-            "&pageSize=200"
-        );
-    }
-
-    getById(id: string) {
-        return this.httpService.select(`${this.api}/${id}`);
+    create(person: Person) {
+        return this.httpService.create(this.api, person);
     }
 
     delete(id: string) {
         return this.httpService.delete(`${this.api}/${id}`);
+    }
+
+    select(params: any, withRefresh: boolean): Observable<Person[]> {
+        return this.httpService.select<Person[]>(`${this.api}`, params, withRefresh);
     }
 }

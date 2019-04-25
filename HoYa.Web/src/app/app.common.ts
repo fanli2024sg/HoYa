@@ -3,6 +3,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
+    MatChipsModule,
     MatIconModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -52,6 +53,7 @@ export const TW_FORMATS = {
 
 @NgModule({
     exports: [
+        MatChipsModule,
         MatNativeDateModule,
         MatSnackBarModule,
         FormsModule,

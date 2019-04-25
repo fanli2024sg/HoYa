@@ -16,18 +16,22 @@ namespace HoYa.Controllers
     {
         private HoYaContext db = new HoYaContext();
 
-        public IQueryable<Option> GetOptions()
+    
+      
+        public IQueryable<Option> GetOptions(
+         string anyLike = "",
+         Guid? parentId = null,
+
+         string sortBy = "",
+         string orderBy = "",
+         int? pageIndex = 1,
+         int? pageSize = 20
+     )
         {
-            return db.Options;
-        }
-        [Route("api/Options/By")]
-        [ResponseType(typeof(Option))]
-        public IQueryable<Option> GetOptionsByParentId(
-            Guid? parentId = null,
-            string anyLike = "")
-        {
-            return db.Options.Where(x => (x.ParentId == parentId || parentId == null) &&
-            ((x.Value + "(" + x.Code + ")").Contains(anyLike) || anyLike == null)).OrderBy(x => x.Code);
+            return db.Options.Where(x => ((x.Value.Contains(anyLike) || anyLike == null) ||
+                           (x.Code.Contains(anyLike) || anyLike == null)) &&
+                           (x.ParentId == parentId || parentId == null)
+                           );
         }
 
         [ResponseType(typeof(Option))]
@@ -43,7 +47,6 @@ namespace HoYa.Controllers
         {
             Option existedOption = await db.Options.FindAsync(id);
             option.Id = existedOption.Id;
-            option.UpdatedDate = DateTime.Now;
             db.Entry(existedOption).CurrentValues.SetValues(option);
             await db.SaveChangesAsync();
             await db.Entry(existedOption).GetDatabaseValuesAsync();

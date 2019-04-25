@@ -3,30 +3,29 @@ import { map } from "rxjs/operators";
 import { LoginModel, CurrentUserModel } from "models/login";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AppInterface } from "interfaces/app.interface";
 @Injectable()
 export class AuthService {
+    isLogin$ = new BehaviorSubject<boolean>(this.hasToken());
+    token$ = new BehaviorSubject<string>(localStorage.getItem("token"));
     userName: string;
     userId: string;
     profileValue: string;
-    host: string;
-    // store the URL so we can redirect after logging in
-    token: string;
+    host: string; 
     redirectUrl: string;
     loginModel: LoginModel;
 
     headers = new Headers();
-    constructor(private http: HttpClient) {
-        this.headers.append("View-Type", "application/x-www-form-urlencoded");
-        this.loginModel = new LoginModel();
-         //this.host = "http://118.163.183.248/hoya/";
-       this.host = "http://localhost:3001/";
-        this.userName = "";
-        this.userId = "";
-        this.profileValue = "";
+    constructor(private http: HttpClient,
+        private appInterface: AppInterface
+    ) {
     }
-   
+    private hasToken(): boolean {
+        return !!localStorage.getItem("token");
+    }
     isLoggedIn(): boolean {
-        
+        this.token$.next(localStorage.getItem("token"));
+        return this.isLogin$.value;/*
         if (localStorage.getItem("token")) {
             this.token = localStorage.getItem("token");
             return true;
@@ -34,20 +33,21 @@ export class AuthService {
         else {
             if (localStorage.getItem("ad")) return true;
             else return false;
-        }
+        }*/
     }
 
     ad() {
         localStorage.removeItem("ad");
         this.loginModel = new LoginModel();
-        return this.http.get(this.host + "api/Settings", { withCredentials: true }).pipe(
+        return this.http.get(`${this.appInterface.host$.getValue()}/api/Settings`, { withCredentials: true }).pipe(
             map((response2: Response) => {
-             /*   let setting = response2.json();
-                localStorage.setItem("ad", setting.ad);
-                this.userName = setting.ad;
-                this.userId = setting.profile.userId;
-                this.profileValue = setting.profile.value;
-              */  
+                /*   let setting = response2.json();
+                   localStorage.setItem("ad", setting.ad);
+                   this.userName = setting.ad;
+                   this.userId = setting.profile.userId;
+                   this.profileValue = setting.profile.value;
+                 */
+                this.isLogin$.next(true);
             }));
     }
 
@@ -57,11 +57,11 @@ export class AuthService {
         this.loginModel.userName = username;
         this.loginModel.password = password;
         console.log("login:" + username + "," + password);
-        return this.http.post(this.host + "auth/Login", this.loginModel).pipe(map((x: any) => {
+        return this.http.post(`${this.appInterface.host$.getValue()}/auth/Login`, this.loginModel).pipe(map((x: any) => {
             let user = x as CurrentUserModel;
-            this.token = user.token;
-            console.log(`new token is ${user.token}`);
+            this.token$.next(user.token);
             localStorage.setItem("token", user.token);
+            this.isLogin$.next(true);
         }));
     }
 
@@ -71,6 +71,7 @@ export class AuthService {
         this.userName = "";
         this.userId = "";
         this.profileValue = "";
+        this.isLogin$.next(false);
     }
-    
+
 }

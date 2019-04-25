@@ -1,0 +1,44 @@
+<!--<mat-toolbar>詢價列表</mat-toolbar>
+<mat-form-field style="margin: 20px; width:calc(100% - 160px)">
+    <input matInput #inquiryGeneralsFilter type="text" placeholder="搜尋">
+    <button mat-button *ngIf="anyLike" matSuffix mat-icon-button aria-label="Clear" (click)="anyLike=''">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>-->
+<button mat-raised-button color="primary" style="margin: 20px; width:100px" (click)="inquiryGeneralCreateDialog()">新增</button>
+<mat-table [dataSource]="inquiryGenerals" matSort #sortTable="matSort" (matSortChange)="changeSort($event)">
+    <ng-container matColumnDef="ownerNo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>單號</mat-header-cell>
+        <mat-cell *matCellDef="let inquiryGeneral">{{ inquiryGeneral.owner?.no }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="customerCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>客戶統編</mat-header-cell>
+        <mat-cell *matCellDef="let inquiryGeneral">{{ inquiryGeneral.customer?.code }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="customerValue">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>客戶名稱</mat-header-cell>
+        <mat-cell *matCellDef="let inquiryGeneral">{{ inquiryGeneral.customer?.value }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="contactOwnerValue">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>聯絡人</mat-header-cell>
+        <mat-cell *matCellDef="let inquiryGeneral">{{ inquiryGeneral.contact?.owner?.value }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="contactValue">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>聯絡方式</mat-header-cell>
+        <mat-cell *matCellDef="let inquiryGeneral">{{ inquiryGeneral.contact?.value }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="createdDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>建立日期</mat-header-cell>
+        <mat-cell *matCellDef="let inquiryGeneral">{{ inquiryGeneral.createdDate }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="more">
+        <mat-header-cell *matHeaderCellDef>更多</mat-header-cell>
+        <mat-cell *matCellDef="let inquiryGeneral">
+            <button mat-icon-button [routerLink]="['/', 'views', 'inquiries', 'generals', inquiryGeneral.id]"><mat-icon>chevron_right</mat-icon></button>
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="['ownerNo', 'customerCode','customerValue','contactOwnerValue', 'contactValue', 'createdDate', 'more']"></mat-header-row>
+    <mat-row matRipple *matRowDef="let selectedInquiryGeneral; columns: ['ownerNo', 'customerCode','customerValue', 'contactOwnerValue', 'contactValue', 'createdDate', 'more']"></mat-row>
+</mat-table>
+<mat-paginator #inquiryGeneralsPaginator [length]="inquiryGeneralsPaginatorLength" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+</mat-paginator>

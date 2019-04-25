@@ -8,15 +8,15 @@
             <mat-table [dataSource]="profiles" matSort #sortTable="matSort" (matSortChange)="changeSort($event)">
                 <ng-container matColumnDef="personTypeValue">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>類型</mat-header-cell>
-                    <mat-cell *matCellDef="let profile">{{ profile.definition?.type?.value }}</mat-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.type?.value }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="personCode">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>統編</mat-header-cell>
-                    <mat-cell *matCellDef="let profile">{{ profile.definition?.code }}</mat-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.definitionBranch?.code }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="personValue">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>名稱</mat-header-cell>
-                    <mat-cell *matCellDef="let profile">{{ profile.definition?.value }}</mat-cell>
+                    <mat-cell *matCellDef="let profile">{{ profile.definitionBranch?.value }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="profileValue">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>帳號</mat-header-cell>
