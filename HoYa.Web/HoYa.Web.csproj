@@ -160,10 +160,7 @@
     <Content Include="src\manifest.json" />
     <Content Include="src\ngsw-config.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\directives\" />
-    <Folder Include="src\pipes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="src\entities\inquiry.ts" />
     <TypeScriptCompile Include="src\entities\group.ts" />
@@ -197,7 +194,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties package_1json__JSONSchema="" angular_1json__JSONSchema="" />
+      <UserProperties angular_1json__JSONSchema="" package_1json__JSONSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
