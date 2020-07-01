@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{6B67CA36-A364-4A6F-BFD1-313418248916}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <TypeScriptBuildMode>true</TypeScriptBuildMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\%40components\inventory\confirm\component.css" />
+    <Content Include="src\%40components\inventory\confirm\component.html" />
+    <Content Include="src\%40components\inventory\no\component.css" />
+    <Content Include="src\%40components\inventory\no\component.html" />
+    <Content Include="src\%40components\inventory\putdown\inventory.putdown.component.css" />
+    <Content Include="src\%40components\inventory\putdown\inventory.putdown.component.html" />
+    <Content Include="src\%40components\inventory\value\component.css" />
+    <Content Include="src\%40components\inventory\value\component.html" />
+    <Content Include="src\%40components\option\code\component.css" />
+    <Content Include="src\%40components\option\code\component.html" />
+    <Content Include="src\%40components\option\value\component.css" />
+    <Content Include="src\%40components\option\value\component.html" />
+    <TypeScriptCompile Include="src\%40actions\attributes\checkbox\templete\attributes.checkbox.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\attribute\entities\attribute.entities.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\categoryAttributes\list\templete\categoryAttributes.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\category\view\page\category.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\inventory\edit\templete\inventory.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\categoryAttribute\edit\templete\categoryAttribute.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\qrcode.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\recipe\edit\templete\recipe.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\workOrder\edit\templete\workOrder.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\workOrder\index.ts" />
+    <TypeScriptCompile Include="src\%40actions\workOrder\view\page\workOrder.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\workOrders\list\templete\workOrders.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\workOrders\view\page\workOrders.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\workOrderEvent\edit\templete\workOrderEvent.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\workOrderEvents\list\templete\workOrderEvents.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\relationshipTargets\list\templete\relationshipTargets.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\inventoryAttribute\edit\templete\inventoryAttribute.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\inventory\view\guard\inventory.view.guard.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\relationshipTarget\edit\templete\relationshipTarget.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\relationshipTarget\index.ts" />
+    <TypeScriptCompile Include="src\%40actions\profile\index.ts" />
+    <TypeScriptCompile Include="src\%40actions\profile\view\page\profile.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\recipe\index.ts" />
+    <TypeScriptCompile Include="src\%40actions\recipe\view\page\recipe.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\itemAttribute\edit\templete\itemAttribute.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\inventoryAttributes\list\templete\inventoryAttributes.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\itemAttributes\list\templete\itemAttributes.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\recipes\list\templete\recipes.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\recipes\view\page\recipes.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\item\view\guard\item.view.guard.actions.ts" />
+    <TypeScriptCompile Include="src\%40components\loading\loading.component.ts" />
+    <TypeScriptCompile Include="src\%40components\scrollTop\scrollTop.component.ts" />
+    <TypeScriptCompile Include="src\%40directives\loadMore.directive.ts" />
+    <TypeScriptCompile Include="src\%40directives\lazyLoad.directive.ts" />
+    <Content Include="src\%40components\loading\loading.component.css" />
+    <Content Include="src\%40components\loading\loading.component.html" />
+    <Content Include="src\%40components\scrollTop\scrollTop.component.css" />
+    <Content Include="src\%40components\scrollTop\scrollTop.component.html" />
+    <Content Include="src\%40pages\workOrder\view\workOrder.view.page.css" />
+    <Content Include="src\%40pages\workOrder\view\workOrder.view.page.html" />
+    <Content Include="src\%40pages\workOrders\view\workOrders.view.page.css" />
+    <Content Include="src\%40pages\workOrders\view\workOrders.view.page.html" />
+    <Content Include="src\%40pages\recipe\view\recipe.view.page.css" />
+    <Content Include="src\%40pages\recipe\view\recipe.view.page.html" />
+    <Content Include="src\%40pages\recipes\view\recipes.view.page.css" />
+    <Content Include="src\%40pages\recipes\view\recipes.view.page.html" />
+    <Content Include="src\%40templetes\inventoryAttributes\list\inventoryAttributes.list.templete.css" />
+    <Content Include="src\%40templetes\inventoryAttributes\list\inventoryAttributes.list.templete.html" />
+    <Content Include="src\%40templetes\inventoryAttribute\edit\inventoryAttribute.edit.templete.css" />
+    <Content Include="src\%40templetes\inventoryAttribute\edit\inventoryAttribute.edit.templete.html" />
+    <Content Include="src\%40templetes\inventory\edit\inventory.edit.templete.css" />
+    <Content Include="src\%40templetes\inventory\edit\inventory.edit.templete.html" />
+    <Content Include="src\%40templetes\categoryAttribute\edit\categoryAttribute.edit.templete.css" />
+    <Content Include="src\%40templetes\categoryAttribute\edit\categoryAttribute.edit.templete.html" />
+    <Content Include="src\%40templetes\categoryAttributes\list\categoryAttributes.list.templete.css" />
+    <Content Include="src\%40templetes\categoryAttributes\list\categoryAttributes.list.templete.html" />
+    <Content Include="src\%40templetes\item\edit\item.edit.templete.css" />
+    <Content Include="src\%40templetes\item\edit\item.edit.templete.html" />
+    <Content Include="src\%40templetes\recipe\edit\recipe.edit.templete.css" />
+    <Content Include="src\%40templetes\recipe\edit\recipe.edit.templete.html" />
+    <Content Include="src\%40templetes\workOrderEvents\list\workOrderEvents.list.templete.css" />
+    <Content Include="src\%40templetes\workOrderEvents\list\workOrderEvents.list.templete.html" />
+    <Content Include="src\%40templetes\workOrderEvent\edit\workOrderEvent.edit.templete.css" />
+    <Content Include="src\%40templetes\workOrderEvent\edit\workOrderEvent.edit.templete.html" />
+    <Content Include="src\%40templetes\workOrders\list\workOrders.list.templete.css" />
+    <Content Include="src\%40templetes\workOrders\list\workOrders.list.templete.html" />
+    <Content Include="src\%40templetes\recipes\list\recipes.list.templete.css" />
+    <Content Include="src\%40templetes\recipes\list\recipes.list.templete.html" />
+    <Content Include="src\%40templetes\itemAttribute\edit\itemAttribute.edit.templete.css" />
+    <Content Include="src\%40templetes\itemAttribute\edit\itemAttribute.edit.templete.html" />
+    <Content Include="src\%40templetes\inventories\list\inventories.list.templete.css" />
+    <Content Include="src\%40templetes\inventories\list\inventories.list.templete.html" />
+    <Content Include="src\%40templetes\itemAttributes\list\itemAttributes.list.templete.css" />
+    <Content Include="src\%40templetes\itemAttributes\list\itemAttributes.list.templete.html" />
+    <Content Include="src\%40templetes\attributes\checkbox\attributes.checkbox.templete.css" />
+    <Content Include="src\%40templetes\attributes\checkbox\attributes.checkbox.templete.html" />
+    <Content Include="src\%40templetes\items\list\items.list.templete.css" />
+    <Content Include="src\%40templetes\items\list\items.list.templete.html" />
+    <Content Include="src\%40pages\activities\activities.component.css" />
+    <Content Include="src\%40pages\activities\activities.component.html" />
+    <Content Include="src\%40pages\attribute\view\attribute.view.page.css" />
+    <Content Include="src\%40pages\attribute\view\attribute.view.page.html" />
+    <Content Include="src\%40pages\category\view\category.view.page.css" />
+    <Content Include="src\%40pages\category\view\category.view.page.html" />
+    <Content Include="src\%40components\item\description\item.description.component.css" />
+    <Content Include="src\%40components\item\description\item.description.component.html" />
+    <Content Include="src\%40templetes\relationshipTargets\list\relationshipTargets.list.templete.css" />
+    <Content Include="src\%40templetes\relationshipTargets\list\relationshipTargets.list.templete.html" />
+    <Content Include="src\%40templetes\relationshipTarget\edit\relationshipTarget.edit.templete.css" />
+    <Content Include="src\%40templetes\relationshipTarget\edit\relationshipTarget.edit.templete.html" />
+    <Content Include="src\%40templetes\workOrder\edit\workOrder.edit.templete.css" />
+    <Content Include="src\%40templetes\workOrder\edit\workOrder.edit.templete.html" />
+    <Content Include="src\assets\ED5565.png" />
+    <Content Include="src\assets\gray.png" />
+    <Content Include="src\%40pages\invoices\view\invoices.view.page.css" />
+    <Content Include="src\%40pages\invoices\view\invoices.view.page.html" />
+    <Content Include="src\%40pages\items\view\items.view.page.css" />
+    <Content Include="src\%40pages\items\view\items.view.page.html" />
+    <Content Include="src\%40pages\profile\view\profile.view.component.css" />
+    <Content Include="src\%40pages\profile\view\profile.view.component.html" />
+    <Content Include="src\app\notFound\notFound.component.css" />
+    <Content Include="src\app\notFound\notFound.component.html" />
+    <Content Include="src\%40pages\inventory\view\inventory.view.page.css" />
+    <Content Include="src\%40pages\inventory\view\inventory.view.page.html" />
+    <Content Include="src\%40pages\inventory\edit\inventory.edit.page.css" />
+    <Content Include="src\%40pages\inventory\edit\inventory.edit.page.html" />
+    <Content Include="src\%40pages\search\search.component.css" />
+    <Content Include="src\%40pages\search\search.component.html" />
+    <Content Include="src\%40pages\wallet\wallet.component.css" />
+    <Content Include="src\%40pages\wallet\wallet.component.html" />
+    <Content Include="src\%40components\item\value\item.value.component.css" />
+    <Content Include="src\%40components\item\value\item.value.component.html" />
+    <Content Include="src\%40components\item\code\item.code.component.css" />
+    <Content Include="src\%40components\item\code\item.code.component.html" />
+    <Content Include="src\%40pages\item\edit\item.edit.page.css" />
+    <Content Include="src\%40pages\item\edit\item.edit.page.html" />
+    <Content Include="src\%40pages\inventories\pickup\page.css" />
+    <Content Include="src\%40pages\inventories\pickup\page.html" />
+    <Content Include="src\%40pages\item\view\item.view.page.css" />
+    <Content Include="src\%40pages\item\view\item.view.page.html" />
+    <Content Include="src\%40pages\options\units\units.component.css" />
+    <Content Include="src\%40pages\options\units\units.component.html" />
+    <Content Include="src\%40components\qrcode\qrcode.component.css" />
+    <Content Include="src\%40components\qrcode\qrcode.component.html" />
+    <Content Include="src\%40components\qrcode\reader\qrcodeReader.component.css" />
+    <Content Include="src\%40components\qrcode\reader\qrcodeReader.component.html" />
+    <Content Include="src\%40pages\home\home.component.css" />
+    <Content Include="src\%40pages\home\home.component.html" />
+    <Content Include="src\app\print\print.component.css" />
+    <Content Include="src\app\print\print.component.html" />
+    <Content Include="src\assets\14e9320cf58d.png" />
+    <Content Include="src\assets\4afb202ccaaf.png" />
+    <Content Include="src\app\bottomAction\bottomAction.component.css" />
+    <Content Include="src\app\bottomAction\bottomAction.component.html" />
+    <Content Include="src\app\top\top.component.css" />
+    <Content Include="src\app\top\top.component.html" />
+    <Content Include="src\app\officeHeader\officeHeader.component.css" />
+    <Content Include="src\app\officeHeader\officeHeader.component.html" />
+    <Content Include="src\app\presentation\presentation.component.css" />
+    <Content Include="src\app\presentation\presentation.component.html" />
+    <Content Include="src\app\officeFooter\officeFooter.component.css" />
+    <Content Include="src\app\officeFooter\officeFooter.component.html" />
+    <Content Include="src\app\bottomNav\bottomNav.component.css" />
+    <Content Include="src\app\bottomNav\bottomNav.component.html" />
+    <TypeScriptCompile Include="src\%40components\components.module.ts" />
+    <TypeScriptCompile Include="src\%40components\inventory\module.ts" />
+    <TypeScriptCompile Include="src\%40components\inventory\confirm\component.ts" />
+    <TypeScriptCompile Include="src\%40components\inventory\no\component.ts" />
+    <TypeScriptCompile Include="src\%40components\inventory\putdown\inventory.putdown.component.ts" />
+    <TypeScriptCompile Include="src\%40components\inventory\value\component.ts" />
+    <TypeScriptCompile Include="src\%40components\item\item.components.module.ts" />
+    <TypeScriptCompile Include="src\%40components\option\code\component.ts" />
+    <TypeScriptCompile Include="src\%40components\option\value\component.ts" />
+    <TypeScriptCompile Include="src\%40components\option\module.ts" />
+    <TypeScriptCompile Include="src\%40directives\module.ts" />
+    <TypeScriptCompile Include="src\%40effects\attributes\checkbox\templete\attributes.checkbox.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\attribute\index.ts" />
+    <TypeScriptCompile Include="src\%40effects\inventory\edit\templete\inventory.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\categoryAttribute\edit\templete\categoryAttribute.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\item\edit\templete\item.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\recipe\edit\templete\recipe.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\workOrder\edit\templete\workOrder.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\workOrder\index.ts" />
+    <TypeScriptCompile Include="src\%40effects\workOrder\view\page\workOrder.view.page.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\workOrders\list\templete\workOrders.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\workOrderEvent\edit\templete\workOrderEvent.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\workOrderEvents\list\templete\workOrderEvents.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\relationshipTarget\edit\templete\relationshipTarget.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\relationshipTarget\index.ts" />
+    <TypeScriptCompile Include="src\%40effects\relationshipTargets\list\templete\relationshipTargets.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\inventoryAttribute\edit\templete\itemAttribute.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\profile\index.ts" />
+    <TypeScriptCompile Include="src\%40effects\profile\view\page\profile.view.page.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\recipe\index.ts" />
+    <TypeScriptCompile Include="src\%40effects\recipe\view\page\recipe.view.page.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\itemAttribute\edit\templete\itemAttribute.edit.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\category\index.ts" />
+    <TypeScriptCompile Include="src\%40effects\categoryAttributes\list\templete\categoryAttributes.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\category\view\page\category.view.page.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\inventory\view\page\inventory.view.page.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\inventory\index.ts" />
+    <TypeScriptCompile Include="src\%40effects\inventories\list\templete\inventories.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\inventoryAttributes\list\templete\inventoryAttributes.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\recipes\list\templete\recipes.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\item\index.ts" />
+    <TypeScriptCompile Include="src\%40effects\itemAttributes\list\templete\itemAttributes.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40effects\item\view\page\item.view.page.effects.ts" />
+    <TypeScriptCompile Include="src\%40entities\attribute.ts" />
+    <TypeScriptCompile Include="src\%40entities\category.ts" />
+    <TypeScriptCompile Include="src\%40entities\item.ts" />
+    <TypeScriptCompile Include="src\%40guards\canDeactivate.guard.ts" />
+    <TypeScriptCompile Include="src\%40models\app.model.ts" />
+    <TypeScriptCompile Include="src\%40models\attribute.ts" />
+    <TypeScriptCompile Include="src\%40models\inventory.ts" />
+    <TypeScriptCompile Include="src\%40models\item.ts" />
+    <TypeScriptCompile Include="src\%40models\category.ts" />
+    <TypeScriptCompile Include="src\%40pages\workOrder\view\workOrder.view.page.ts" />
+    <TypeScriptCompile Include="src\%40pages\workOrder\workOrder.pages.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\workOrder\workOrder.pages.routing.ts" />
+    <TypeScriptCompile Include="src\%40pages\workOrders\view\workOrders.view.page.ts" />
+    <TypeScriptCompile Include="src\%40pages\recipe\view\recipe.view.page.ts" />
+    <TypeScriptCompile Include="src\%40pages\recipes\view\recipes.view.page.ts" />
+    <TypeScriptCompile Include="src\%40reducers\attributes\checkobx\templete\attributes.checkbox.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\categoryAttribute\edit\templete\categoryAttribute.edit.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\inventory\edit\templete\inventory.edit.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\item\edit\templete\item.edit.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\qrcode.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\recipe\edit\templete\recipe.edit.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\workOrder\edit\templete\workOrder.edit.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\workOrder\entities\workOrder.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\workOrder\index.ts" />
+    <TypeScriptCompile Include="src\%40reducers\workOrder\view\page\workOrder.view.page.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\workOrders\list\templete\workOrders.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\workOrderEvent\edit\templete\workOrderEvent.edit.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\workOrderEvent\entities\workOrderEvent.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\workOrderEvents\list\templete\workOrderEvents.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\relationshipTargets\list\templete\relationshipTargets.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\relationshipTarget\edit\templete\relationshipTarget.edit.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\relationshipTarget\entities\relationshipTarget.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\relationshipTarget\index.ts" />
+    <TypeScriptCompile Include="src\%40reducers\profile\index.ts" />
+    <TypeScriptCompile Include="src\%40reducers\profile\view\page\profile.view.page.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\recipe\entities\recipe.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\recipe\index.ts" />
+    <TypeScriptCompile Include="src\%40reducers\recipe\view\page\recipe.view.page.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\itemAttribute\edit\templete\itemAttribute.edit.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\itemAttribute\entities\itemAttribute.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\inventoryAttribute\entities\inventoryAttribute.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\categoryAttributes\list\templete\categoryAttributes.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\categoryAttribute\entities\categoryAttribute.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\category\view\page\category.view.page.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\inventoryAttributes\list\templete\inventoryAttributes.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\itemAttributes\list\templete\itemAttributes.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\recipes\list\templete\recipes.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40services\attributes.service.ts" />
+    <TypeScriptCompile Include="src\%40services\dialog.service.ts" />
+    <TypeScriptCompile Include="src\%40services\inventoryAttributes.service.ts" />
+    <TypeScriptCompile Include="src\%40services\categoryAttributes.service.ts" />
+    <TypeScriptCompile Include="src\%40services\itemAttributes.service.ts" />
+    <TypeScriptCompile Include="src\%40services\positions.service.ts" />
+    <TypeScriptCompile Include="src\%40services\segmentations.service.ts" />
+    <TypeScriptCompile Include="src\%40services\search.service.ts" />
+    <TypeScriptCompile Include="src\%40templetes\attribute\attribute.templetes.module.ts" />
+    <TypeScriptCompile Include="src\%40templetes\inventory\edit\inventory.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\categoryAttribute\edit\categoryAttribute.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\categoryAttributes\list\categoryAttributes.list.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\category\category.templetes.module.ts" />
+    <TypeScriptCompile Include="src\%40templetes\recipe\edit\recipe.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\workOrderEvents\list\workOrderEvents.list.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\workOrderEvent\edit\workOrderEvent.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\workOrder\edit\workOrder.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\workOrder\workOrder.templetes.module.ts" />
+    <TypeScriptCompile Include="src\%40templetes\workOrders\list\workOrders.list.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\templetes.module.ts" />
+    <TypeScriptCompile Include="src\%40templetes\item\edit\item.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\relationshipTarget\edit\relationshipTarget.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\relationshipTarget\relationshipTarget.templetes.module.ts" />
+    <TypeScriptCompile Include="src\%40templetes\inventoryAttributes\list\inventoryAttributes.list.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\inventoryAttribute\edit\inventoryAttribute.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\recipe\recipe.templetes.module.ts" />
+    <TypeScriptCompile Include="src\%40templetes\recipes\list\recipes.list.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\itemAttribute\edit\itemAttribute.edit.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\inventories\list\inventories.list.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\inventory\inventory.templetes.module.ts" />
+    <TypeScriptCompile Include="src\%40templetes\itemAttributes\list\itemAttributes.list.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\attributes\checkbox\attributes.checkbox.templete.ts" />
+    <TypeScriptCompile Include="src\%40templetes\item\item.templetes.module.ts" />
+    <TypeScriptCompile Include="src\%40templetes\items\list\items.list.templete.ts" />
+    <TypeScriptCompile Include="src\%40pages\activities\activities.component.ts" />
+    <TypeScriptCompile Include="src\%40actions\attribute\index.ts" />
+    <TypeScriptCompile Include="src\%40pages\attribute\attribute.pages.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\attribute\attribute.pages.routing.ts" />
+    <TypeScriptCompile Include="src\%40pages\attribute\view\attribute.view.page.ts" />
+    <TypeScriptCompile Include="src\%40reducers\attribute\entities\attribute.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\attribute\index.ts" />
+    <TypeScriptCompile Include="src\%40actions\category\index.ts" />
+    <TypeScriptCompile Include="src\%40pages\category\view\category.view.page.ts" />
+    <TypeScriptCompile Include="src\%40pages\category\category.pages.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\category\category.pages.routing.ts" />
+    <TypeScriptCompile Include="src\%40components\item\description\item.description.component.ts" />
+    <TypeScriptCompile Include="src\%40reducers\category\index.ts" />
+    <TypeScriptCompile Include="src\%40reducers\category\entities\category.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40actions\inventory\index.ts" />
+    <TypeScriptCompile Include="src\%40actions\inventory\edit\page\inventory.edit.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\inventory\view\page\inventory.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\inventories\list\templete\inventories.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40reducers\inventories\list\templete\inventories.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\inventory\index.ts" />
+    <TypeScriptCompile Include="src\%40reducers\inventory\entities\inventory.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\inventory\view\page\inventory.view.page.reducer.ts" />
+    <TypeScriptCompile Include="src\%40pages\invoice\invoice.pages.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\invoice\invoice.pages.routing.ts" />
+    <TypeScriptCompile Include="src\%40pages\invoices\view\invoices.view.page.ts" />
+    <TypeScriptCompile Include="src\%40actions\item\index.ts" />
+    <TypeScriptCompile Include="src\%40actions\items\list\templete\items.list.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\item\edit\templete\item.edit.templete.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\item\view\page\item.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\items\view\page\items.view.page.actions.ts" />
+    <TypeScriptCompile Include="src\%40effects\items\list\templete\items.list.templete.effects.ts" />
+    <TypeScriptCompile Include="src\%40reducers\item\index.ts" />
+    <TypeScriptCompile Include="src\%40reducers\item\entities\item.entities.reducer.ts" />
+    <TypeScriptCompile Include="src\%40pages\items\view\items.view.page.ts" />
+    <TypeScriptCompile Include="src\%40reducers\item\view\page\item.view.page.reducer.ts" />
+    <TypeScriptCompile Include="src\%40reducers\items\list\templete\items.list.templete.reducer.ts" />
+    <TypeScriptCompile Include="src\%40pages\profile\view\profile.view.component.ts" />
+    <TypeScriptCompile Include="src\%40pages\profile\profile.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\profile\profile.routing.ts" />
+    <TypeScriptCompile Include="src\%40templetes\relationshipTargets\list\relationshipTargets.list.templete.ts" />
+    <TypeScriptCompile Include="src\app\auth\actions\auth-api.actions.ts" />
+    <TypeScriptCompile Include="src\app\auth\actions\auth.actions.ts" />
+    <TypeScriptCompile Include="src\app\auth\actions\index.ts" />
+    <TypeScriptCompile Include="src\app\auth\actions\login-page.actions.ts" />
+    <TypeScriptCompile Include="src\app\auth\models\index.ts" />
+    <TypeScriptCompile Include="src\app\auth\models\user.ts" />
+    <TypeScriptCompile Include="src\%40actions\index.ts" />
+    <TypeScriptCompile Include="src\%40actions\layout.actions.ts" />
+    <TypeScriptCompile Include="src\%40actions\user.actions.ts" />
+    <TypeScriptCompile Include="src\%40effects\router.effects.ts" />
+    <TypeScriptCompile Include="src\app\core\index.ts" />
+    <TypeScriptCompile Include="src\%40reducers\layout.reducer.ts" />
+    <TypeScriptCompile Include="src\app\notFound\notFound.component.ts" />
+    <TypeScriptCompile Include="src\%40pages\inventory\view\inventory.view.page.ts" />
+    <TypeScriptCompile Include="src\%40pages\inventory\edit\inventory.edit.page.ts" />
+    <TypeScriptCompile Include="src\%40pages\search\search.component.ts" />
+    <TypeScriptCompile Include="src\%40pages\search\search.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\search\search.routing.ts" />
+    <TypeScriptCompile Include="src\%40pages\wallet\wallet.component.ts" />
+    <TypeScriptCompile Include="src\%40pages\wallet\wallet.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\wallet\wallet.routing.ts" />
+    <TypeScriptCompile Include="src\%40pages\home\home.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\home\home.routing.ts" />
+    <TypeScriptCompile Include="src\%40pages\inventory\inventory.pages.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\inventory\inventory.pages.routing.ts" />
+    <TypeScriptCompile Include="src\%40components\item\value\item.value.component.ts" />
+    <TypeScriptCompile Include="src\%40components\item\code\item.code.component.ts" />
+    <TypeScriptCompile Include="src\%40pages\item\edit\item.edit.page.ts" />
+    <TypeScriptCompile Include="src\%40pages\inventories\pickup\page.ts" />
+    <TypeScriptCompile Include="src\%40pages\recipes\recipes.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\recipes\recipes.routing.ts" />
+    <TypeScriptCompile Include="src\%40pages\item\view\item.view.page.ts" />
+    <TypeScriptCompile Include="src\%40pages\item\item.pages.module.ts" />
+    <TypeScriptCompile Include="src\%40pages\item\item.pages.routing.ts" />
+    <TypeScriptCompile Include="src\%40pages\options\units\units.component.ts" />
+    <TypeScriptCompile Include="src\%40components\qrcode\qrcode.component.ts" />
+    <TypeScriptCompile Include="src\%40components\qrcode\reader\qrcodeReader.component.ts" />
+    <TypeScriptCompile Include="src\%40pages\home\home.component.ts" />
+    <TypeScriptCompile Include="src\app\bottomAction\bottomAction.component.ts" />
+    <TypeScriptCompile Include="src\%40actions\presentation.actions.ts" />
+    <TypeScriptCompile Include="src\%40effects\presentation.effects.ts" />
+    <TypeScriptCompile Include="src\%40reducers\presentation.reducer.ts" />
+    <TypeScriptCompile Include="src\app\print\print.component.ts" />
+    <TypeScriptCompile Include="src\%40reducers\index.ts" />
+    <TypeScriptCompile Include="src\app\top\top.component.ts" />
+    <TypeScriptCompile Include="src\app\officeHeader\officeHeader.component.ts" />
+    <TypeScriptCompile Include="src\app\presentation\presentation.component.ts" />
+    <TypeScriptCompile Include="src\app\officeFooter\officeFooter.component.ts" />
+    <TypeScriptCompile Include="src\app\bottomNav\bottomNav.component.ts" />
+    <TypeScriptCompile Include="src\%40services\dynamicComponent.service.ts" />
+    <Content Include="src\assets\04482f505972.png" />
+    <Content Include="src\assets\0f958af901cb.png" />
+    <Content Include="src\assets\193449797d0d.png" />
+    <Content Include="src\assets\24b85a13663c.png" />
+    <Content Include="src\assets\3be21f338c88.png" />
+    <Content Include="src\assets\4800bc114a3a.png" />
+    <Content Include="src\assets\4bbb2e7b5b0d.png" />
+    <Content Include="src\assets\4f48d3d2062b.png" />
+    <Content Include="src\assets\579faf858de0.png" />
+    <Content Include="src\assets\5a5406b44975.png" />
+    <Content Include="src\assets\65c15d7731ea.png" />
+    <Content Include="src\assets\69c195e9ff3c.png" />
+    <Content Include="src\assets\6ba81dcece9b.png" />
+    <Content Include="src\assets\6dcf43711634.png" />
+    <Content Include="src\assets\839e62b1415f.png" />
+    <Content Include="src\assets\90d41aa74a11.png" />
+    <Content Include="src\assets\995e9bcf0ba7.png" />
+    <Content Include="src\assets\995ea10178c7.png" />
+    <Content Include="src\assets\9d6489001756.png" />
+    <Content Include="src\assets\a88c2e6fc4cc.png" />
+    <Content Include="src\assets\a9df6b08a8a2.png" />
+    <Content Include="src\assets\aaaaaa.jpg" />
+    <Content Include="src\assets\ad1ddfdf73c7.png" />
+    <Content Include="src\assets\b20f2a3cd7e4.png" />
+    <Content Include="src\assets\bbbbbb.jpg" />
+    <Content Include="src\assets\hhhhhh.png" />
+    <Content Include="src\assets\icons\icon-128x128.png" />
+    <Content Include="src\assets\icons\icon-144x144.png" />
+    <Content Include="src\assets\icons\icon-152x152.png" />
+    <Content Include="src\assets\icons\icon-167x167.png" />
+    <Content Include="src\assets\icons\icon-180x180.png" />
+    <Content Include="src\assets\icons\icon-192x192.png" />
+    <Content Include="src\assets\icons\icon-384x384.png" />
+    <Content Include="src\assets\icons\icon-512x512.png" />
+    <Content Include="src\assets\icons\icon-72x72.png" />
+    <Content Include="src\assets\icons\icon-96x96.png" />
+    <Content Include="src\assets\1AB394.png" />
+    <Content Include="src\assets\F8AC59.png" />
+    <Content Include="src\assets\lists.png" />
+    <Content Include="src\assets\defaultPerson.jpg" />
+    <Content Include="src\assets\logodrp.png" />
+    <Content Include="src\assets\logogy.png" />
+    <Content Include="src\assets\logoy.png" />
+    <Content Include="src\assets\qrcode.png" />
+    <Content Include="src\assets\scan.png" />
+    <Content Include="src\assets\cccccc.jpg" />
+    <Content Include="src\assets\dddddd.jpg" />
+    <Content Include="src\assets\default.png" />
+    <Content Include="src\assets\e49a4be5d53e.png" />
+    <Content Include="src\assets\e90bd586abaf.png" />
+    <Content Include="src\assets\eeeeee.jpg" />
+    <Content Include="src\assets\f1632e84ebf8.png" />
+    <Content Include="src\app\app.component.css" />
+    <Content Include="src\app\login\login.component.css" />
+    <Content Include="src\assets\ff60b6c57870.png" />
+    <Content Include="src\assets\ffffff.jpg" />
+    <Content Include="src\assets\gggggg.jpg" />
+    <Content Include="src\assets\images\angular_solidBlack.svg" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\login\login.component.html" />
+    <TypeScriptCompile Include="src\app\app.routing.ts" />
+    <TypeScriptCompile Include="src\%40interceptors\auth.interceptor.ts" />
+    <TypeScriptCompile Include="src\%40guards\auth.guard.ts" />
+    <Content Include="src\assets\LOGO_103_29.png" />
+    <Content Include="src\assets\LOGO_175_51.png" />
+    <Content Include="src\assets\LOGO_25_25.png" />
+    <Content Include="src\assets\LOGO_480_140.png" />
+    <Content Include="src\assets\notyet.png" />
+    <Content Include="src\assets\plus.png" />
+    <Content Include="src\assets\noPhoto.png" />
+    <Content Include="src\assets\white.png" />
+    <Content Include="src\heap.js" />
+    <Content Include="src\main.css" />
+    <Content Include="src\list.css" />
+    <Content Include="src\popup.css" />
+    <Content Include="src\index.html" />
+    <Content Include="src\felixSprite.css" />
+    <Content Include="src\IGCoreSpinner.css" />
+    <Content Include="src\coreSprite.css" />
+    <Content Include="src\glyphsSprite.css" />
+    <Content Include="src\mediatypesSprite.css" />
+    <Content Include="src\karma.conf.js" />
+    <TypeScriptCompile Include="src\%40models\icon.ts" />
+    <TypeScriptCompile Include="src\%40models\setting.ts" />
+    <Content Include="src\items.css" />
+    <Content Include="src\createMobile.css" />
+    <Content Include="src\styles.css" />
+    <TypeScriptCompile Include="src\app\core\core.module.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\%40interfaces\app.interface.ts" />
+    <TypeScriptCompile Include="src\%40pipes\equal.pipe.ts" />
+    <TypeScriptCompile Include="src\%40pipes\highLight.pipe.ts" />
+    <TypeScriptCompile Include="src\%40pipes\like.pipe.ts" />
+    <TypeScriptCompile Include="src\%40pipes\notIn.pipe.ts" />
+    <TypeScriptCompile Include="src\%40pipes\orderBy.pipe.ts" />
+    <TypeScriptCompile Include="src\%40pipes\ago.pipe.ts" />
+    <TypeScriptCompile Include="src\%40pipes\pipes.module.ts" />
+    <TypeScriptCompile Include="src\%40services\redirects.service.ts" />
+    <TypeScriptCompile Include="src\%40services\redirectConditions.service.ts" />
+    <TypeScriptCompile Include="src\%40services\judgments.service.ts" />
+    <TypeScriptCompile Include="src\%40services\participates.service.ts" />
+    <TypeScriptCompile Include="src\%40services\app.service.ts" />
+    <TypeScriptCompile Include="src\%40services\http.service.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\login\login.module.ts" />
+    <TypeScriptCompile Include="src\app\login\login.routing.ts" />
+    <TypeScriptCompile Include="src\%40entities\identity.ts" />
+    <TypeScriptCompile Include="src\%40entities\workflow.ts" />
+    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="src\environments\environment.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\%40models\query.ts" />
+    <TypeScriptCompile Include="src\%40models\login.ts" />
+    <TypeScriptCompile Include="src\%40entities\entity.ts" />
+    <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\%40services\inventories.service.ts" />
+    <TypeScriptCompile Include="src\%40services\categories.service.ts" />
+    <TypeScriptCompile Include="src\%40services\itemCategories.service.ts" />
+    <TypeScriptCompile Include="src\%40services\items.service.ts" />
+    <TypeScriptCompile Include="src\%40services\workflows.service.ts" />
+    <TypeScriptCompile Include="src\%40services\steps.service.ts" />
+    <TypeScriptCompile Include="src\%40services\settings.service.ts" />
+    <TypeScriptCompile Include="src\%40services\processes.service.ts" />
+    <TypeScriptCompile Include="src\%40services\groups.service.ts" />
+    <TypeScriptCompile Include="src\%40services\files.service.ts" />
+    <TypeScriptCompile Include="src\%40services\folderFiles.service.ts" />
+    <TypeScriptCompile Include="src\%40services\options.service.ts" />
+    <TypeScriptCompile Include="src\%40services\activities.service.ts" />
+    <TypeScriptCompile Include="src\test.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include="src\StyleSheet2.css" />
+    <Content Include="src\view.css" />
+    <Content Include="tsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="tslint.json" />
+    <Content Include="angular.json" />
+    <Content Include="src\tsconfig.app.json" />
+    <Content Include="src\tsconfig.spec.json" />
+    <Content Include="src\tslint.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\%40entities\group.ts" />
+    <TypeScriptCompile Include="src\%40entities\inventory.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\%40models\entity.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\%40effects\categories\" />
+    <Folder Include="src\%40pages\attributes\" />
+    <Folder Include="src\%40pages\categories\" />
+    <Folder Include="src\%40reducers\categories\" />
+    <Folder Include="src\app\core\actions\" />
+    <Folder Include="src\app\core\effects\" />
+    <Folder Include="src\app\core\reducers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ngsw-config.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\manifest.webmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\manifest.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package-lock.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>RichEasy.Web</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>62270</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62270/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties angular_1json__JSONSchema="" package_1json__JSONSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>
