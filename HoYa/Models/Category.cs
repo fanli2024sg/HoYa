@@ -10,7 +10,7 @@ namespace HoYa.Models
     {
         public Guid Id { get; set; } 
         public string Value { get; set; }
-        public float? ItemQuantity { get; set; }
+        public decimal? ItemQuantity { get; set; }
     } 
 
     public class CategoryGrid

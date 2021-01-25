@@ -68,13 +68,13 @@ namespace HoYa.Controllers
 
         [Route("api/Options/Count")]
         public async Task<IHttpActionResult> GetOptionsCount(
-           string value = "",
-           string code = "",
-           Guid? statusId = null,
-           Guid? excludeId = null,
-           Guid? createdById = null,
-           Guid? parentId = null
-       )
+            string value = "",
+            string code = "",
+            Guid? statusId = null,
+            Guid? excludeId = null,
+            Guid? createdById = null,
+            Guid? parentId = null
+        )
         {
             Guid exclude = excludeId.GetValueOrDefault();
             if (value == null) value = "";

@@ -30,21 +30,21 @@ namespace HoYa.Entities
         public virtual Guid? TypeId { get; set; }
         [ForeignKey("TypeId")]
         public virtual Option Type { get; set; }
-        public float? Sort { get; set; }
+        public decimal? Sort { get; set; }
         public string Value { get; set; }
         public string View { get; set; }
-        public float? SubmitRatio { get; set; }
+        public decimal? SubmitRatio { get; set; }
         public string Component { get; set; }
     }
 
     public class Redirect : Relation<Step, Step>
     {
-        public float? TrueRatio { get; set; }//(=100)=AND (>0)=OR
+        public decimal? TrueRatio { get; set; }//(=100)=AND (>0)=OR
     }
 
     public class RedirectCondition : Relation<Redirect, Condition>
     {
-        public float? Sort { get; set; }
+        public decimal? Sort { get; set; }
     }
 
     public class Condition : Definition
@@ -58,7 +58,7 @@ namespace HoYa.Entities
 
     public class StepRelationship : Relation<Step, Option>//這裡的Option是Of的關係 例如主管 或 代理人
     {
-        public float? Sort { get; set; }
+        public decimal? Sort { get; set; }
         public virtual Guid? OfId { get; set; }
         [ForeignKey("OfId")]
         public virtual Step Of { get; set; }//開單者 或 前一關卡者

@@ -12,10 +12,17 @@ namespace HoYa.Models
         public string No { get; set; }
         public Guid? StatusId { get; set; }
         public Guid? ItemId { get; set; }
-        public float? Value { get; set; }
+        public decimal? Value { get; set; }
         public Position Position { get; set; }
         public Guid? PositionId { get; set; }
         public ICollection<InventoryAttribute> Attributes { get; set; } = new HashSet<InventoryAttribute>();
+    }
+
+    public class DTOWorkPlan
+    {
+        public Guid ItemId { get; set; } 
+        public decimal? Value { get; set; }
+        public Guid UnitId { get; set; }
     }
 
     public class InventoryPickup
@@ -30,7 +37,7 @@ namespace HoYa.Models
 
     public class InventoryStartup
     {
-        public float UpValue { get; set; }
+        public decimal? UpValue { get; set; }
         public string Memo { get; set; }
         public Guid ItemId { get; set; }
         public Guid TargetId { get; set; }
@@ -39,7 +46,7 @@ namespace HoYa.Models
     }
     public class InventoryInspection
     {
-        public float UpValue { get; set; }
+        public decimal? UpValue { get; set; }
         public string Memo { get; set; }
         public Guid ItemId { get; set; }
         public Guid TargetId { get; set; }
@@ -50,8 +57,8 @@ namespace HoYa.Models
     public class InventoryStation
     {
         public string Action { get; set; }
-        public float UsedPower { get; set; }
-        public float UpValue { get; set; }
+        public decimal? UsedPower { get; set; }
+        public decimal? UpValue { get; set; }
         public string Memo { get; set; }
         public Guid TargetId { get; set; }
         public Guid WorkOrderId { get; set; }
@@ -61,7 +68,7 @@ namespace HoYa.Models
     public class Defect
     {
         public string AttributeValue { get; set; }
-        public float Value { get; set; } 
+        public decimal? Value { get; set; } 
     }
 
     public class Reason
@@ -119,7 +126,7 @@ namespace HoYa.Models
         public Inventory Inventory { get; set; }
         public int InventoryQuantity { get; set; }
         public int PhotoQuantity { get; set; }
-        public float? SegmentationsQuantitySum { get; set; }
+        public decimal? SegmentationsQuantitySum { get; set; }
     }
 
     public class InventoryList
@@ -127,7 +134,7 @@ namespace HoYa.Models
         public Guid? Id { get; set; }
         public string No { get; set; }
         public string Sort { get; set; }
-        public float? Value { get; set; }
+        public decimal? Value { get; set; }
         public string _photo { get; set; }
         public Guid? ItemId { get; set; }
         public string _item { get; set; }
@@ -145,7 +152,7 @@ namespace HoYa.Models
         public Guid? Id { get; set; }
         public string No { get; set; }
         public string Unit { get; set; }
-        public float? Value { get; set; }
+        public decimal? Value { get; set; }
         public Guid? RecipeId { get; set; }
         public string RecipeValue { get; set; }
         public Guid? ItemId { get; set; }
@@ -173,6 +180,13 @@ namespace HoYa.Models
         public Inventory Inventory { get; set; }
         public ICollection<FolderFile> Photos { get; set; } = new HashSet<FolderFile>();
         public ICollection<InventoryAttribute> Details { get; set; } = new HashSet<InventoryAttribute>();
+    }
+
+    public class InventoryMerge
+    {
+        public ICollection<Guid> SourceIds { get; set; } = new HashSet<Guid>(); 
+
+        public string No { get; set; }
     }
 
     public class PositionAction

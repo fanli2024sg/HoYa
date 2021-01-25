@@ -3,6 +3,7 @@ import { RouterModule, Routes } from"@angular/router";
 import { AuthGuard } from"@guards/auth.guard";
 import { NotFoundComponent } from "./notFound/notFound.component";
 import { PrintComponent } from "./print/print.component";
+
 const appRoutes: Routes = [
     {
         path: "",
@@ -29,8 +30,8 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: "workOrders",
-        loadChildren: () => import("@pages/workOrder/workOrder.pages.module").then(x => x.WorkOrderPagesModule),
+        path: "workPlans",
+        loadChildren: () => import("@pages/workPlan/workPlan.pages.module").then(x => x.WorkPlanPagesModule),
         canActivate: [AuthGuard]
     },{
         path: "recipes",

@@ -1,3 +1,7 @@
+
+
+ 
+
 .lVhHa {
     position: relative
 }
@@ -57,17 +61,7 @@
 
 
 
-.buttons {
-    height: 260px
-}
 
-    .buttons > button:hover {
-        background-color: azure;
-    }
-
-    .buttons > button:first-child {
-        border-top: none;
-    }
 .container {
     flex-wrap: wrap;
     flex-direction: row;
@@ -151,6 +145,56 @@ top:0;
 .aOOlW:last-of-type {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0
+}
+
+.buttons {
+    height: 260px;
+    overflow-y: scroll;
+}
+
+    .buttons > button {
+        height: 52px;
+    }
+
+
+    .buttons::-webkit-scrollbar {
+        width: 3px;
+    }
+
+/* Track */
+    .buttons::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+/* Handle */
+    .buttons::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+        .buttons::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+
+        .buttons > button:hover {
+            background-color: azure;
+        }
+
+
+
+        .buttons > button:first-child {
+            border-top: none;
+        }
+
+.buttons2 {
+    position:absolute;
+    top: 346px;
+    width:100%;
+}
+
+.buttons2 > button {
+    height: 52px;
 }
 
 

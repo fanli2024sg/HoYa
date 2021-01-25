@@ -5,8 +5,7 @@ import { Item } from "./item";
 import { Attribute } from './attribute';
 
 //實例化Recipe
-export class Inventory extends Instance
-{
+export class Inventory extends Instance {
     value: number;
     itemId: string;
     item: Item;
@@ -30,6 +29,7 @@ export class Inventory extends Instance
     _select: boolean;
     positionTargetId: string;
     positionTargetNo: string;
+    _merge: boolean;
     constructor() {
         super();
         this.value = 1;
@@ -80,7 +80,7 @@ export class Segmentation extends Relation<Inventory, Inventory>//產生另一�
     }
 }
 
-export class Relationship extends Relation<Inventory, Inventory >
+export class Relationship extends Relation<Inventory, Inventory>
 {
     constructor() {
         super();
@@ -95,6 +95,18 @@ export class InventoryGroup extends Relation<Inventory, Group>
         this.targetId = targetId;
     }
 }
+
 export class InventoryActivity extends Relation<Inventory, Activity>
 {
+}
+
+
+export class Exchange extends Relation<Inventory, Inventory>
+{
+    value: number;
+    constructor(ownerId?: string, targetId?: string) {
+        super();
+        this.ownerId = ownerId;
+        this.targetId = targetId;
+    }
 }

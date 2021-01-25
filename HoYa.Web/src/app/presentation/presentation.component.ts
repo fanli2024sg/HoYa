@@ -54,8 +54,7 @@ export class PresentationComponent implements OnInit {
     defects: any[];
     reasons: any[];
     title: string;
-    constructor(
-        public store: Store<reducers.State>,
+    constructor( 
         public location: Location,
         public router: Router,
         public inventoriesService: InventoriesService,
@@ -103,7 +102,9 @@ export class PresentationComponent implements OnInit {
         }
     }
 
-
+    onClick(e) {
+        console.log(e);
+    }
 
     ngOnInit() {
         if (this.presentationSubscription) this.presentationSubscription.unsubscribe();

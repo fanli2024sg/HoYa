@@ -6,7 +6,7 @@ namespace HoYa.Entities
 {
     public abstract class Base
     { 
-        public virtual Guid Id { get; set; }
+        public Guid Id { get; set; }
 
         public int Version { get; set; }
 
@@ -66,7 +66,13 @@ namespace HoYa.Entities
         }
     }
 
- 
+    public abstract class Detail<O> : Base
+    {
+        public virtual Guid? OwnerId { get; set; }
+        [ForeignKey("OwnerId")]
+        [JsonIgnore]
+        public virtual O Owner { get; set; } 
+    }
 
     public class Instance : Base
     {

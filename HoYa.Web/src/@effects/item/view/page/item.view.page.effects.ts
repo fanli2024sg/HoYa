@@ -13,9 +13,9 @@ import {
 } from "rxjs/operators";
 import { Item } from "@entities/item";
 import {
-    ItemViewPageActions,
-    ItemsViewPageActions,
-    ItemsListTempleteActions
+    ItemViewPageActions, 
+    ItemsListTempleteActions,
+    ItemEditTempleteActions
 } from "@actions/item";
 import { AttributesCheckboxTempleteActions } from "@actions/attribute";
 import { CategoryViewPageActions } from "@actions/category";
@@ -26,6 +26,8 @@ import { AppService } from "@services/app.service";
 import { Router } from "@angular/router";
 import { ItemAttributeEditTempleteActions } from "@actions/item";
 import { PresentationActions } from "@actions";
+import { RecipesService } from "@services/recipes.service";
+import { Inventory } from '../../../../@entities/inventory';
 
 @Injectable()
 export class ItemViewPageEffects {
@@ -45,10 +47,10 @@ export class ItemViewPageEffects {
             ofType(ItemViewPageActions.remove),
             switchMap((payload) => {
                 let item = payload.item;
-                this.itemStore$.dispatch(PresentationActions.message({ message: { h3: "§R°£¤¤", div: "§R°£«~¶µ¤¤, ½Ðµy«á..." } }));
+                this.itemStore$.dispatch(PresentationActions.message({ message: { h3: "åˆªé™¤ä¸­", div: "åˆªé™¤å“é …ä¸­, è«‹ç¨å¾Œ..." } }));
                 return this.itemsService.remove(payload.item.id).pipe(
                     tap(() => this.router.navigate([`items`])),
-                    tap(() => this.itemStore$.dispatch(PresentationActions.close({ message: `§R°£«~¶µ: ${item.value} ¦¨¥\!` }))),
+                    tap(() => this.itemStore$.dispatch(PresentationActions.close({ message: `åˆªé™¤å“é …: ${item.value} æˆåŠŸ!` }))),
                     map(() => ItemsListTempleteActions.removeSuccess({ item })),
                     catchError((x) => of(ItemsListTempleteActions.removeFailure({ item })))
                 );
@@ -66,8 +68,30 @@ export class ItemViewPageEffects {
         )
     );
 
+    createRecipe$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ItemViewPageActions.createRecipe), 
+            switchMap((payload) => {
+                this.itemStore$.dispatch(PresentationActions.message({ message: { h3: "æ–°å¢žä¸­", div: "æ–°å¢žé…æ–¹ä¸­, è«‹ç¨å¾Œ..." } }));
+                return this.recipeServices.create({ item: payload.item }).pipe(
+                    tap((recipe: Inventory) => this.itemStore$.dispatch(PresentationActions.close({ message: `æ–°å¢žé…æ–¹: ${recipe.no} æˆåŠŸ!` }))),
+                    map((recipe: Inventory) => ItemViewPageActions.createRecipeSuccess({ recipe })),
+                    catchError(() => of(ItemViewPageActions.createRecipeFailure()))
+                );
+            })
+        )
+    );
 
-
+    itemEditTemplete$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(
+                ItemViewPageActions.editItem
+            ),
+            switchMap((payload) => {
+                return of(PresentationActions.open({ title: "itemEditTemplete", width: "365px" }));
+            })
+        )
+    );
 
 
 
@@ -79,6 +103,7 @@ export class ItemViewPageEffects {
     constructor(
         private actions$: Actions,
         private itemStore$: Store<reducers.State>,
+        private recipeServices: RecipesService,
         private itemsService: ItemsService,
         public appService: AppService,
         public router: Router

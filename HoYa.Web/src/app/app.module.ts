@@ -9,8 +9,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "environments/environment";
 import { AuthInterceptor } from "@interceptors/auth.interceptor";
 import { AppService } from "@services/app.service";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { DeviceDetectorModule } from "ngx-device-detector";
+import { HTTP_INTERCEPTORS } from "@angular/common/http"; 
 import { ActivitiesComponent } from "@pages/activities/activities.component";
 import { RouterModule } from "@angular/router"; 
 
@@ -52,8 +51,7 @@ import { PresentationEffects } from "@effects/presentation.effects";
             appId: "serverApp"
         }),
         AppRouting,
-        HttpClientModule,
-        DeviceDetectorModule.forRoot(),
+        HttpClientModule, 
         ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production }),
         RouterModule, 
         StoreModule.forRoot(ROOT_REDUCERS, {

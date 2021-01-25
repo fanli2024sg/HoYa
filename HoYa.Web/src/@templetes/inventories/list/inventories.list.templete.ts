@@ -15,6 +15,7 @@ import * as attributeReducers from "@reducers/attribute";
 import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
 import { Attribute } from "@entities/attribute";
 import { PresentationActions } from "@actions";
+import Swal from 'sweetalert2';
 
 @Component({
     selector: "inventoriesListTemplete",
@@ -51,6 +52,7 @@ export class InventoriesListTemplete implements OnInit {
     inventoryId: string;
     @ViewChild("hiddenUpload") hiddenUpload: ElementRef;
     constructor(
+
         private router: Router,
         public activatedRoute: ActivatedRoute,
         public inventoriesService: InventoriesService,
@@ -72,7 +74,7 @@ export class InventoriesListTemplete implements OnInit {
         ).subscribe((anyLike: string) => {
             anyLike = anyLike || "";
             this.anyLike = anyLike;
-            this.inventoryStore$.dispatch(InventoriesListTempleteActions.setFilter({ anyLike: anyLike }));
+            this.inventoryStore$.dispatch(InventoriesListTempleteActions.setFilter({ anyLike, itemId:this.itemId }));
             this.reLoad(1);
         });
 
@@ -112,7 +114,12 @@ export class InventoriesListTemplete implements OnInit {
                                             this.inventories[i] = { ...this.inventories[i], ...inventory, ...details };
                                         }
                                     }
-                                    if (!this.inventories.find(x => x.id === inventory.id)) this.inventories.push(inventory);
+                                    if (!this.inventories.find(x => x.id === inventory.id)) { 
+                                        if (inventory.value > 0) {
+                                            if (this.mergeIds.find(mergeId => mergeId === inventory.id)) this.inventories.push({ ...inventory, ...{ _merge: true } });
+                                            else this.inventories.push({ ...inventory, ...{ _merge: false } });
+                                        }
+                                    }
                                 }
                             });
                         });
@@ -250,12 +257,57 @@ export class InventoriesListTemplete implements OnInit {
 
 
 
+    mergeIds: string[] = [];
+    toggleMerge(inventory) { 
+        inventory._merge = inventory._merge ? false : true;
+        if (inventory._merge) {
+            this.mergeIds.push(inventory.id);
+            if (this.inventories.filter(x => x._merge).length === 1) {
+                console.log("itemId: '" + inventory.itemId + "'");
+                this.inventoryStore$.dispatch(InventoriesListTempleteActions.setFilter({ anyLike: this.anyLike, itemId: inventory.itemId }));
+            }
+        } else {
+            this.mergeIds = this.mergeIds.filter(x => x !== inventory.id);
+            if (this.inventories.filter(x => x._merge).length === 0) {
+                console.log("itemId: ''");
+                this.inventoryStore$.dispatch(InventoriesListTempleteActions.setFilter({ anyLike: this.anyLike, itemId: "" }));
+            }
+        }
+    }
 
+    mergePromise(no) {
+        return this.inventoriesService.createMerge({ no, sourceIds: this.mergeIds }).toPromise();
+    }
 
+    merge() {
+        Swal.fire({
+            title: '輸入合併後編號',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            confirmButtonText: '合併',
+            showLoaderOnConfirm: true,
+            preConfirm: (no) => this.mergePromise(no),
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                 
+                let mergedInventory = result.value as Inventory;
+                mergedInventory._merge = true;
+                this.inventories.push(mergedInventory);
 
+                this.inventories = this.inventories.filter(x => !this.mergeIds.find(mergeId => mergeId === x.id));
 
-
-
+                Swal.fire({ 
+                    icon: 'success',
+                    title: '合併成功',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+    }
 
     @HostListener('scroll', ['$event']) // for window scroll events
     onScroll(event) {
@@ -431,19 +483,25 @@ export class InventoriesListTemplete implements OnInit {
             let pageYOffset = window.pageYOffset;
             moreInventories.forEach(inventory => {
                 if (this.inventories.find(x => x.id === inventory.id)) this.inventories = this.inventories.filter(x => x.id !== inventory.id);
-                this.inventories.push({ ...inventory });
+                if (inventory.value > 0) {
+                    if (this.mergeIds.find(mergeId => mergeId === inventory.id)) this.inventories.push({ ...inventory, ...{ _merge: true } });
+                    else this.inventories.push({ ...inventory, ...{ _merge: false } });
+                }
             });
-            for (let i = (this.inventories.length - moreInventories.length); i < this.inventories.length; i++) {
-                this.inventoriesService.findDetails(this.inventories[i].id).toPromise().then((details: Inventory) => {
-                    let inventory = {
-                        ...this.inventories[i], ...details
-                    };
-                    if (this.inventories[i]) {
-                        if (this.inventories[i].id === inventory.id) {
-                            this.inventories[i] = inventory;
+
+            if (this.inventories.length - moreInventories.length >= 0) {
+                for (let i = (this.inventories.length - moreInventories.length); i < this.inventories.length; i++) {
+                    this.inventoriesService.findDetails(this.inventories[i].id).toPromise().then((details: Inventory) => {
+                        let inventory = {
+                            ...this.inventories[i], ...details
+                        };
+                        if (this.inventories[i]) {
+                            if (this.inventories[i].id === inventory.id) {
+                                this.inventories[i] = inventory;
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
             window.scrollTo({ top: pageYOffset });
             setTimeout(() => this.loading = false, debounceTime);

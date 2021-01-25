@@ -40,14 +40,14 @@ export class AttributesCheckBoxTemplete implements OnInit {
     private wasInside = false;
     @HostListener('click')
     clickInside() {
-        console.log("clicked in");
+        //console.log("clicked in");
         this.wasInside = true;
     }
 
     @HostListener('document:click')
     clickout() {
         if (!this.wasInside) {
-            console.log("clicked out");
+            //console.log("clicked out");
             this.collapse = true;
         }
         this.wasInside = false;

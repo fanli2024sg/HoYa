@@ -54,7 +54,7 @@ export class InventoriesListTempleteEffects {
                     catchError(error => of(InventoriesListTempleteActions.selectListFailure({ error })))
                 );
                 else return this.inventoriesService.selectList({
-                    anyLike: state.anyLike,
+                    anyLike: state.anyLike, 
                     inventoryId: state.inventoryId,
                     orderBy: state.orderBy,
                     descending: state.descending,

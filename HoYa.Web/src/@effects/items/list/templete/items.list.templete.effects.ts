@@ -139,7 +139,7 @@ export class ItemsListTempleteEffects {
                 ItemsListTempleteActions.newItem
             ),
             switchMap((payload) => {
-                return of(PresentationActions.open({ title: "itemEditTemplete", width: "365px" }));
+                return of(PresentationActions.open({ title: "itemEditTemplete", width: "365px", payload }));
             })
         )
     );

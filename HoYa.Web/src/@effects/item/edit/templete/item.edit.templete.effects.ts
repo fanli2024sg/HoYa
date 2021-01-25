@@ -18,6 +18,7 @@ export class ItemEditTempleteEffects {
             ofType(ItemEditTempleteActions.create),
             concatMap(action => of(action).pipe(withLatestFrom(this.store.pipe(select(reducers.itemEditTempleteState))))),
             switchMap(([payload, state]) => {
+                
                 this.store.dispatch(PresentationActions.message({ message: { h3: "新增中", div: "新增品項中, 請稍後..." } }));
                 return this.itemsService.create(state.item).pipe(
                     tap((item: Item) => this.store.dispatch(PresentationActions.close({ message: `新增品項: ${item.value} 成功!` }))),
@@ -32,7 +33,8 @@ export class ItemEditTempleteEffects {
         this.actions$.pipe(
             ofType(ItemEditTempleteActions.update),
             concatMap(action => of(action).pipe(withLatestFrom(this.store.pipe(select(reducers.itemEditTempleteState))))),
-            switchMap(([payload, state]) => {                
+            switchMap(([payload, state]) => {  
+                debugger
                 this.store.dispatch(PresentationActions.message({ message: { h3: "更新中", div: "更新品項中, 請稍後..." } }));
                 return this.itemsService.update(state.item.id, state.item).pipe(
                     tap((item: Item) => this.store.dispatch(PresentationActions.close({ message: `更新品項: ${item.value} 成功!` }))),

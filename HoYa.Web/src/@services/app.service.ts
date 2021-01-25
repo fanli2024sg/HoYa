@@ -76,7 +76,7 @@ export class AppService {
         this.webUrl = (urlSegment[0] + "//" + urlSegment[2] + app);
         this.host = (urlSegment[0] + "//" + urlSegment[2] + app).replace(this.webPort, this.apiPort); 
         this.apiUrl = this.host;
-        this.filesUrl = "https://richeasy.blob.core.windows.net/files";
+        this.filesUrl = "https://yourwebsite.blob.url/files";
     }
 
     ngOnInit() {

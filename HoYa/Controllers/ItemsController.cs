@@ -425,8 +425,10 @@ namespace HoYa.Controllers
                 photo = x.Photo.Target.Path,
                 code = x.Code,
                 description = x.Description,
-                deletable = (db.Inventories.Where(y => y.ItemId == x.Id).Count() == 0)
-
+                deletable = (db.Inventories.Where(y => y.ItemId == x.Id).Count() == 0),
+                unit =new { no=x.Unit.No},
+                unitId=x.UnitId,
+                unitTypeId = x.UnitTypeId
             }).FirstOrDefault());
         }
 
@@ -505,6 +507,7 @@ namespace HoYa.Controllers
 
         public async Task<IHttpActionResult> PostItem(Item item)
         {
+            item.Unit = null;
             if (item.Value == "")
             {
                 string userId = HttpContext.Current.User.Identity.Name;
@@ -520,10 +523,13 @@ namespace HoYa.Controllers
                     deletable = (db.Inventories.Where(y => y.ItemId == x.Id).Count() == 0)
                 }).FirstOrDefault());
             }
-            //  item.StatusId = new Guid("005617B3-D283-461C-ABEF-5C0C16C780D0");
-            db.Items.Add(item);
-            await db.SaveChangesAsync();
-            await db.Entry(item).GetDatabaseValuesAsync();
+           
+                //  item.StatusId = new Guid("005617B3-D283-461C-ABEF-5C0C16C780D0");
+                db.Items.Add(item);
+                await db.SaveChangesAsync();
+                await db.Entry(item).GetDatabaseValuesAsync();
+           
+            
             HashSet<string> categoryValues = new HashSet<string>();
             if (item.Description.ToString() != "")
             {

@@ -152,9 +152,10 @@ export const reducer = createReducer(
             loaded: false
         });
     }),
-    on(InventoriesListTempleteActions.setFilter, (state, { anyLike }) => ({
+    on(InventoriesListTempleteActions.setFilter, (state, { anyLike, itemId }) => ({
         ...state,
         anyLike,
+        itemId,
         pageIndex: 1,
         loaded: false
     })),    

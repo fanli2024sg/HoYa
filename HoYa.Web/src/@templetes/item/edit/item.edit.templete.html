@@ -1,9 +1,16 @@
 ﻿<div class="_08v79" *ngIf="item">
-    <div class="_7UhW9 xLCgt MMzan _0PwGv uL8Hv">
+    <div class="_7UhW9 xLCgt MMzan _0PwGv uL8Hv"
+         style="margin-bottom: 15px"
+         *ngIf="mode===''">
         <span *ngIf="isNew">新增品項</span>
         <span *ngIf="!isNew">編輯『{{itemValue}}』</span>
     </div>
-    <div class="dsJ8D">
+    <div class="_7UhW9 MMzan _0PwGv uL8Hv"
+         style="margin-bottom: 15px"
+         *ngIf="mode!==''">
+        選擇{{mode}}
+    </div>
+    <div class="dsJ8D"  *ngIf="mode===''">
         <div class="xlTJg">
             <div class="G3yoz"
                  style="border-radius: 0;cursor:pointer;min-height:150px"
@@ -48,7 +55,7 @@
 
         </div>
     </div>
-    <div class="_7UhW9 xLCgt MMzan _0PwGv uL8Hv">
+    <div class="_7UhW9 xLCgt MMzan _0PwGv uL8Hv" *ngIf="mode===''">
         <div class="container" style="width:calc(100% - 25px)">
             <div class="container" style="width:40px"><span style="margin: 7px 0">名稱</span></div>
             <div class="container" style="width:calc(100% - 40px)">
@@ -59,6 +66,15 @@
                        style="border:1px solid #efefef;width: 100%;padding: 6px; margin:0">
                 <span style="color:red;margin: 0 0 7px 0">{{error1}}</span>
             </div>
+        </div>
+        <div class="container" style="width:calc(100% - 25px)">
+            <div class="container" style="width:40px"><span style="margin: 7px 0">單位</span></div>
+            <div class="container" style="width:calc(100% - 40px)">
+                <span (click)="selectUnitGroup()" style="padding: 7px 6px 14px; cursor: pointer">
+                    <span  *ngIf="!item.unit">選擇單位</span>
+                    <span *ngIf="item.unit">{{item.unit.no}}</span>
+                </span>
+            </div> 
         </div>
         <div class="container" style="width:calc(100% - 25px)">
             <div class="container" style="width:40px"><span style="margin: 7px 0">代碼</span></div>
@@ -80,6 +96,7 @@
                           style="border:1px solid #efefef;width: 100%;padding: 6px; margin:0 0 5px 0"></textarea>
             </div>
         </div>
+
         <div class="container" style="width:calc(100% - 25px)">
             <div class="container" style="width:40px"><span>狀態</span></div>
             <div class="container" style="width:calc(100% - 40px)">
@@ -97,8 +114,38 @@
             </div>
         </div>
     </div>
+    <div class="_7UhW9 MMzan _0PwGv uL8Hv" *ngIf="mode!==''">
+        <div style="display: flex; flex-direction: row; margin: 0 auto; max-width: 220px; padding-top: 0">
+            <input (keyup)="keyup($event.target.value)"
+                   [(ngModel)]="anyLike"
+                   type="text"
+                   style="border: 1px solid #efefef;text-align: center;line-height: 14px;vertical-align: middle;width: 100%;font-size: 14px;padding:8px">
+        </div>
+    </div>
 </div>
-<div class="mt3GC">
+<div class="buttons" *ngIf="mode!==''" >
+    <button *ngFor="let option of options" class="aOOlW HoLwm" tabindex="0" style="height:52px" (click)="selectOption(option)">
+        <span *ngIf="option.code">
+            <span [innerHTML]="option.value | highlight: (anyLike$ | async)"></span><br />
+            <span [innerHTML]="option.code | highlight: (anyLike$ | async)"></span>
+        </span>
+        <span *ngIf="option.no" [innerHTML]="option.no | highlight: (anyLike$ | async)"></span>
+    </button>
+    <div style="position:absolute;margin:90px 50%" *ngIf="loading">
+        <div class="Igw0E IwRSH YBx95 _4EzTm _9qQ0O ZUqME"
+             style="height: 32px; width: 32px;">
+            <loading [size]="32"></loading>
+        </div>
+    </div>
+</div>
+<div class="buttons2" *ngIf="mode!==''">
+    <button class="aOOlW HoLwm"
+            tabindex="0"
+            (click)="previousMode()">
+        返回
+    </button>
+</div>
+<div class="mt3GC"  *ngIf="mode===''">
     <button class="aOOlW -Cab_" tabindex="0" [ngClass]="{'hasError':(locked||error1!==''||error2!=='')}" *ngIf="isNew" [disabled]="locked||error1!==''||error2!==''" (click)="create()">新增</button>
     <button class="aOOlW -Cab_" tabindex="0" [ngClass]="{'hasError':(locked||error1!==''||error2!=='')}" *ngIf="!isNew" [disabled]="locked||error1!==''||error2!==''" (click)="update()">更新</button>
     <button class="aOOlW HoLwm" tabindex="0" (click)="cancel()">取消</button>

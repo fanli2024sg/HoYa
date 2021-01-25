@@ -28,25 +28,24 @@ namespace HoYa.Controllers
             string userName = (User as ClaimsPrincipal).Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
             AspNetUser aspNetUser = db.AspNetUsers.FirstOrDefault(x => x.Id == userName || x.UserName == userName);
             if (aspNetUser == null) aspNetUser = await CreateUser(userName, repository.getHashedNewPassword(userName));
-            Inventory profile = await db.Inventories.FirstOrDefaultAsync(x => x.UserId == aspNetUser.Id);
+            Inventory profile = null;
+            profile = await db.Inventories.FirstOrDefaultAsync(x => x.UserId == aspNetUser.Id);
             if (profile == null) profile = await CreateInventory(aspNetUser);
 
-
-           
-            Inventory p = new Inventory();
+            Inventory p = new Inventory("d5b63e24-1d67-4983-8803-1cb2bd80a2be");
             p.Id = profile.Id;
             p.No = profile.No;
             return new SettingModel
             {
                 AD = HttpContext.Current.User.Identity.Name,
-                Profile = p, 
+                Profile = p,
                 IP = GetIpAddress()
             };
         }
 
         private async Task<Inventory> CreateInventory(AspNetUser aspNetUser)
         {
-            db.Inventories.Add(new Inventory
+            db.Inventories.Add(new Inventory("d5b63e24-1d67-4983-8803-1cb2bd80a2be")
             {
                 UserId = aspNetUser.Id,
                 No = aspNetUser.UserName

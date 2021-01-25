@@ -13,4 +13,8 @@ namespace HoYa.Entities
         public string InventoryIds { get; set; }
         public string CategoryIds { get; set; }
     }
+
+    public class AttributeGroup : Relation<Attribute, Inventory>
+    {
+    }
 }

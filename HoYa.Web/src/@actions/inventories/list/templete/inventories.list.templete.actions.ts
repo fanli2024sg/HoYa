@@ -8,7 +8,7 @@ export const update = createAction("[inventories.list.templete] update inventory
 export const updateSuccess = createAction("[inventories.list.templete] update success", props<{ inventory: Inventory }>());
 export const updateFailure = createAction("[inventories.list.templete] update failure", props<{ inventory: Inventory }>());
 export const setSort = createAction("[inventories.list.templete] set sort", props<{ orderBy: string, descending: boolean }>());
-export const setFilter = createAction("[inventories.list.templete] set filter", props<{ anyLike: string }>());
+export const setFilter = createAction("[inventories.list.templete] set filter", props<{ anyLike: string, itemId: string }>());
 export const setPageIndex = createAction('[inventories.list.templete] set pageIndex', props<{ pageIndex: number }>()); 
 export const setPageSize = createAction('[inventories.list.templete] set pageSize', props<{ pageSize: number }>()); 
 

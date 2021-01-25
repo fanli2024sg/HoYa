@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+﻿import { Component, OnInit, ElementRef, ViewChild, HostListener } from "@angular/core";
 import { Item } from "@entities/item";
 import { Store } from "@ngrx/store";
 import * as itemReducers from "@reducers/item";
@@ -11,7 +11,10 @@ import { SearchService } from "@services/search.service";
 import { PresentationActions } from "@actions";
 import { FileSave } from "@models/entity";
 import { FilesService } from "@services/files.service";
-
+import { InventoriesService } from "@services/inventories.service";
+import { Inventory, Exchange } from "@entities/inventory";
+import { ExchangesService } from "@services/exchanges.service";
+import * as reducers from "@reducers";
 @Component({
     selector: "itemEditTemplete",
     templateUrl: "item.edit.templete.html",
@@ -24,7 +27,7 @@ export class ItemEditTemplete implements OnInit {
     anyLike1$: BehaviorSubject<string> = new BehaviorSubject<string>("");
     anyLike2$: BehaviorSubject<string> = new BehaviorSubject<string>("");
     item: Item;
-    itemValue: string = ""; 
+    itemValue: string = "";
     targetValue: string;
     error1: string = "";
     error2: string = "";
@@ -32,13 +35,27 @@ export class ItemEditTemplete implements OnInit {
     locked: boolean = true;
     uploading: boolean = false;
     disable: boolean = false;
+    mode: string = "";
+    optionsSubscription: Subscription;
+    anyLike: string = "";
+    anyLike$: BehaviorSubject<string> = new BehaviorSubject<string>("");
+    options: any[];
+    loading: boolean;
     constructor(
         public itemsService: ItemsService,
         public filesService: FilesService,
         public store: Store<itemReducers.State>,
         public appService: AppService,
-        public searchService: SearchService
+        public store$: Store<reducers.State>,
+        public searchService: SearchService,
+        public inventoriesService: InventoriesService,
+        public exchangesService: ExchangesService
     ) { }
+    /*
+    @HostListener("click", ["$event"])
+    public onClick(event: any): void {
+        event.stopPropagation();
+    }*/
 
     ngOnInit() {
         this.ngOnInitSubscription = this.store.select(itemReducers.itemEditTemplete_item).subscribe((item: Item) => {
@@ -119,7 +136,70 @@ export class ItemEditTemplete implements OnInit {
         }));
     }
     ngOnDestroy() {
+        if (this.optionsSubscription) this.optionsSubscription.unsubscribe();
         if (this.ngOnInitSubscription) this.ngOnInitSubscription.unsubscribe();
+    }
+
+    selectUnitGroup() {
+        this.mode = "單位類型";
+        if (this.optionsSubscription) this.optionsSubscription.unsubscribe();
+        this.optionsSubscription = this.anyLike$.pipe(
+            debounceTime(300),
+            tap(() => {
+                this.options = [];
+                this.loading = true;
+            }),
+            switchMap(anyLike => this.inventoriesService.select({
+                anyLike: encodeURIComponent(anyLike),
+                itemId: "aa917cae-5aaf-4173-bd1e-ab3ab1e3393e",
+                take: 5
+            }))
+        ).subscribe((options: Inventory[]) => {
+            this.options = options;
+            this.loading = false;
+        });
+    }
+    keyup(anyLike: string) {
+        this.anyLike$.next(anyLike.trim());
+    }
+    selectOption(option: any) {
+        switch (this.mode) {
+            case "單位類型":
+                this.anyLike = "";
+                this.options = [];
+                this.selectUnitTypeOk(option);
+                break;
+            default:
+                this.item.unit = option;
+                this.item.unitId = option.id;
+                this.mode = "";
+                this.options = [];
+                break;
+        }
+      
+    }
+
+    selectUnitTypeOk(unitType) {
+        this.mode = unitType.no;
+        this.item.unitTypeId = unitType.id;
+        if (this.optionsSubscription)this.optionsSubscription.unsubscribe();
+        this.optionsSubscription = this.anyLike$.pipe(
+            debounceTime(300),
+            tap(() => {
+                this.options = [];
+                this.loading = true;
+            }),
+            switchMap(anyLike => this.exchangesService.select({
+                anyLike: encodeURIComponent(anyLike),
+                ownerId: unitType.id,
+                take: 5
+            }))
+        ).subscribe((options: Exchange[]) => {
+            this.options = options;
+            this.loading = false;
+        }, () => {
+                this.loading = false;
+        });
     }
 
 
@@ -127,26 +207,27 @@ export class ItemEditTemplete implements OnInit {
         // if (this.appService.profile.photo) this.appService.presentation$.next("變更大頭貼照"); else 
         this.createFileInput.nativeElement.click();
     }
+
     uploadPhoto(event) {
         this.locked = true;
         this.uploading = true;
         if (event.target.files) {
             this.filesService.create(<Array<File>>event.target.files, `items/${this.item.id}`).toPromise().then((fileSave: FileSave) => {
                 this.item.photo = "converting";
-                this.item.photoId = fileSave.photos[0].id; 
+                this.item.photoId = fileSave.photos[0].id;
 
 
                 setTimeout(() => {
                     this.item.photo = fileSave.photos[0].target.path;
                     this.locked = false;
                     this.uploading = false;
-                }, 1); 
-                
-                
+                }, 1);
+
+
             }, () => {
                 alert("圖片上傳失敗!");
-                    this.locked = false;
-                    this.uploading = false;
+                this.locked = false;
+                this.uploading = false;
             });
         }
     }
@@ -161,7 +242,16 @@ export class ItemEditTemplete implements OnInit {
         else this.item.statusId = "005617b3-d283-461c-abef-5c0c16c780d0";
     }
 
-
+    previousMode() {
+        switch (this.mode) {
+            case "單位類型":
+                this.mode = "";
+                break;
+            default:
+                this.mode = "單位類型";
+                break;
+        }
+    }
 
 
     cancel() {
@@ -169,7 +259,7 @@ export class ItemEditTemplete implements OnInit {
     }
 
     create() {
-        
+
         this.store.dispatch(ItemEditTempleteActions.create({ item: { ...this.item } }));
     }
 

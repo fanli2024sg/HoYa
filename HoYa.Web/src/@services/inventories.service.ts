@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Query } from "@models/query";
 import { HttpService } from "@services/http.service";
 import { Observable } from "rxjs";
-import { InventorySave, InventoryPutdown, InventorySelect, InventoryAttributeList, InventoryList, InventoryPrint, InventoryPosition } from "@models/inventory";
+import { InventorySave, InventoryPutdown, InventorySelect, InventoryAttributeList, InventoryList, InventoryPrint, InventoryPosition, InventoryMerge } from "@models/inventory";
 import { PostPosition } from "@models/entity";
 import { Grid } from "@models/app.model";
 
@@ -78,6 +78,10 @@ export class InventoriesService {
 
     createSave(inventorySave: InventorySave) {
         return this.httpService.create(`${this.api}/Save`, inventorySave);
+    }
+
+     createMerge(inventoryMerge: InventoryMerge) {
+        return this.httpService.create(`${this.api}/Merge`, inventoryMerge);
     }
 
     count(params: any, withRefresh: boolean) {

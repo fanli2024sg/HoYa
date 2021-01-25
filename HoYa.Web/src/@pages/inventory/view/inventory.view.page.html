@@ -158,8 +158,7 @@
         </a>
     </div>
     <section class="_1SP8R M_qbh"
-             *ngIf="(mode$|async)==='inventoriesList'">
-        <attributesCheckboxTemplete></attributesCheckboxTemplete>
+             *ngIf="(mode$|async)==='inventoriesList'"> 
         <div class="accordion"
              [ngClass]="{'open':openFilter}">
             <div style="height:auto">
@@ -167,7 +166,7 @@
             <div style="height:1px">
             </div>
         </div>
-        <inventoriesListTemplete [inventory$]="inventory$"></inventoriesListTemplete>
+        <inventoriesListTemplete></inventoriesListTemplete>
     </section>
     <section class="_1SP8R M_qbh"
              *ngIf="(mode$|async)==='qrcode'" style="margin: 50px auto">

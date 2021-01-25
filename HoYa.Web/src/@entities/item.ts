@@ -1,6 +1,7 @@
 ﻿import { Definition, Detail, FolderFile, Option, Relation } from "./entity";
 import { Category } from "./category";
 import { Attribute } from "./attribute";
+import { Inventory } from './inventory';
 
 export class Item extends Definition { 
     audited: boolean[]; 
@@ -8,6 +9,12 @@ export class Item extends Definition {
     photoId: string;
     photo: string;
     deletable: boolean;
+    unitType: Inventory;
+    unitTypeId: string;
+    unit: Inventory;
+    unitId: string;
+    default: Inventory;
+    defaultId: string;
     constructor() {
         super();
         this.code = "";
@@ -54,5 +61,14 @@ export class ItemCategory extends Relation<Item, Category>
         this.target = target;
         this.targetId = this.target.id;
         this.statusId = "cd8d8758-aee1-4dc6-b8a8-860ba61c1ae5";
+    }
+}
+
+ 
+
+export class ItemGroup extends Relation < Attribute, Inventory >
+{
+    constructor() {
+        super();
     }
 }

@@ -20,15 +20,19 @@ namespace HoYa.Controllers
     {
         private HoYaContext db = new HoYaContext();
 
+
+      
         [Route("api/Inventories")]
         public async Task<IHttpActionResult> GetInventories(
             string anyLike = "",
             int? take = 200,
             Guid? itemId = null,
             Guid? inventoryId = null,
+            Guid? groupId = null,
             Guid? categoryId = null,
             string itemIds = "",
             string inventoryIds = "",
+            string groupIds = null,
             string categoryIds = ""
         )
         {
@@ -38,7 +42,9 @@ namespace HoYa.Controllers
             IQueryable<Inventory> inventories1 = null;
             IQueryable<Inventory> inventories2 = null;
             IQueryable<Inventory> inventories3 = null;
+            IQueryable<Inventory> inventories4 = null;
             if (inventoryIds == null) inventoryIds = "";
+            if (groupIds == null) groupIds = "";
             if (itemIds == null) itemIds = "";
             if (categoryIds == null) categoryIds = "";
             if (categoryIds != "")
@@ -47,13 +53,14 @@ namespace HoYa.Controllers
 
                 if (_categoryIds.Count() == 1)
                 {
-                    categoryId =Guid.Parse( _categoryIds.FirstOrDefault());
+                    categoryId = Guid.Parse(_categoryIds.FirstOrDefault());
                     IQueryable<Guid?> _itemIds = db.ItemCategories.Where(x => x.TargetId == categoryId).Select(x => x.OwnerId).Distinct();
                     inventories1 = db.Inventories.Where(x => _itemIds.Contains(x.ItemId));
                 }
                 else
                 {
-                    if (_categoryIds.Count() > 1) {
+                    if (_categoryIds.Count() > 1)
+                    {
                         IQueryable<Guid?> _itemIds = db.ItemCategories.Where(x => _categoryIds.Contains(x.TargetId.ToString())).Select(x => x.OwnerId).Distinct();
                         inventories1 = db.Inventories.Where(x => _itemIds.Contains(x.ItemId));
                     }
@@ -78,14 +85,14 @@ namespace HoYa.Controllers
                 }
                 else
                 {
-                    if(_itemIds.Count()>1) inventories2 = db.Inventories.Where(x => _itemIds.Contains(x.ItemId.ToString()));
+                    if (_itemIds.Count() > 1) inventories2 = db.Inventories.Where(x => _itemIds.Contains(x.ItemId.ToString()));
                 }
             }
             else
             {
                 if (itemId != null)
                 {
-                    inventories2=db.Inventories.Where(x => x.ItemId == itemId);
+                    inventories2 = db.Inventories.Where(x => x.ItemId == itemId);
                 }
             }
 
@@ -109,7 +116,28 @@ namespace HoYa.Controllers
                     inventories3 = db.Inventories.Where(x => x.Position.TargetId == inventoryId);
                 }
             }
-
+            
+            if (groupIds != "")
+            {
+                IQueryable<string> _groupIds = groupIds.Split(',').AsQueryable();
+                if (_groupIds.Count() == 1)
+                {
+                    groupId = Guid.Parse(_groupIds.FirstOrDefault());
+                    inventories4 = db.Inventories.Where(x => db.InventoryGroups.Any(y=>y.TargetId== groupId));
+                }
+                else
+                {
+                    inventories4 = db.Inventories.Where(x => db.InventoryGroups.Any(y => _groupIds.Contains(y.TargetId.ToString())));
+                }
+            }
+            else
+            {
+                if (groupId != null)
+                {
+                    inventories4 = db.Inventories.Where(x => db.InventoryGroups.Any(y => y.TargetId == groupId));
+                }
+            }
+            
             if (inventories1 != null)
             {
                 inventories = inventories1;
@@ -122,7 +150,16 @@ namespace HoYa.Controllers
                 if (inventories3 != null) inventories = inventories.Union(inventories3);
             }
             if (inventories3 != null) inventories = inventories3;
-            if (anyLike != "") inventories = inventories.Where(x => x.No.Contains(anyLike));
+
+            if (anyLike != "")
+            {
+                if (inventories != null) inventories = inventories.Where(x => x.No.Contains(anyLike));
+                else inventories = db.Inventories.Where(x => x.No.Contains(anyLike));
+            }
+            else
+            {
+
+            }
 
             return Ok(inventories.Take(take.GetValueOrDefault()).Select(x => new { id = x.Id, no = x.No, value = x.Value }));
         }
@@ -166,45 +203,6 @@ namespace HoYa.Controllers
                 positionStartDate = x.Position.StartDate
             }).FirstOrDefault(x => x.id == inventory.Id));
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         [Route("api/Inventories/Details/{id}")]
         public async Task<IHttpActionResult> GetInventoryDetails(
@@ -299,7 +297,7 @@ namespace HoYa.Controllers
                 }
                 if (jToken != null) jObject.Add(new JProperty(itemAttribute.Target.Code, jToken));
             }
-            foreach (InventoryAttribute inventoryAttribute in db.InventoryAttributes.Where(x => x.OwnerId == inventory.Id&&x.Value!=null))//recipe底下所有屬性
+            foreach (InventoryAttribute inventoryAttribute in db.InventoryAttributes.Where(x => x.OwnerId == inventory.Id && x.Value != null))//recipe底下所有屬性
             {
                 Entities.Attribute attribute = inventoryAttribute.Target;
                 object jToken = null;
@@ -357,11 +355,6 @@ namespace HoYa.Controllers
             return Ok(jObject);
         }
 
-
-
-
-
-
         [Route("api/Inventories/Count")]
         public async Task<IHttpActionResult> GetInventoriesCount(
             string no = "",
@@ -393,27 +386,25 @@ namespace HoYa.Controllers
 
         [Route("api/Inventories/By")]
         public async Task<IHttpActionResult> GetInventoryBy(
-            float? value = null,
+            decimal? value = 0,
             string no = ""
         )
         {
             if (no == null) no = "";
             else no = HttpUtility.UrlDecode(no);
-            return Ok(await db.Inventories.FirstOrDefaultAsync(x =>
-             x.No.ToString() != "" &&
-            (x.Value == value || value == null) &&
-            (x.No == no || no == "")
-            ));
+            return Ok(
+                await db.Inventories.FirstOrDefaultAsync(x =>
+                    x.No.ToString() != "" &&
+                    x.Value == value &&
+                    (x.No == no || no == "")
+                )
+            );
         }
 
         public async Task<IHttpActionResult> GetInventory(Guid id)
         {
-            var v = db.Segmentations.Where(y => y.OwnerId == id).Sum(y => y.Quantity);
             Inventory inventory = await db.Inventories.FindAsync(id);
-            if (inventory == null)
-            {
-                return Ok();
-            }
+            if (inventory == null) return Ok();
             return Ok(db.Inventories.Where(x => x.Id == inventory.Id).Select(x => new
             {
                 id = x.Id,
@@ -461,7 +452,7 @@ namespace HoYa.Controllers
                     });
             }
         }
-       
+
 
         [Route("api/Inventories/Save")]
         public async Task<IHttpActionResult> PostInventorySave(InventorySave inventorySave)
@@ -485,6 +476,75 @@ namespace HoYa.Controllers
             }
             await db.SaveChangesAsync();
             return Ok(inventorySave);
+        }
+
+      
+
+        [Route("api/Inventories/Merge")]
+        public async Task<IHttpActionResult> PostInventoryMerge(InventoryMerge inventoryMerge)
+        {
+            string userId = HttpContext.Current.User.Identity.Name;
+            Guid? createdById = (await db.Inventories.FirstOrDefaultAsync(x => x.UserId == userId))?.Id;
+            (Guid? itemId,Guid? positionTargetId) = db.Inventories.Find(inventoryMerge.SourceIds.First());
+            Inventory mergedInventory = new Inventory
+            {
+                No = inventoryMerge.No,
+                ItemId = itemId,
+                Value = 0,
+                CreatedById = createdById
+            };
+            db.Inventories.Add(mergedInventory);
+            db.SaveChanges(); 
+
+
+            Position mergedPosition = new Position
+            {
+                OwnerId = mergedInventory.Id,
+                TargetId = positionTargetId,
+                StartDate = DateTime.Now,
+                CreatedById = createdById
+            };
+            db.Positions.Add(mergedPosition);
+            foreach (Inventory source in db.Inventories.Where(x =>x.ItemId== itemId && x.Position.TargetId == positionTargetId && inventoryMerge.SourceIds.Contains(x.Id)))
+            {
+                decimal? quantity = source.Value - Convert.ToDecimal( db.Segmentations.Where(x => x.OwnerId == source.Id).Sum(x => x.Quantity));
+                db.Segmentations.Add(new Segmentation
+                {
+                    OwnerId = source.Id,
+                    TargetId = mergedInventory.Id,
+                    Quantity = quantity,
+                    StartDate = DateTime.Now,
+                    CreatedById = createdById
+                });
+                mergedInventory.Value += quantity;
+            }
+            db.SaveChanges();
+            
+            Inventory existedInventory = db.Inventories.Find(mergedInventory.Id);
+            mergedInventory.PositionId = mergedPosition.Id;
+            db.Entry(existedInventory).CurrentValues.SetValues(mergedInventory);
+            await db.SaveChangesAsync();
+
+            return Ok(db.Inventories.Where(x=>x.Id== mergedInventory.Id).Select(x => new
+            {
+                id = x.Id,
+                no = x.No,
+                value = x.Value - (db.Segmentations.Where(y => y.OwnerId == x.Id).Sum(y => y.Quantity) ?? 0),
+                originalValue = x.Value,
+                photo = x.Photo != null ? x.Photo.Target.Path : x.Item.Photo.Target.Path,
+                itemId = x.ItemId,
+                itemValue = x.Item.Value,
+                positionId = x.PositionId,
+                positionTargetId = x.Position.TargetId,
+                positionTargetNo = x.Position.Target.No,
+                positionTargetPhoto = x.Position.Target.Photo != null ? x.Position.Target.Photo.Target.Path : x.Position.Target.Item.Photo.Target.Path,
+                positionCreatedById = x.Position.CreatedById,
+                positionCreatedByNo = x.Position.CreatedBy.No,
+                positionPreOwnerId = x.Position.PreOwnerId,
+                positionPreOwnerNo = x.Position.PreOwner.No,
+                positionStartDate = x.Position.StartDate
+
+            }).FirstOrDefault(x => x.id == mergedInventory.Id));
         }
 
         [Route("api/Inventories/Position")]
@@ -1130,7 +1190,7 @@ namespace HoYa.Controllers
                             positionStartDate = x.Position.StartDate
                         }).OrderBy(x => x.itemValue).Skip((pageIndex.GetValueOrDefault() - 1) * pageSize.GetValueOrDefault()).Take(pageSize.GetValueOrDefault()))));
                         break;
-                    case "positionNo":
+                    case "positionTargetNo":
                         if (descending) jObject.Add(new JProperty("result", JToken.FromObject(queriedInventories.Select(x => new
                         {
                             id = x.Id,
@@ -1557,7 +1617,7 @@ namespace HoYa.Controllers
                                         {
                                             id = x.Id,
                                             no = x.No,
-                                            value = x.Value - (db.Segmentations.Where(y => y.OwnerId == x.Id).Sum(y => y.Quantity) ?? 0),
+                                            value = x.Value - ((db.Segmentations.Where(y => y.OwnerId == x.Id).Sum(y => y.Quantity) ?? 0)),
                                             photo = x.Photo != null ? x.Photo.Target.Path : x.Item.Photo.Target.Path,
                                             itemId = x.ItemId,
                                             itemValue = x.Item.Value,
@@ -1933,13 +1993,13 @@ namespace HoYa.Controllers
                 No = inventory.No
             }).Skip((pageIndex.GetValueOrDefault() - 1) * pageSize.GetValueOrDefault()).Take(pageSize.GetValueOrDefault());
         }
-         
+
 
         [Route("api/Inventories/WithAttributes")]
         public async Task<IHttpActionResult> PostInventoryWithAttributes(InventoryWithAttributes inventoryWithAttributes)
         {
             ICollection<InventoryAttribute> inventoryAttributes = inventoryWithAttributes.Attributes;
-            Inventory inventory = new Inventory();
+            Inventory inventory = new Inventory(inventoryWithAttributes.ItemId.ToString());
             inventory.Id = inventoryWithAttributes.Id;
             inventory.Position = inventoryWithAttributes.Position;
             inventory.ItemId = inventoryWithAttributes.ItemId;
@@ -1996,7 +2056,7 @@ namespace HoYa.Controllers
             Inventory existedInventory = await db.Inventories.FindAsync(id);
             inventory.No = no;
 
-            if (inventory.PositionId == null && inventoryWithAttributes.Position!=null)
+            if (inventory.PositionId == null && inventoryWithAttributes.Position != null)
             {
                 db.Positions.Add(inventoryWithAttributes.Position);
                 await db.SaveChangesAsync();
@@ -2006,9 +2066,9 @@ namespace HoYa.Controllers
             if (inventory.ItemId == null) inventory.ItemId = inventoryWithAttributes.ItemId;
             db.Entry(existedInventory).CurrentValues.SetValues(inventory);
             await db.SaveChangesAsync();
-            foreach (InventoryAttribute inventoryAttribute in db.InventoryAttributes.Where(x=>x.OwnerId== inventory.Id).ToArray())
+            foreach (InventoryAttribute inventoryAttribute in db.InventoryAttributes.Where(x => x.OwnerId == inventory.Id).ToArray())
             {
-                if(inventoryAttributes.FirstOrDefault(x=>x.Id== inventoryAttribute.Id) == null)
+                if (inventoryAttributes.FirstOrDefault(x => x.Id == inventoryAttribute.Id) == null)
                 {
                     db.InventoryAttributes.Remove(inventoryAttribute);
                 }
@@ -2073,10 +2133,9 @@ namespace HoYa.Controllers
 
             Item item = db.Items.Find(inventoryPickup.ItemId);
             Inventory workOrder = db.Inventories.Find(inventoryPickup.WorkOrderId);
-            float? value = inventoryPickup.Segmentations.Sum(x => x.Quantity);
-            Inventory inventory = new Inventory
+            decimal? value = inventoryPickup.Segmentations.Sum(x => x.Quantity);
+            Inventory inventory = new Inventory(inventoryPickup.ItemId.ToString())
             {
-                ItemId = inventoryPickup.ItemId,
                 Value = value,
                 No = "工單【" + workOrder.No + "】的【" + item.Value + "】第" + pickupCount.ToString() + "次領料",
                 Position = new Position
@@ -2100,11 +2159,9 @@ namespace HoYa.Controllers
             db.Entry(existedPosition).CurrentValues.SetValues(inventory.Position);
             await db.SaveChangesAsync();
 
-            Guid workOredrEventId = new Guid("f318dbd8-d500-4390-b9c1-2f112c157d1a");
-            Inventory workOredrEvent = new Inventory
+            Inventory workOredrEvent = new Inventory("f318dbd8-d500-4390-b9c1-2f112c157d1a")
             {
                 Id = inventoryPickup.Id,
-                ItemId = workOredrEventId,
                 Value = 1,
                 No = "工單【" + workOrder.No + "】的【" + item.Value + "】第" + pickupCount.ToString() + "次領料事件"
             };
@@ -2113,22 +2170,18 @@ namespace HoYa.Controllers
 
             if (workOrderId.Length == 36)
             {
-                Guid targetId = new Guid("592473a1-95d0-49cd-87bf-120c5f682204");
-                InventoryAttribute workOredr = new InventoryAttribute
+                InventoryAttribute workOredr = new InventoryAttribute("592473a1-95d0-49cd-87bf-120c5f682204")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = workOrderId
                 };
                 db.InventoryAttributes.Add(workOredr);
             }
             if ("pickup" != "")
             {
-                Guid targetId = new Guid("c144726c-16f9-477d-ae85-610303dbf0a1");
-                InventoryAttribute eventType = new InventoryAttribute
+                InventoryAttribute eventType = new InventoryAttribute("c144726c-16f9-477d-ae85-610303dbf0a1")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = "pickup"
                 };
                 db.InventoryAttributes.Add(eventType);
@@ -2137,11 +2190,9 @@ namespace HoYa.Controllers
             string pickupInventoryIds = inventory.Id.ToString();
             if (inventory.PositionId.ToString().Length == 36)
             {
-                Guid targetId = new Guid("94c2ea86-ae75-47ca-a725-d385beba03ea");
-                InventoryAttribute inventoryIds = new InventoryAttribute
+                InventoryAttribute inventoryIds = new InventoryAttribute("94c2ea86-ae75-47ca-a725-d385beba03ea")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = pickupInventoryIds
                 };
                 db.InventoryAttributes.Add(inventoryIds);
@@ -2149,11 +2200,9 @@ namespace HoYa.Controllers
 
             if (inventoryPickup.Memo != null)
             {
-                Guid targetId = new Guid("f7432ea6-33e1-4a8c-b390-010e0091833e");
-                InventoryAttribute memo = new InventoryAttribute
+                InventoryAttribute memo = new InventoryAttribute("f7432ea6-33e1-4a8c-b390-010e0091833e")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = inventoryPickup.Memo
                 };
                 db.InventoryAttributes.Add(memo);
@@ -2195,10 +2244,9 @@ namespace HoYa.Controllers
 
             Item item = db.Items.Find(inventoryStartup.ItemId);
             Inventory workOrder = db.Inventories.Find(inventoryStartup.WorkOrderId);
-            float? value = inventoryStartup.UpValue;
-            Inventory inventory = new Inventory
+            decimal? value = inventoryStartup.UpValue;
+            Inventory inventory = new Inventory(inventoryStartup.ItemId.ToString())
             {
-                ItemId = inventoryStartup.ItemId,
                 Value = value,
                 No = "工單【" + workOrder.No + "】的【" + item.Value + "】第" + startupCount.ToString() + "次投產",
                 Position = new Position
@@ -2227,7 +2275,7 @@ namespace HoYa.Controllers
 
 
 
-            float? left = value;
+            decimal? left = value;
             foreach (var segmentationOwner in segmentationOwners)
             {
                 if (left > 0 && segmentationOwner.Value > 0)
@@ -2258,10 +2306,8 @@ namespace HoYa.Controllers
             db.Entry(existedPosition).CurrentValues.SetValues(inventory.Position);
             await db.SaveChangesAsync();
 
-            Guid workOredrEventId = new Guid("f318dbd8-d500-4390-b9c1-2f112c157d1a");
-            Inventory workOredrEvent = new Inventory
+            Inventory workOredrEvent = new Inventory("f318dbd8-d500-4390-b9c1-2f112c157d1a")
             {
-                ItemId = workOredrEventId,
                 Value = 1,
                 No = "工單【" + workOrder.No + "】的【" + item.Value + "第】" + startupCount.ToString() + "次投產事件"
             };
@@ -2270,22 +2316,18 @@ namespace HoYa.Controllers
 
             if (workOrderId.Length == 36)
             {
-                Guid targetId = new Guid("592473a1-95d0-49cd-87bf-120c5f682204");
-                InventoryAttribute workOredr = new InventoryAttribute
+                InventoryAttribute workOredr = new InventoryAttribute("592473a1-95d0-49cd-87bf-120c5f682204")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = workOrderId
                 };
                 db.InventoryAttributes.Add(workOredr);
             }
             if ("startup" != "")
             {
-                Guid targetId = new Guid("c144726c-16f9-477d-ae85-610303dbf0a1");
-                InventoryAttribute eventType = new InventoryAttribute
+                InventoryAttribute eventType = new InventoryAttribute("c144726c-16f9-477d-ae85-610303dbf0a1")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = "startup"
                 };
                 db.InventoryAttributes.Add(eventType);
@@ -2294,11 +2336,9 @@ namespace HoYa.Controllers
             string startupInventoryIds = inventory.Id.ToString();
             if (startupInventoryIds.Length == 36)
             {
-                Guid targetId = new Guid("94c2ea86-ae75-47ca-a725-d385beba03ea");
-                InventoryAttribute inventoryIds = new InventoryAttribute
+                InventoryAttribute inventoryIds = new InventoryAttribute("94c2ea86-ae75-47ca-a725-d385beba03ea")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = startupInventoryIds
                 };
                 db.InventoryAttributes.Add(inventoryIds);
@@ -2306,11 +2346,9 @@ namespace HoYa.Controllers
 
             if (inventoryStartup.Memo != null)
             {
-                Guid targetId = new Guid("f7432ea6-33e1-4a8c-b390-010e0091833e");
-                InventoryAttribute memo = new InventoryAttribute
+                InventoryAttribute memo = new InventoryAttribute("f7432ea6-33e1-4a8c-b390-010e0091833e")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = inventoryStartup.Memo
                 };
                 db.InventoryAttributes.Add(memo);
@@ -2352,11 +2390,10 @@ namespace HoYa.Controllers
 
 
             Item item = db.Items.Find(inventoryInspection.ItemId);
-            float value = inventoryInspection.UpValue - inventoryInspection.Defects.Sum(x => x.Value);
+            decimal? value = inventoryInspection.UpValue - inventoryInspection.Defects.Sum(x => x.Value);
             Inventory workOrder = db.Inventories.Find(inventoryInspection.WorkOrderId);
-            Inventory inventory = new Inventory
+            Inventory inventory = new Inventory(inventoryInspection.ItemId.ToString())
             {
-                ItemId = inventoryInspection.ItemId,
                 Value = value,
                 No = "工單【" + workOrder.No + "】的【" + item.Value + "】第" + inspectionCount.ToString() + "次產出",
                 Position = new Position
@@ -2377,9 +2414,8 @@ namespace HoYa.Controllers
             string inspectionInventoryIds = inventory.Id.ToString().ToLower();
             foreach (Defect defect in inventoryInspection.Defects)
             {
-                Inventory defectInventory = new Inventory
+                Inventory defectInventory = new Inventory(inventoryInspection.ItemId.ToString())
                 {
-                    ItemId = inventoryInspection.ItemId,
                     Value = defect.Value,
                     No = "工單【" + workOrder.No + "】的【" + item.Value + "】第" + inspectionCount.ToString() + "次產出(" + defect.AttributeValue + ")",
                     Position = new Position
@@ -2396,19 +2432,19 @@ namespace HoYa.Controllers
                 {
                     string attributeValue = defectAttributeValue.Trim();
                     Entities.Attribute attribute = db.Attributes.FirstOrDefault(x => x.Value == attributeValue);
-                    InventoryAttribute defectIs = new InventoryAttribute
-                    {
-                        OwnerId = defectInventory.Id,
-                        Value = "1"
-                    };
+                    InventoryAttribute defectIs;
                     if (attribute != null)
                     {
-                        defectIs.TargetId = attribute.Id;
+                        defectIs = new InventoryAttribute(attribute.Id.ToString())
+                        {
+                            OwnerId = defectInventory.Id,
+                            Value = "1"
+                        };
                     }
                     else
                     {
                         Guid statusId = new Guid("005617b3-d283-461c-abef-5c0c16c780d0");
-                        defectIs.Target = new Entities.Attribute
+                        attribute = new Entities.Attribute
                         {
                             StatusId = statusId,
                             Value = attributeValue,
@@ -2420,6 +2456,14 @@ namespace HoYa.Controllers
                             InventoryIds = "",
                             CategoryIds = ""
                         };
+                        db.Attributes.Add(attribute);
+                        db.SaveChanges();
+
+                        defectIs = new InventoryAttribute(attribute.Id.ToString())
+                        {
+                            OwnerId = defectInventory.Id,
+                            Value = "1"
+                        };
                     }
                     db.InventoryAttributes.Add(defectIs);
                 }
@@ -2430,10 +2474,8 @@ namespace HoYa.Controllers
             await db.SaveChangesAsync();
             #endregion
 
-            Guid workOredrEventId = new Guid("f318dbd8-d500-4390-b9c1-2f112c157d1a");
-            Inventory workOredrEvent = new Inventory
+            Inventory workOredrEvent = new Inventory("f318dbd8-d500-4390-b9c1-2f112c157d1a")
             {
-                ItemId = workOredrEventId,
                 Value = 1,
                 No = "工單" + workOrder.No + "的" + item.Value + "第" + inspectionCount.ToString() + "次產出事件"
             };
@@ -2444,22 +2486,18 @@ namespace HoYa.Controllers
 
             if (workOrderId.Length == 36)
             {
-                Guid targetId = new Guid("592473a1-95d0-49cd-87bf-120c5f682204");
-                InventoryAttribute workOredr = new InventoryAttribute
+                InventoryAttribute workOredr = new InventoryAttribute("592473a1-95d0-49cd-87bf-120c5f682204")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = workOrderId
                 };
                 db.InventoryAttributes.Add(workOredr);
             }
             if ("inspection" != "")
             {
-                Guid targetId = new Guid("c144726c-16f9-477d-ae85-610303dbf0a1");
-                InventoryAttribute eventType = new InventoryAttribute
+                InventoryAttribute eventType = new InventoryAttribute("c144726c-16f9-477d-ae85-610303dbf0a1")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = "inspection"
                 };
                 db.InventoryAttributes.Add(eventType);
@@ -2467,11 +2505,9 @@ namespace HoYa.Controllers
 
             if (inspectionInventoryIds.Length >= 36)
             {
-                Guid targetId = new Guid("94c2ea86-ae75-47ca-a725-d385beba03ea");
-                InventoryAttribute inventoryIds = new InventoryAttribute
+                InventoryAttribute inventoryIds = new InventoryAttribute("94c2ea86-ae75-47ca-a725-d385beba03ea")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = inspectionInventoryIds
                 };
                 db.InventoryAttributes.Add(inventoryIds);
@@ -2479,11 +2515,9 @@ namespace HoYa.Controllers
 
             if (inventoryInspection.Memo != null)
             {
-                Guid targetId = new Guid("f7432ea6-33e1-4a8c-b390-010e0091833e");
-                InventoryAttribute memo = new InventoryAttribute
+                InventoryAttribute memo = new InventoryAttribute("f7432ea6-33e1-4a8c-b390-010e0091833e")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = inventoryInspection.Memo
                 };
                 db.InventoryAttributes.Add(memo);
@@ -2529,13 +2563,9 @@ namespace HoYa.Controllers
 
 
 
-            Guid workOredrEventId = new Guid("f318dbd8-d500-4390-b9c1-2f112c157d1a");
-            Inventory workOredrEvent = new Inventory
-            {
-                ItemId = workOredrEventId,
-                Value = 1,
-                No = "工單【" + workOrder.No + "】的【" + station.No + "】第" + stationCount.ToString() + "次" + actionValue
-            };
+            Inventory workOredrEvent = new Inventory("f318dbd8-d500-4390-b9c1-2f112c157d1a");
+            workOredrEvent.Value = 1;
+            workOredrEvent.No = "工單【" + workOrder.No + "】的【" + station.No + "】第" + stationCount.ToString() + "次" + actionValue;
             db.Inventories.Add(workOredrEvent);
             await db.SaveChangesAsync();
 
@@ -2543,44 +2573,36 @@ namespace HoYa.Controllers
 
             if (workOrderId.Length == 36)
             {
-                Guid targetId = new Guid("592473a1-95d0-49cd-87bf-120c5f682204");
-                InventoryAttribute workOredr = new InventoryAttribute
+                InventoryAttribute workOredr = new InventoryAttribute("592473a1-95d0-49cd-87bf-120c5f682204")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = workOrderId
                 };
                 db.InventoryAttributes.Add(workOredr);
             }
             if ("station" != "")
             {
-                Guid targetId = new Guid("c144726c-16f9-477d-ae85-610303dbf0a1");
-                InventoryAttribute eventType = new InventoryAttribute
+                InventoryAttribute eventType = new InventoryAttribute("c144726c-16f9-477d-ae85-610303dbf0a1")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = "station"
                 };
                 db.InventoryAttributes.Add(eventType);
             }
             if (inventoryStation.Action != null && inventoryStation.Action.ToString() != "")
             {
-                Guid targetId = new Guid("93a7862f-aece-45e7-9c3c-9a8265a5fa0c");
-                InventoryAttribute action = new InventoryAttribute
+                InventoryAttribute action = new InventoryAttribute("93a7862f-aece-45e7-9c3c-9a8265a5fa0c")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = inventoryStation.Action
                 };
                 db.InventoryAttributes.Add(action);
             }
             if (inventoryStation.UsedPower != null && Convert.ToDouble(inventoryStation.UsedPower) > 0)
             {
-                Guid targetId = new Guid("2067a80e-eb80-4640-b9e3-21ee26e64e1b");
-                InventoryAttribute usedPower = new InventoryAttribute
+                InventoryAttribute usedPower = new InventoryAttribute("2067a80e-eb80-4640-b9e3-21ee26e64e1b")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = inventoryStation.UsedPower.ToString()
                 };
                 db.InventoryAttributes.Add(usedPower);
@@ -2588,11 +2610,9 @@ namespace HoYa.Controllers
 
             if (inventoryStation.Memo != null && inventoryStation.Memo.ToString() != "")
             {
-                Guid targetId = new Guid("f7432ea6-33e1-4a8c-b390-010e0091833e");
-                InventoryAttribute memo = new InventoryAttribute
+                InventoryAttribute memo = new InventoryAttribute("f7432ea6-33e1-4a8c-b390-010e0091833e")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = inventoryStation.Memo
                 };
                 db.InventoryAttributes.Add(memo);
@@ -2600,11 +2620,9 @@ namespace HoYa.Controllers
 
             if (stationIdIs.Length == 36)
             {
-                Guid targetId = new Guid("6830b8a5-8be4-419c-a433-3caa70fe73e9");
-                InventoryAttribute stationId = new InventoryAttribute
+                InventoryAttribute stationId = new InventoryAttribute("6830b8a5-8be4-419c-a433-3caa70fe73e9")
                 {
                     OwnerId = workOredrEvent.Id,
-                    TargetId = targetId,
                     Value = stationIdIs
                 };
                 db.InventoryAttributes.Add(stationId);
@@ -2614,19 +2632,19 @@ namespace HoYa.Controllers
             {
                 string attributeValue = reason.Value.Trim();
                 Entities.Attribute attribute = db.Attributes.FirstOrDefault(x => x.Value == attributeValue);
-                InventoryAttribute reasonIs = new InventoryAttribute
-                {
-                    OwnerId = workOredrEvent.Id,
-                    Value = "1"
-                };
+                InventoryAttribute reasonIs;
                 if (attribute != null)
                 {
-                    reasonIs.TargetId = attribute.Id;
+                    reasonIs = new InventoryAttribute(attribute.Id.ToString())
+                    {
+                        OwnerId = workOredrEvent.Id,
+                        Value = "1"
+                    };
                 }
                 else
                 {
                     Guid statusId = new Guid("005617b3-d283-461c-abef-5c0c16c780d0");
-                    reasonIs.Target = new Entities.Attribute
+                    attribute = new Entities.Attribute
                     {
                         StatusId = statusId,
                         Value = attributeValue,
@@ -2637,6 +2655,14 @@ namespace HoYa.Controllers
                         ItemIds = "",
                         InventoryIds = "",
                         CategoryIds = ""
+                    };
+                    db.Attributes.Add(attribute);
+                    db.SaveChanges();
+
+                    reasonIs = new InventoryAttribute(attribute.Id.ToString())
+                    {
+                        OwnerId = workOredrEvent.Id,
+                        Value = "1"
                     };
                 }
                 db.InventoryAttributes.Add(reasonIs);
@@ -2736,62 +2762,74 @@ namespace HoYa.Controllers
 
         public async Task<IHttpActionResult> DeleteInventory(Guid id)
         {
-            HashSet<Guid> deleteIds = new HashSet<Guid>();
-            Inventory inventory = await db.Inventories.FindAsync(id);
-            if (inventory == null) return NotFound();
-            Segmentation segmentation = await db.Segmentations.FirstOrDefaultAsync(x => x.TargetId == id);
-            if (segmentation != null)
+            try
             {
-                Inventory segmentationOwner = await db.Inventories.FindAsync(segmentation.OwnerId);
-                if (segmentationOwner != null)
+                HashSet<Guid> deleteIds = new HashSet<Guid>();
+                Inventory inventory = await db.Inventories.FindAsync(id);
+                if (inventory == null) return NotFound();
+                Segmentation segmentation = await db.Segmentations.FirstOrDefaultAsync(x => x.TargetId == id);
+                if (segmentation != null)
                 {
-                    Inventory existedSegmentationOwner = await db.Inventories.FindAsync(segmentationOwner.Id);
-                    segmentationOwner.Value -= segmentation.Quantity;
-                    segmentationOwner.Version++;
-                    db.Entry(existedSegmentationOwner).CurrentValues.SetValues(segmentationOwner);
+                    Inventory segmentationOwner = await db.Inventories.FindAsync(segmentation.OwnerId);
+                    if (segmentationOwner != null)
+                    {
+                        Inventory existedSegmentationOwner = await db.Inventories.FindAsync(segmentationOwner.Id);
+                        segmentationOwner.Value -= segmentation.Quantity;
+                        segmentationOwner.Version++;
+                        db.Entry(existedSegmentationOwner).CurrentValues.SetValues(segmentationOwner);
+                    }
+                    Segmentation existedSegmentation = await db.Segmentations.FindAsync(segmentation.Id);
+                    db.Segmentations.Remove(segmentation);
                 }
-                Segmentation existedSegmentation = await db.Segmentations.FindAsync(segmentation.Id);
-                db.Segmentations.Remove(segmentation);
-            }
-            Inventory existedInventory = await db.Inventories.FindAsync(inventory.Id);
-            inventory.PositionId = null;
-            db.Entry(existedInventory).CurrentValues.SetValues(inventory);
-            await db.SaveChangesAsync();
+                Inventory existedInventory = await db.Inventories.FindAsync(inventory.Id);
+                inventory.PositionId = null;
+                db.Entry(existedInventory).CurrentValues.SetValues(inventory);
+                await db.SaveChangesAsync();
 
-            foreach (Segmentation ownerSegmentation in db.Segmentations.Where(x => x.OwnerId == id).ToArray())
-            {
-                db.Segmentations.Remove(ownerSegmentation);
-            }
-            foreach (InventoryAttribute inventoryAttribute in db.InventoryAttributes.Where(x => x.OwnerId == id).ToArray())
-            {
-                db.InventoryAttributes.Remove(inventoryAttribute);
-            }
-            foreach (Position inventoryPosition in db.Positions.Where(x => x.OwnerId == id).ToArray())
-            {
-                db.Positions.Remove(inventoryPosition);
-            }
-            db.Inventories.Remove(inventory);
-            await db.SaveChangesAsync();
-
-
-            var accountName = ConfigurationManager.AppSettings["storage:account:name"];
-            var accountKey = ConfigurationManager.AppSettings["storage:account:key"];
-            var storageAccount = new CloudStorageAccount(new StorageCredentials(accountName, accountKey), true);
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer files = blobClient.GetContainerReference("files");
-            foreach (FolderFile folderFile in db.FolderFiles.Where(x => x.FolderId == id).ToList())
-            {
-                foreach (File file in db.Files.Where(x => x.Id == folderFile.TargetId).ToList())
+                foreach (Segmentation ownerSegmentation in db.Segmentations.Where(x => x.OwnerId == id).ToArray())
                 {
-
-                    CloudBlockBlob destBlob = files.GetBlockBlobReference(file.Path);
-                    if (destBlob.Exists()) destBlob.Delete();
-                    db.Files.Remove(file);
+                    db.Segmentations.Remove(ownerSegmentation);
                 }
-                db.FolderFiles.Remove(folderFile);
-            }
+                foreach (InventoryAttribute inventoryAttribute in db.InventoryAttributes.Where(x => x.OwnerId == id).ToArray())
+                {
+                    db.InventoryAttributes.Remove(inventoryAttribute);
+                }
+                foreach (Position position in db.Positions.Where(x => x.OwnerId == id).ToArray())
+                {
+                    db.Positions.Remove(position);
+                }
+                foreach (Position position in db.Positions.Where(x => x.TargetId == id).ToArray())
+                {
+                    Position existedPosition = db.Positions.Find(position.Id);
+                    position.TargetId = null;
+                    db.Entry(existedPosition).CurrentValues.SetValues(position);
+                }
+                db.Inventories.Remove(inventory);
+                await db.SaveChangesAsync();
 
-            await db.SaveChangesAsync();
+
+                var accountName = ConfigurationManager.AppSettings["storage:account:name"];
+                var accountKey = ConfigurationManager.AppSettings["storage:account:key"];
+                var storageAccount = new CloudStorageAccount(new StorageCredentials(accountName, accountKey), true);
+                CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+                CloudBlobContainer files = blobClient.GetContainerReference("files");
+                foreach (FolderFile folderFile in db.FolderFiles.Where(x => x.FolderId == id).ToList())
+                {
+                    foreach (File file in db.Files.Where(x => x.Id == folderFile.TargetId).ToList())
+                    {
+
+                        CloudBlockBlob destBlob = files.GetBlockBlobReference(file.Path);
+                        if (destBlob.Exists()) destBlob.Delete();
+                        db.Files.Remove(file);
+                    }
+                    db.FolderFiles.Remove(folderFile);
+                }
+            }
+            catch (Exception e)
+            {
+                string ee = e.ToString();
+                await db.SaveChangesAsync();
+            }
             return Ok();
         }
     }

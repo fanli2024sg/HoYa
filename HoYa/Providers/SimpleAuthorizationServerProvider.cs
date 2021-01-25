@@ -88,7 +88,7 @@ namespace HoYa.Providers
             using (AuthRepository repository = new AuthRepository())
             {
                 user = await repository.FindUser(context.UserName, context.Password);
-              role = await repository.FindRole(user.Roles.FirstOrDefault(r => r.UserId == user.Id).RoleId);
+                if(user!=null) role = await repository.FindRole(user.Roles.FirstOrDefault(r => r.UserId == user.Id).RoleId);
             }
 
 

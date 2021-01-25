@@ -111,60 +111,63 @@ export class ItemViewPage implements OnInit {
     }
 
     more() {
-        let buttons = [];
+        let buttons = new Array<any>();
         let position = new Position();
         position.target = { ...this.appService.profile };
         position.targetId = position.target.id;
-        buttons.push({
-            color: "blue",
-            title: `新增${this.item.value}的存量`,
-            action: InventoriesListTempleteActions.newInventory,
-            params: {
-                item: { ...this.item }
-                //,position: { ...position, ...{ startDate: position.startDate.toJSON() } }
-            }
-        });
-        buttons.push({
-            color: "blue",
-            title: `大量新增${this.item.value}的存量`,
-            action: InventoriesListTempleteActions.importList
-        });
-        buttons.push({
-            color: "blue",
-            title: `列印${this.item.value}的所有存量`,
-            action: ItemViewPageActions.printInventories,
-            params: {
-                item: { ...this.item }
-            }
-        });
-        buttons.push({
-            color: "blue",
-            title: `匯出目前查詢結果`,
-            action: InventoriesListTempleteActions.exportList
-        });
-        buttons.push({
-            color: "blue",
-            title: "編輯",
-            action: ItemsListTempleteActions.editItem,
-            params: {
-                item: { ...this.item }
-            }
-        });
-        if (this.item.deletable) {
-            buttons.push({
+
+
+        buttons = [
+            {
+                color: "blue",
+                title: "編輯",
+                action: ItemViewPageActions.editItem,
+                params: {
+                    item: { ...this.item }
+                }
+            },
+            {
+                color: "blue",
+                title: "新增配方",
+                action: ItemViewPageActions.createRecipe,
+                params: { item: this.item }
+            },
+            {
                 color: "red",
                 title: "刪除",
                 action: ItemViewPageActions.remove,
                 params: {
                     item: { ...this.item }
                 }
-            });
-        }
-        /*
-        buttons = buttons.map(button => {
-            button.action = ItemViewPageActions[button.action];
-            return button;
-        });*/
+            },
+            {
+                color: "blue",
+                title: `新增${this.item.value}的存量`,
+                action: InventoriesListTempleteActions.newInventory,
+                params: {
+                    item: { ...this.item }
+                }
+            },
+            {
+                color: "blue",
+                title: `大量新增${this.item.value}的存量`,
+                action: InventoriesListTempleteActions.importList
+            },
+            {
+                color: "blue",
+                title: `列印${this.item.value}的所有存量`,
+                action: ItemViewPageActions.printInventories,
+                params: {
+                    item: { ...this.item }
+                }
+            },
+            {
+                color: "blue",
+                title: `匯出目前查詢結果`,
+                action: InventoriesListTempleteActions.exportList
+            }
+        ];
+ 
         this.itemStore$.dispatch(ItemViewPageActions.more({ buttons }));
     }
 

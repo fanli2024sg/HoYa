@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { ItemEditTempleteActions, ItemsListTempleteActions } from "@actions/item";
+import { ItemEditTempleteActions, ItemsListTempleteActions, ItemViewPageActions } from "@actions/item";
 import { Item } from "@entities/item";
 
 export const featureKey = "item.edit.templete";
@@ -17,7 +17,8 @@ const initialState: State = {
 
 export const reducer = createReducer(
     initialState,
-    on(ItemsListTempleteActions.editItem, (state, { item }) => {
+    on(ItemViewPageActions.editItem,
+        ItemsListTempleteActions.editItem, (state, { item }) => {
         return {
             ...state,
             item

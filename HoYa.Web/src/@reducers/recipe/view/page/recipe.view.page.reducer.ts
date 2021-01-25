@@ -1,5 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { RecipeViewPageActions } from "@actions/recipe";
+import { Item } from "@entities/item";
+import { ItemViewPageActions } from '../../../../@actions/item';
 
 export const featureKey = "recipe.view.page";
 

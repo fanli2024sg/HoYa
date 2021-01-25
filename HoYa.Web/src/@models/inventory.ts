@@ -56,6 +56,11 @@ export class InventorySave {
     details: InventoryAttribute[];
 }
 
+export class InventoryMerge {
+    sourceIds: string[];
+    no: string;
+}
+
 export class InventoryPutdown {
     id: string;
     no: string;

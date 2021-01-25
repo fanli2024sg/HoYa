@@ -33,8 +33,8 @@ namespace HoYa.Controllers
 
             //先確認這個參與者將用哪個RedirectId過關 
             Guid? redirectId = null;
-            float redirectConditionCount = 0;
-            float redirectConditionTrueRatio = 0;
+            decimal? redirectConditionCount = 0;
+            decimal? redirectConditionTrueRatio = 0;
             foreach (Redirect redirect in db.Redirects.Where(x => x.OwnerId == currentStep.Id).ToList().OrderBy(x => x.Target.Sort))
             {
                 redirectConditionCount = 0;
@@ -70,8 +70,8 @@ namespace HoYa.Controllers
 
                 db.Entry(currentParticipate).CurrentValues.SetValues(participate);//送出此人的參與後
                 await db.SaveChangesAsync();
-                float? participateCount = 0;//總參與數量
-                float? stepSubmitRatio = 0;//所有參與者通過比例
+                decimal? participateCount = 0;//總參與數量
+                decimal? stepSubmitRatio = 0;//所有參與者通過比例
                 //接下來要判斷此活動是否所有參與者都通過要進入下一節點 //先取得所有其他參與者且RedirectId等於目前的RedirectId
                 foreach (Participate otherParticipate in db.Participates.Where(x => x.OwnerId == participate.OwnerId && participate.RedirectId == redirectId && x.ArchivedDate != null).ToList())
                 {

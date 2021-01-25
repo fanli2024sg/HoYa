@@ -200,8 +200,8 @@ namespace HoYa.Controllers
                         startDate = token.Start.ToString("yyyy-MM-dd HH:mm:ss"),
                         endDate = token.End.ToString("yyyy-MM-dd HH:mm:ss"),
                         roleId = role.Id,
-                        profileId = db.Inventories.FirstOrDefault(x => x.UserId == user.Id).Id,
-                        profileNo = db.Inventories.FirstOrDefault(x => x.UserId == user.Id).No
+                        profileId = db.Inventories.FirstOrDefault(x => x.UserId == user.Id)?.Id,
+                        profileNo = db.Inventories.FirstOrDefault(x => x.UserId == user.Id)?.No
                     };
                     return Ok(loginReturn);
                 }
